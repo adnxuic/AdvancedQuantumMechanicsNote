@@ -1,0 +1,319 @@
+\section{Feynman Path Integral.}
+The version of quantum mechanics:
+\begin{enumerate}
+    \item Schrödinger's wavefuction (operator form):
+    \begin{equation}
+        \hat{H}|\psi\rangle = \mathrm{i}\hbar\frac{\partial}{\partial t}|\psi\rangle
+    \end{equation}
+    \item Feynman's Path Integral (Common number form):
+    \begin{equation}
+        \mathrm{i}G(\text{Green's function}) \propto \int \mathcal{D}(x, t) \mathrm{e}^{\mathrm{i}\int \mathcal{L} \mathrm{d}t}
+    \end{equation}
+\end{enumerate}
+
+There are many advantages of Feynman Path Integral:
+\begin{enumerate}
+    \item Make the double-slit experiment more understandable.
+    \item The classical limit \enquote{$\hbar \to 0$} is \enquote{tractable}:
+    quantum $\xrightarrow{\hbar \to 0}$ classical.
+    \item Provide a semi-classical picture. for. quantum mechanics.
+    \item \enquote{Quantum fluctuations} are more \enquote{understandable}.
+    \item A natural route. to low energy effective theory of quantum many-body systems.
+    \item A natural language for describing topological properties of quantum many-body systems.
+\end{enumerate}
+
+But the practical calculation in the path-integral representation
+of simple quantum mechanical problem many be notoriously
+difficult and lengthy.
+
+\subsection{Propagators.}
+Consider a quantum partical confined in a one-dimensional space:
+\begin{equation}
+\hat{H} = \frac{\hat{p}^2}{2m} + V(\hat{x})
+\end{equation}
+and the canonical pair: $[\hat{x}, \hat{p}] = \hat{x}\hat{p} - \hat{p}\hat{x} = \mathrm{i}\hbar$
+
+The Schrödinger's equation is:
+\begin{equation}
+\mathrm{i}\hbar \frac{\partial |\psi(t)\rangle}{\partial t} = \hat{H}|\psi(t)\rangle
+\end{equation}
+
+This first-order nature allows us to define a time evolution
+operator $\hat{U}(t, t_0)$ which propagates the state vector from
+an initial time $t_0$ to a final time $t$:
+\begin{equation}
+|\psi(t)\rangle = \hat{U}(t, t_0)|\psi(t_0)\rangle
+\end{equation}
+
+Assuming the Hamiltonian $H$ is not explicitly depend on
+time, the formal solution of $\hat{U}$ is:
+\begin{equation}
+\hat{U} = \mathrm{e}^{-\frac{\mathrm{i}}{\hbar}\hat{H}(t-t_0)}
+\end{equation}
+
+A crucial property of $\hat{U}$ is the \enquote{chain-like} rule, or composition property. For any intermediate time $t'$ such that $t>t'>t_0$:
+\begin{equation}
+\hat{U}(t, t_0) = \hat{U}(t, t') \hat{U}(t', t_0)
+\end{equation}
+
+This property is the key to the entire path integral derivation.
+And $\hat{U}(t, t_0)$ is unitary:
+\begin{equation}
+\hat{U}^{\dagger}\hat{U} = \hat{U}\hat{U}^{\dagger} = \hat{\mathbb{I}}
+\end{equation}
+where $\hat{\mathbb{I}}$ is the identity operator.
+
+In the position representation, we can obtain matrix elements:
+\begin{equation}
+\begin{aligned}
+U(x, t; x_0, t_0) &= \langle x | \hat{U}(t, t_0) | x_0 \rangle \\
+&= \langle x | \mathrm{e}^{-\frac{\mathrm{i}}{\hbar}\hat{H}(t-t_0)} | x_0 \rangle
+\end{aligned}
+\end{equation}
+
+We can define a propagators (Green's function) of the quantum system by using the matrix elements:
+\begin{equation}
+\mathrm{i}G(x, t; x_0, t_0) = U(x, t; x_0, t_0)
+\end{equation}
+
+Using the matrix elements, $\psi(x, t)$ can be reformulated as:
+\begin{equation}
+\begin{aligned}
+\psi(x, t) &= \langle x | \hat{U}(t, t_0) | \psi(t_0) \rangle \\
+&= \int \mathrm{d}x_0 \langle x | \hat{U}(t, t_0) | x_0 \rangle \langle x_0 | \psi(t_0) \rangle \\
+&= \int \mathrm{d}x_0 U(x, t; x_0, t_0) \psi(x_0, t_0)
+\end{aligned}
+\end{equation}
+
+Also, the propagator also satisfies the Schrödinger's equation:
+\begin{equation}
+    \color{red}\boxed{\color{black}\mathrm{i}\hbar \frac{\partial}{\partial t} G(x, t; x_0, t_0) = \hat{H} G(x, t; x_0, t_0)}
+\end{equation}
+
+And the initial condition is:
+\begin{equation}
+G(x, t_0; x_0, t_0) = -\mathrm{i} \langle x | \hat{U}(t_0, t_0) | x_0 \rangle = -\mathrm{i} \delta(x-x_0)
+\end{equation}
+$\delta(x-x_0)$ is Dirac function.
+
+\begin{example}
+
+    For free particle: $\hat{H} = \frac{1}{2m}\hat{p}^2$, in position representation:
+    \begin{equation}
+    \hat{p} \to -\mathrm{i}\hbar \frac{\partial}{\partial x}
+    \end{equation}
+
+    So the PDE is:
+    \begin{equation}
+    \mathrm{i}\hbar \frac{\partial}{\partial t} G(x, t; x_0, t_0) = -\frac{\hbar^2}{2m} \frac{\partial^2}{\partial x^2} G(x, t; x_0, t_0)
+    \end{equation}
+
+    Solve the PDE:
+
+    Use Fourier Transform: (we use $G(x,t)$ instead of $G(x,t;x_0,t_0)$). We solve the free-particle Green's function by transforming to momentum space:
+    \begin{equation}
+        \left\{
+        \begin{aligned}
+        G(x, t) &= \frac{1}{\sqrt{2\pi}} \int \mathrm{d}k \cdot \tilde{G}(k,t) \mathrm{e}^{\mathrm{i}kx} \\
+        \tilde{G}(k, t) &= \frac{1}{\sqrt{2\pi}} \int \mathrm{d}x \ G(x,t) \mathrm{e}^{-\mathrm{i}kx}
+        \end{aligned}
+        \right.
+    \end{equation}
+
+    With these conventions, spatial derivatives become algebraic in $k$-space while the time derivative remains unchanged:
+    \begin{equation}
+        \left\{
+        \begin{aligned}
+        \mathcal{F}\left\{ \mathrm{i}\hbar \frac{\partial G(x,t)}{\partial t} \right\} &= \mathrm{i}\hbar \frac{\partial \tilde{G}(k,t)}{\partial t} \\
+        \mathcal{F}\left\{ -\frac{\hbar^2}{2m} \frac{\partial^2 G}{\partial x^2} \right\} &= -\frac{\hbar^2}{2m} [ -k^2 \tilde{G}(k,t) ] = \frac{\hbar^2 k^2}{2m} \tilde{G}(k,t)
+        \end{aligned}
+        \right.
+    \end{equation}
+
+    Applying the transform to the PDE yields an ordinary differential equation in time for each $k$:
+    \begin{equation}
+        \left\{
+        \begin{aligned}
+        &\mathrm{i}\hbar \frac{\partial}{\partial t} \tilde{G}(k,t) = \frac{\hbar^2 k^2}{2m} \tilde{G}(k,t)\\
+        &\frac{\mathrm{d}\tilde{G}}{\tilde{G}} = -\mathrm{i} \frac{\hbar k^2}{2m} \mathrm{d}t
+        \end{aligned}
+        \right.
+    \end{equation}
+
+    Integrating in time gives the logarithm of the solution up to a $k$-dependent constant:
+    \begin{equation}
+    \ln \tilde{G} = -\mathrm{i} \frac{\hbar k^2}{2m} t + C(k)
+    \end{equation}
+
+    So we can get the solution:
+    \begin{equation}
+    \tilde{G}(k,t) = A(k) \mathrm{e}^{-\mathrm{i}\frac{\hbar k^2}{2m}t}, \quad A(k) = \mathrm{e}^{C(k)}
+    \end{equation}
+
+    To determine $A(k)$, impose the initial condition at time $t_0$ in position space:
+    \begin{equation}
+    \begin{aligned}
+    \tilde{G}(k, t_0) &= \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} \mathrm{d}x G(x, t_0) \mathrm{e}^{-\mathrm{i}kx} \\
+    &= \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} \mathrm{d}x \delta(x-x_0) \mathrm{e}^{-\mathrm{i}kx}
+    \end{aligned}
+    \end{equation}
+
+    Using the Fourier transform of the Dirac delta, we find:
+    \begin{equation}
+    \tilde{G}(k, t_0) = \frac{1}{\sqrt{2\pi}} \mathrm{e}^{-\mathrm{i}kx_0}
+    \end{equation}
+
+    Matching at $t_0$ fixes the $k$-space amplitude:
+    \begin{equation}
+    A(k) = \frac{1}{\sqrt{2\pi}} \mathrm{e}^{-\mathrm{i}kx_0} \cdot \mathrm{e}^{\mathrm{i}\frac{\hbar k^2}{2m}t_0}.
+    \end{equation}
+
+    Therefore, for general time $t$ we have:
+    \begin{equation}
+    \tilde{G}(k,t) = \frac{1}{\sqrt{2\pi}} \mathrm{e}^{-\mathrm{i}kx_0} \mathrm{e}^{-\mathrm{i}\frac{\hbar k^2}{2m}(t-t_0)}
+    \end{equation}
+
+    Finally, inverse-transform back to position space to obtain the integral representation of the propagator:
+    \begin{equation}
+    \begin{aligned}
+    G(x,t) &= \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} \mathrm{d}k \cdot \tilde{G}(k,t) \mathrm{e}^{\mathrm{i}kx} \\
+    &= \frac{1}{2\pi} \int_{-\infty}^{\infty} \mathrm{d}k \, \mathrm{e}^{\mathrm{i}k(x-x_0)} \cdot \mathrm{e}^{-\mathrm{i}\frac{\hbar(t-t_0)}{2m}k^2}
+    \end{aligned}
+    \end{equation}
+
+    This is a standard Gaussian integral of the form:
+    \begin{equation}
+    \int_{-\infty}^{\infty} \mathrm{d}k \, \mathrm{e}^{-ak^2+bk} = \sqrt{\frac{\pi}{a}} \mathrm{e}^{\frac{b^2}{4a}}.
+    \end{equation}
+
+    Let's identify the coefficients:
+    \begin{equation}
+    \left\{
+    \begin{aligned}
+    &a = \mathrm{i} \frac{\hbar(t-t_0)}{2m} \\
+    &b = \mathrm{i}(x-x_0)
+    \end{aligned}
+    \right.
+    \end{equation}
+
+    So we can get the solution:
+    \begin{equation}
+        \mathrm{i}G(x,t) 
+        = \left[ \frac{m}{2\pi\hbar\mathrm{i}(t-t_0)} \right]^{\frac{1}{2}} \cdot \mathrm{e}^{\frac{\mathrm{i}}{\hbar} 
+        \cdot \frac{m(x-x_0)^2}{2(t-t_0)}}
+    \end{equation}
+
+    Also, we can solve this PDE via definition:
+    \begin{equation}
+    \begin{aligned}
+    \mathrm{i}G &= \langle x | \mathrm{e}^{-\frac{\mathrm{i}}{\hbar}(t-t_0)\hat{H}} | x_0 \rangle \\
+    &= \int \langle x | \mathrm{e}^{-\frac{\mathrm{i}}{\hbar}(t-t_0)\hat{H}} | p \rangle \langle p | x_0 \rangle \, \mathrm{d}p \\
+    &= \int \mathrm{d}p \, \mathrm{e}^{-\frac{\mathrm{i}(t-t_0)p^2}{2m\hbar}} \langle x | p \rangle \langle p | x_0 \rangle \\
+    &= \frac{1}{2\pi\hbar} \int \mathrm{d}p \, \mathrm{e}^{-\frac{\mathrm{i}(t-t_0)p^2}{2m\hbar} + \mathrm{i}\frac{(x-x_0)}{\hbar}p}.
+    \end{aligned}
+    \end{equation}
+    we use $P = \hbar k$ and can get the same equation as
+    the Fourier Transform Method.
+  
+\end{example}
+
+
+\subsection{Path-Integral}
+
+When $t > t_1 > t_0$, and $t_1$ is an arbitrarily selected intermediate time,
+we can write:
+\begin{equation}
+    \begin{aligned}
+    \mathrm{i}G(x, t; x_0, t_0) &= \langle x | \hat{U}(t, t_0) | x_0 \rangle \\
+    &= \langle x | \hat{U}(t, t_1) \hat{U}(t_1, t_0) | x_0 \rangle \\
+    &= \int \mathrm{d}x_1 \langle x | \hat{U}(t, t_1) | x_1 \rangle \langle x_1 | \hat{U}(t_1, t_0) | x_0 \rangle \\
+    &= \int \mathrm{d}x_1 \, \mathrm{i}G(x, t; x_1, t_1) \cdot \mathrm{i}G(x_1, t_1; x_0, t_0)
+    \end{aligned}
+\end{equation}
+
+This intergral over $x_1$ means \enquote{superposition} of all possible \enquote{path} that connect $x$ and $x_0$.
+Next, we try to \enquote{smooth} the path along time directly.
+We can insert more time slices between $x$ and $x_0$.
+If we insert infinite time slices, the path become smooth.
+
+Firstly, let's discretize time. domain $[t_0, t]$ into $N$ pieces of equal length $\Delta t = \frac{t-t_0}{N}$:
+\begin{equation}
+\begin{aligned}
+\mathrm{i}G(x, t; x_0, t_0) &= \langle x | \hat{U}(t, t_{N-1}) \hat{U}(t_{N-1}, t_{N-2}) \cdots \hat{U}(t_1, t_0) | x_0 \rangle \\
+&= \int \mathrm{d}x_{N-1} \cdots \mathrm{d}x_1 \prod_{l=1}^{N} \mathrm{i}G(x_l, t_l; x_{l-1}, t_{l-1})
+\end{aligned}
+\end{equation}
+
+let $\mathcal{D}_x = \prod_{l=1}^{N-1} \mathrm{d}x_l$.
+Consider $N \to \infty$, so $\Delta t = \frac{t-t_0}{N} \to 0$, which means $t_l - t_{l-1} = \Delta t$.
+\begin{equation}
+    \label{eq:path_integral}
+    \mathrm{i}G(x_l, t_l; x_{l-1}, t_{l-1}) = \langle x_l | \mathrm{e}^{-\frac{\mathrm{i}}{\hbar}\hat{H}\Delta t} | x_{l-1} \rangle
+\end{equation}
+
+Because $\Delta t$ is small, we can approximate the exponential function by its Taylor series:
+\begin{equation}
+    \label{eq:exp_approx}
+    \mathrm{e}^{-\frac{\mathrm{i}}{\hbar}\hat{H}\Delta t} \approx \hat{\mathbb{I}} - \frac{\mathrm{i}}{\hbar}\hat{H}\Delta t 
+    = \hat{\mathbb{I}} - \frac{\mathrm{i}}{\hbar}\Delta t \left[ \frac{\hat{p}^2}{2m} + V(\hat{x}) \right]
+\end{equation}
+
+Substitute \eqref{eq:exp_approx} into \eqref{eq:path_integral}:
+\begin{equation}
+\begin{aligned}
+\mathrm{i}G(x_l, t_l; x_{l-1}, t_{l-1}) &= \int \mathrm{d}p_l \langle x_l | p_l \rangle \langle p_l | \hat{\mathbb{I}} - \frac{\mathrm{i}}{\hbar}\Delta t \left[ \frac{\hat{p}^2}{2m} + V(\hat{x}) \right] | x_{l-1} \rangle \\
+&= \int \mathrm{d}p_l \langle x_l | p_l \rangle \langle p_l | x_{l-1} \rangle \left[ 1 - \frac{\mathrm{i}}{\hbar} \left( \frac{p_l^2}{2m} + V(x_{l-1}) \right) \Delta t \right] \\
+\end{aligned}
+\end{equation}
+
+With the approximations $V(x_l) \approx V(x_{l-1})$:
+\begin{equation}
+\left[ 1 - \frac{\mathrm{i}}{\hbar} \left( \frac{p_l^2}{2m} + V(x_{l-1}) \right) \Delta t \right] 
+\approx \left( 1 - \frac{\mathrm{i}}{\hbar} H_{l} \Delta t \right) \approx \mathrm{e}^{-\frac{\mathrm{i}}{\hbar}H_{l}\Delta t}
+\end{equation}
+
+So $\mathrm{i}G(x_l, t_l; x_{l-1}, t_{l-1})$ can be written as:
+\begin{equation}
+    \begin{aligned}
+    \mathrm{i}G(x_l, t_l; x_{l-1}, t_{l-1}) &= \int \mathrm{d}p_l \frac{1}{2\pi\hbar} \mathrm{e}^{\frac{\mathrm{i}}{\hbar}p_l(x_l-x_{l-1})} \mathrm{e}^{-\frac{\mathrm{i}}{\hbar}H_{cl}\Delta t} \\
+    &= \frac{1}{2\pi\hbar} \int \mathrm{d}p_l e^{\frac{\mathrm{i}}{\hbar}[p_l(x_l-x_{l-1})-H_{l}\Delta t]} \\
+    &= \frac{1}{2\pi\hbar} \int \mathrm{d}p_l \mathrm{e}^{\frac{\mathrm{i}}{\hbar}[p_l(\frac{x_l-x_{l-1}}{\Delta t})-H_{l}]\Delta t}
+    \end{aligned}
+\end{equation}
+where, $H_l$ is the classical Hamiltonion as a function of $p_l$ and $x_l$.
+
+When $\Delta t \to 0$:
+\begin{equation}
+\frac{x_l - x_{l-1}}{\Delta t} = \dot{x}_l
+\end{equation}
+
+So we can get:
+\begin{equation}
+p_l\dot{x}_l - H_l = \mathcal{L}_l.
+\end{equation}
+where, $\mathcal{L}_l$ is the classical Lagrangian.
+
+So $\mathrm{i}G(x_l, t_l; x_{l-1}, t_{l-1})$ can be written as the form with Lagrangian:
+\begin{equation}
+\mathrm{i}G(x_l, t_l; x_{l-1}, t_{l-1}) = \int \mathrm{d}p_l \cdot \frac{1}{2\pi\hbar} \mathrm{e}^{\frac{\mathrm{i}}{\hbar}\mathcal{L}_l\Delta t}.
+\end{equation}
+
+Substitute $\mathrm{i}G(x_l, t_l; x_{l-1}, t_{l-1})$ into the path integral:
+\begin{equation}
+\prod_{l=1}^{N} \mathrm{i}G(x_l, t_l; x_{l-1}, t_{l-1}) = \int \frac{\mathrm{d}p_N}{2\pi\hbar} \cdots \frac{\mathrm{d}p_1}{2\pi\hbar} \cdot \mathrm{e}^{\frac{\mathrm{i}}{\hbar}\sum_{l=1}^{N}\mathcal{L}_l \cdot \Delta t}
+\end{equation}
+
+let $\mathcal{D}_p = \prod_{l=1}^{N} \frac{\mathrm{d}p_l}{2\pi\hbar}$, when $\Delta t \to 0$, which means:
+\begin{equation}
+\sum_{l=1}^{N} \mathcal{L}_l \Delta t = \int_{t_0}^{t} \mathrm{d}\tau \cdot \mathcal{L}[p(\tau), x(\tau)]
+\end{equation}
+
+Finally, we can get the propagators by the path integral:
+\begin{theorem}
+    The propagators path integral:
+    \begin{equation}
+        \mathrm{i}G(x, t; x_0, t_0) 
+        = \int \mathcal{D}_x \mathcal{D}_p \cdot \mathrm{e}^{\frac{\mathrm{i}}{\hbar}\int_{t_0}^{t} \mathrm{d}\tau \cdot \mathcal{L}[p(\tau), x(\tau)]}
+    \end{equation}
+    where, the pair of $p(t)$ and $\dot{x}(t)$ characterizes a path in the px phase space.
+\end{theorem}
