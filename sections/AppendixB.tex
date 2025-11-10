@@ -1,0 +1,123 @@
+\section{Proof of the Multivariate Gaussian Integral}
+
+\subsection{Statement of the Formula}
+The formula to be proven is the multivariate Gaussian integral:
+\begin{equation}
+    \colorboxed{
+        I = \int \prod_{n=1}^{N} \mathrm{d}x_n \, \exp\left(-\frac{1}{2} \bm{x}^\mathsf{T} A \bm{x} - \bm{x}^\mathsf{T} \bm{y}\right) = (2\pi)^{N/2} (\det A)^{-\frac{1}{2}} \exp\left(\frac{1}{2} \bm{y}^\mathsf{T} A^{-1} \bm{y}\right)
+    }
+\end{equation}
+where:
+\begin{itemize}
+    \item $\bm{x}$ and $\bm{y}$ are $N$-dimensional column vectors.
+    \item $A$ is an $N \times N$ real, symmetric, and positive-definite matrix.
+    \item The notation $\int \prod_{n=1}^{N} \mathrm{d}x_n$ denotes integration over all components of $\bm{x}$ from $-\infty$ to $+\infty$.
+\end{itemize}
+The proof relies on the assumptions that $A$ is symmetric ($A^\mathsf{T} = A$) and positive-definite (all eigenvalues are positive), which ensures the integral converges. The proof proceeds in several key steps.
+
+\subsection{Step 1: Completing the Square}
+The primary technique is to complete the square for the quadratic form in the exponent. We want to rewrite the argument of the exponential, $-\frac{1}{2} \bm{x}^\mathsf{T} A \bm{x} - \bm{x}^\mathsf{T} \bm{y}$, into the form $-\frac{1}{2} (\bm{x} - \bm{x}_0)^\mathsf{T} A (\bm{x} - \bm{x}_0) + C$, where $\bm{x}_0$ and $C$ are constants with respect to $\bm{x}$.
+
+Expanding this target form, we get:
+\begin{equation}
+\begin{aligned}
+-\frac{1}{2} (\bm{x} - \bm{x}_0)^\mathsf{T} A (\bm{x} - \bm{x}_0) &= -\frac{1}{2} (\bm{x}^\mathsf{T} - \bm{x}_0^\mathsf{T}) A (\bm{x} - \bm{x}_0) \\
+&= -\frac{1}{2} (\bm{x}^\mathsf{T} A \bm{x} - \bm{x}^\mathsf{T} A \bm{x}_0 - \bm{x}_0^\mathsf{T} A \bm{x} + \bm{x}_0^\mathsf{T} A \bm{x}_0)
+\end{aligned}
+\end{equation}
+Since $A$ is symmetric ($A = A^\mathsf{T}$), the scalar term $\bm{x}_0^\mathsf{T} A \bm{x}$ is equal to its own transpose: $(\bm{x}_0^\mathsf{T} A \bm{x})^\mathsf{T} = \bm{x}^\mathsf{T} A^\mathsf{T} \bm{x}_0 = \bm{x}^\mathsf{T} A \bm{x}_0$. Thus, the two cross-terms are equal.
+\begin{equation}
+-\frac{1}{2} (\bm{x} - \bm{x}_0)^\mathsf{T} A (\bm{x} - \bm{x}_0) = -\frac{1}{2} \bm{x}^\mathsf{T} A \bm{x} + \bm{x}^\mathsf{T} A \bm{x}_0 - \frac{1}{2} \bm{x}_0^\mathsf{T} A \bm{x}_0
+\end{equation}
+Comparing this to the original exponent, $-\frac{1}{2} \bm{x}^\mathsf{T} A \bm{x} - \bm{x}^\mathsf{T} \bm{y}$, we can equate the terms linear in $\bm{x}$:
+\begin{equation}
+-\bm{x}^\mathsf{T} \bm{y} = \bm{x}^\mathsf{T} A \bm{x}_0 \implies A \bm{x}_0 = -\bm{y}
+\end{equation}
+Since $A$ is positive-definite, it is invertible. We can solve for $\bm{x}_0$:
+\begin{equation}
+\bm{x}_0 = -A^{-1} \bm{y}
+\end{equation}
+With this definition of $\bm{x}_0$, the original exponent can be written as:
+\begin{equation}
+-\frac{1}{2} \bm{x}^\mathsf{T} A \bm{x} - \bm{x}^\mathsf{T} \bm{y} = -\frac{1}{2} (\bm{x} + A^{-1}\bm{y})^\mathsf{T} A (\bm{x} + A^{-1}\bm{y}) + \frac{1}{2} (A^{-1}\bm{y})^\mathsf{T} A (A^{-1}\bm{y})
+\end{equation}
+Let's simplify the constant term (the term not involving $\bm{x}$):
+\begin{equation}
+\begin{aligned}
+\frac{1}{2} (A^{-1}\bm{y})^\mathsf{T} A (A^{-1}\bm{y}) &= \frac{1}{2} \bm{y}^\mathsf{T} (A^{-1})^\mathsf{T} A A^{-1} \bm{y} \\
+&= \frac{1}{2} \bm{y}^\mathsf{T} A^{-1} A A^{-1} \bm{y} \quad (\text{since } (A^{-1})^\mathsf{T} = (A^\mathsf{T})^{-1} = A^{-1}) \\
+&= \frac{1}{2} \bm{y}^\mathsf{T} I A^{-1} \bm{y} = \frac{1}{2} \bm{y}^\mathsf{T} A^{-1} \bm{y}
+\end{aligned}
+\end{equation}
+So, the exponent is:
+\begin{equation}
+-\frac{1}{2} \bm{x}^\mathsf{T} A \bm{x} - \bm{x}^\mathsf{T} \bm{y} = -\frac{1}{2} (\bm{x} + A^{-1}\bm{y})^\mathsf{T} A (\bm{x} + A^{-1}\bm{y}) + \frac{1}{2} \bm{y}^\mathsf{T} A^{-1} \bm{y}
+\end{equation}
+
+\subsection{Step 2: Change of Variables (Translation)}
+Substituting the completed square back into the integral:
+\begin{equation}
+I = \int \prod_{n=1}^{N} \mathrm{d}x_n \, \exp\left[-\frac{1}{2} (\bm{x} + A^{-1}\bm{y})^\mathsf{T} A (\bm{x} + A^{-1}\bm{y}) + \frac{1}{2} \bm{y}^\mathsf{T} A^{-1} \bm{y}\right]
+\end{equation}
+The term $\exp(\frac{1}{2} \bm{y}^\mathsf{T} A^{-1} \bm{y})$ is constant with respect to $\bm{x}$ and can be factored out of the integral:
+\begin{equation}
+I = \exp\left(\frac{1}{2} \bm{y}^\mathsf{T} A^{-1} \bm{y}\right) \int \prod_{n=1}^{N} \mathrm{d}x_n \, \exp\left[-\frac{1}{2} (\bm{x} + A^{-1}\bm{y})^\mathsf{T} A (\bm{x} + A^{-1}\bm{y})\right]
+\end{equation}
+Now, we perform a change of variables. Let $\bm{z} = \bm{x} + A^{-1}\bm{y}$. This is a simple translation of the coordinate system. The differential element $\prod \mathrm{d}x_n$ transforms as $\prod \mathrm{d}z_n$, as the Jacobian of this transformation is 1. The limits of integration remain from $-\infty$ to $+\infty$.
+The integral becomes:
+\begin{equation}
+I = \exp\left(\frac{1}{2} \bm{y}^\mathsf{T} A^{-1} \bm{y}\right) \int \prod_{n=1}^{N} \mathrm{d}z_n \, \exp\left(-\frac{1}{2} \bm{z}^\mathsf{T} A \bm{z}\right)
+\end{equation}
+The problem is now reduced to evaluating the simpler, centered Gaussian integral:
+\begin{equation}
+I_0 = \int \prod \mathrm{d}z_n \, \exp(-\frac{1}{2} \bm{z}^\mathsf{T} A \bm{z})
+\end{equation}
+
+\subsection{Step 3: Diagonalization}
+To compute $I_0$, we diagonalize the matrix $A$. Since $A$ is a real symmetric matrix, it is orthogonally diagonalizable:
+\begin{equation}
+A = P D P^\mathsf{T}
+\end{equation}
+where $P$ is an orthogonal matrix ($P P^\mathsf{T} = P^\mathsf{T} P = I$) whose columns are the orthonormal eigenvectors of $A$, and $D$ is a diagonal matrix whose entries are the corresponding eigenvalues $\lambda_1, \lambda_2, \dots, \lambda_N$.
+Substituting this into the quadratic form $\bm{z}^\mathsf{T} A \bm{z}$:
+\begin{equation}
+\bm{z}^\mathsf{T} A \bm{z} = \bm{z}^\mathsf{T} (P D P^\mathsf{T}) \bm{z} = (\bm{z}^\mathsf{T} P) D (P^\mathsf{T} \bm{z}) = (P^\mathsf{T} \bm{z})^\mathsf{T} D (P^\mathsf{T} \bm{z})
+\end{equation}
+We perform another change of variables. Let $\bm{w} = P^\mathsf{T}\bm{z}$. This transformation corresponds to a rotation of the coordinate system. The Jacobian determinant is $|\det(P^\mathsf{T})| = 1$, so the volume element is unchanged: $\prod \mathrm{d}z_n = \prod \mathrm{d}w_n$. The quadratic form simplifies to:
+\begin{equation}
+\bm{w}^\mathsf{T} D \bm{w} = \sum_{i=1}^{N} \lambda_i w_i^2
+\end{equation}
+This is because $D$ is a diagonal matrix.
+
+\subsection{Step 4: Computing the Decoupled Integral}
+The integral $I_0$ now becomes:
+\begin{equation}
+I_0 = \int \prod_{n=1}^{N} \mathrm{d}w_n \, \exp\left(-\frac{1}{2} \sum_{i=1}^{N} \lambda_i w_i^2\right)
+\end{equation}
+The exponential of a sum is the product of exponentials, which allows us to separate the multidimensional integral into a product of $N$ one-dimensional integrals:
+\begin{equation}
+I_0 = \int \prod_{n=1}^{N} \mathrm{d}w_n \prod_{i=1}^{N} \exp\left(-\frac{1}{2} \lambda_i w_i^2\right) = \prod_{i=1}^{N} \left( \int_{-\infty}^{\infty} \exp\left(-\frac{1}{2} \lambda_i w_i^2\right) \mathrm{d}w_i \right)
+\end{equation}
+We use the standard formula for a 1D Gaussian integral: $\int_{-\infty}^{\infty} \exp(-au^2) \mathrm{d}u = \sqrt{\pi/a}$. In our case, $a = \lambda_i/2$.
+\begin{equation}
+\int_{-\infty}^{\infty} \exp\left(-\frac{1}{2} \lambda_i w_i^2\right) \mathrm{d}w_i = \sqrt{\frac{\pi}{\lambda_i/2}} = \sqrt{\frac{2\pi}{\lambda_i}}
+\end{equation}
+Multiplying these $N$ results together:
+\begin{equation}
+I_0 = \prod_{i=1}^{N} \sqrt{\frac{2\pi}{\lambda_i}} = (2\pi)^{N/2} \prod_{i=1}^{N} (\lambda_i)^{-1/2} = (2\pi)^{N/2} \left(\prod_{i=1}^{N} \lambda_i\right)^{-1/2}
+\end{equation}
+The determinant of a matrix is equal to the product of its eigenvalues. Thus, $\det A = \det D = \prod_{i=1}^{N} \lambda_i$.
+\begin{equation}
+I_0 = (2\pi)^{N/2} (\det A)^{-1/2}
+\end{equation}
+
+\subsection{Step 5: Combining the Results}
+Finally, we substitute the value of $I_0$ back into our expression for $I$ from Step 2:
+\begin{equation}
+I = \exp\left(\frac{1}{2} \bm{y}^\mathsf{T} A^{-1} \bm{y}\right) \cdot I_0 = \exp\left(\frac{1}{2} \bm{y}^\mathsf{T} A^{-1} \bm{y}\right) (2\pi)^{N/2} (\det A)^{-1/2}
+\end{equation}
+Rearranging the terms yields the final result:
+\begin{equation}
+I = (2\pi)^{N/2} (\det A)^{-\frac{1}{2}} \exp\left(\frac{1}{2} \bm{y}^\mathsf{T} A^{-1} \bm{y}\right)
+\end{equation}
+This completes the proof.
