@@ -1,4 +1,6 @@
-\section{Quantum Spin}
+\part{Quantum Spins, Coherent-state Path Integral, and Topological Terms}
+
+\chapter{Quantum Spin}
 
 We begin by considering the Hilbert space $\hilbert$ for a single quantum spin-1/2 particle. This is a two-dimensional complex vector space.
 
@@ -14,7 +16,7 @@ Here, $\ket{\uparrow}$ represents the "spin up" state and $\ket{\downarrow}$ rep
 \end{itemize}
 where $\opI$ is the identity operator in $\hilbert$.
 
-\subsection{Spin Coherent States}
+\section{Spin Coherent States}
 
 A general, normalized state $\ket{\psi}$ in the spin-1/2 Hilbert space can be written as a complex linear combination of the basis states:
 \begin{equation}
@@ -22,7 +24,7 @@ A general, normalized state $\ket{\psi}$ in the spin-1/2 Hilbert space can be wr
 \end{equation}
 where $z_1, z_2 \in \mathbb{C}$ are complex coefficients.
 
-\subsubsection{Degrees of Freedom and Normalization}
+\subsection{Degrees of Freedom and Normalization}
 
 The normalization condition $\braket{\psi}{\psi} = 1$ imposes a constraint on these coefficients:
 \begin{equation}
@@ -34,7 +36,7 @@ Furthermore, in quantum mechanics, the overall phase of a state vector is unphys
 
 This leaves $4 - 1 - 1 = 2$ real, physical degrees of freedom. This is a crucial observation: the state space of a spin-1/2 particle is topologically equivalent to the surface of a 2D sphere, which is also parameterized by two angles (like latitude and longitude).
 
-\subsubsection{Parametrization}
+\subsection{Parametrization}
 
 We can explicitly parameterize $z_1$ and $z_2$ using two angles, $\theta$ and $\phi$, which will map directly to the surface of a sphere. A standard (but not unique) parametrization for the spin coherent state, labeled by a unit vector $\bm{n}$, is:
 \begin{equation}
@@ -47,7 +49,7 @@ Here, the spherical coordinate angles have the domains $\theta \in [0, \mpi]$ an
 \end{equation}
 This set of states $\{\ket{\bm{n}}\}$ is continuously parameterized by the angles $(\theta, \phi)$, addressing the first drawback of the discrete basis.
 
-\subsection{Physical Interpretation: The Bloch Sphere}
+\section{Physical Interpretation: The Bloch Sphere}
 
 To understand the physical meaning of $\theta$ and $\phi$, we compute the expectation value of the vector spin operator $\vecS$ in the state $\ket{\bm{n}}$. We will set $\hbar = 1$ from here on for simplicity. The spin operator is $\vecS = \frac{1}{2}\vecsigma$, where $\vecsigma = (\op{\sigma}_x, \op{\sigma}_y, \op{\sigma}_z)$ is the vector of Pauli matrices:
 \begin{equation}
@@ -96,7 +98,7 @@ In the $\ket{\uparrow}, \ket{\downarrow}$ basis, $\ket{\bm{n}}$ is represented b
     = \frac{1}{2} \sin\theta \sin\phi
 \end{aligned}\end{equation}
 
-\subsubsection{Conclusion: The Classical Spin Vector}
+\subsection{Conclusion: The Classical Spin Vector}
 Combining these results, the expectation value of the spin vector is:
 \begin{equation}
     \langle \vecS \rangle = \frac{1}{2} \left( \sin\theta \cos\phi, \; \sin\theta \sin\phi, \; \cos\theta \right)
@@ -109,7 +111,7 @@ Thus, the state $\ket{\bm{n}}$ is the quantum state that "points" in the classic
 
 This formalism treats all directions $\bm{n}$ on an equal footing, making the SU(2) rotational symmetry manifest. This addresses the second drawback of the discrete basis.
 
-\subsubsection{Coherent State as an Eigenvector}
+\subsection{Coherent State as an Eigenvector}
 
 The formula presented in the original notes, $\langle\bm{n}|\vecS \cdot \vecn|\bm{n}\rangle = \frac{1}{2} \ket{\bm{n}}$, appears to contain a typographical error, as an expectation value (a scalar) cannot be equal to a state vector.
 
@@ -119,7 +121,7 @@ The more fundamental property, which is likely intended, is the eigenvector equa
 \end{equation}
 This equation signifies that the coherent state $\ket{\bm{n}}$ is, by definition, the "spin up" eigenvector of the spin operator projected along its own pointing direction $\vecn$, with the eigenvalue $+1/2$ (with $\hbar=1$).
 
-\paragraph{Proof:}
+\textbf{Proof:}
 We first construct the operator $\vecS \cdot \vecn$ in matrix form:
 \begin{equation}\begin{aligned}
     \vecS \cdot \vecn &= \op{S}_x n_x + \op{S}_y n_y + \op{S}_z n_z \\
@@ -175,7 +177,7 @@ Combining both components, we have shown:
 \end{equation}
 This completes the proof. The expectation value $\langle \vecS \cdot \vecn \rangle = \bra{\bm{n}}(\vecS \cdot \vecn)\ket{\bm{n}} = \bra{\bm{n}}(\frac{1}{2}\ket{\bm{n}}) = \frac{1}{2}\braket{\bm{n}}{\bm{n}} = \frac{1}{2}$ follows directly.
 
-\subsection{Gauge Choice and Topological Singularities}
+\section{Gauge Choice and Topological Singularities}
 
 The parametrization in Eq. \eqref{eq:coherent_state} is not unique, and it hides a subtle topological problem.
 \begin{itemize}
@@ -186,7 +188,7 @@ This is analogous to the problem of creating a flat map of the Earth: you cannot
 
 We can "fix" the singularity at one pole by making a $\phi$-dependent gauge choice (i.e., multiplying by an overall phase $\me^{\mi\gamma(\phi)}$).
 
-\paragraph{Choice 1: Regular at North Pole.}
+\textbf{Choice 1: Regular at North Pole.}
 Let's choose an overall phase $\gamma = \phi/2$. The new state, $\ket{\bm{n}}_N$, is:
 \begin{equation}
     \ket{\bm{n}}_N = \me^{\mi\phi/2} \ket{\bm{n}} = \cos\left(\frac{\theta}{2}\right) \ket{\uparrow} + \sin\left(\frac{\theta}{2}\right) \me^{\mi\phi} \ket{\downarrow}
@@ -196,7 +198,7 @@ Let's choose an overall phase $\gamma = \phi/2$. The new state, $\ket{\bm{n}}_N$
     \item At the South Pole ($\theta=\mpi$): $\ket{\bm{n}}_N = \cos(\mpi/2)\ket{\uparrow} + \sin(\mpi/2)\me^{\mi\phi}\ket{\downarrow} = \me^{\mi\phi}\ket{\downarrow}$. The singularity has been "pushed" to the South Pole.
 \end{itemize}
 
-\paragraph{Choice 2: Regular at South Pole.}
+\textbf{Choice 2: Regular at South Pole.}
 Let's choose $\gamma = -\phi/2$. The new state, $\ket{\bm{n}}_S$, is:
 \begin{equation}
     \ket{\bm{n}}_S = \me^{-\mi\phi/2} \ket{\bm{n}} = \cos\left(\frac{\theta}{2}\right) \me^{-\mi\phi} \ket{\uparrow} + \sin\left(\frac{\theta}{2}\right) \ket{\downarrow}
@@ -205,7 +207,7 @@ This state is regular at the South Pole ($\ket{\bm{n}}_S = \ket{\downarrow}$) bu
 
 This unavoidable singularity is topological in nature and is the origin of the \textbf{Berry Phase}, or the "topological term," in the coherent-state path integral.
 
-\subsection{Over-Completeness and Orthogonality}
+\section{Over-Completeness and Orthogonality}
 
 The set of all coherent states $\{\ket{\bm{n}}\}$ for all $\bm{n}$ on the sphere is an \textbf{over-complete} basis. The Hilbert space is only 2-dimensional, but we have an infinite, continuous set of states. This means the states are not, in general, orthogonal.
 \begin{equation}
@@ -213,7 +215,7 @@ The set of all coherent states $\{\ket{\bm{n}}\}$ for all $\bm{n}$ on the sphere
 \end{equation}
 A special exception, as noted in the text, is for antipodal states.
 
-\subsubsection{Orthogonality of Antipodal States}
+\subsection{Orthogonality of Antipodal States}
 Let us prove that $\braket{-\bm{n}}{\bm{n}} = 0$. The antipodal point $-\bm{n}$ corresponds to the angles $(\theta', \phi') = (\mpi - \theta, \phi + \mpi)$.
 
 We write the state $\ket{-\bm{n}}$ using Eq. \eqref{eq:coherent_state}:
@@ -256,12 +258,12 @@ By simple inspection, these two state vectors are clearly not identical. They ar
 
 The state $\ket{-\bm{n}}$ represents a spin pointing in the \textit{opposite direction} (e.g., spin down), while $-\ket{\bm{n}}$ represents the \textit{same physical state} as $\ket{\bm{n}}$ but with a phase shift of $\mpi$ (since $\me^{\mi\mpi} = -1$).
 
-\subsection{Completeness Relation}
+\section{Completeness Relation}
 Despite being over-complete, the spin coherent states provide a resolution of the identity operator $\opI$.
 
 Let's call the integral $J = \int \mathrm{d}\Omega \, \ketbra{\bm{n}}{\bm{n}} = \int_0^{2\mpi} \md\phi \int_0^{\mpi} \sin\theta \, \md\theta \, \ketbra{\bm{n}}{\bm{n}}$.
 
-\paragraph{1. Integrate over $\phi$:}
+\textbf{1. Integrate over $\phi$:}
 The off-diagonal terms depend on $\me^{\pm\mi\phi}$.
 \begin{equation}
     \int_0^{2\mpi} \me^{\pm\mi\phi} \, \md\phi = 0
@@ -279,7 +281,7 @@ After integrating over $\phi$, the matrix $J$ becomes diagonal:
     \end{pmatrix}
 \end{equation}
 
-\paragraph{2. Integrate over $\theta$:}
+\textbf{2. Integrate over $\theta$:}
 Both integrals evaluate to $2\mpi$. Thus, the full integral is:
 \begin{equation}
     J = \int \mathrm{d}\Omega \, \ketbra{\bm{n}}{\bm{n}} = \begin{pmatrix} 2\mpi & 0 \\ 0 & 2\mpi \end{pmatrix} = 2\mpi \, \opI

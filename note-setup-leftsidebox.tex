@@ -180,7 +180,19 @@
 % 附录中的公式编号使用 A.1、B.1 等格式
 \apptocmd{\appendix}{
     \setcounter{equation}{0}%
-    \numberwithin{equation}{section}%
+    \setcounter{chapter}{0}%
+    \renewcommand{\chaptername}{Appendix}%
+    \renewcommand{\chapterautorefname}{Appendix}%
+    \renewcommand{\thechapter}{\Alph{chapter}}%
+    \renewcommand{\thesection}{\thechapter.\arabic{section}}%
+    \renewcommand{\thesubsection}{\thesection.\arabic{subsection}}%
+    \renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}%
+    \renewcommand{\theequation}{\thechapter.\arabic{equation}}%
+    \renewcommand{\theHchapter}{\Alph{chapter}}%
+    \renewcommand{\theHsection}{\theHchapter.\arabic{section}}%
+    \renewcommand{\theHsubsection}{\theHsection.\arabic{subsection}}%
+    \renewcommand{\theHsubsubsection}{\theHsubsection.\arabic{subsubsection}}%
+    \renewcommand{\theHequation}{\theHchapter.\arabic{equation}}%
 }{}{}
 
 %===================================
@@ -347,3 +359,59 @@
 \newtcbenvironment{problem}{colframe=WildStrawberry!30, colback=WildStrawberry!5}
 % 定义 proof （证明）环境
 \newtcbenvironment{proof}{colframe=Goldenrod, colback=Goldenrod!10}
+
+%===================================
+% Part 和 Chapter 支持
+%===================================
+
+\usepackage{titlesec}
+
+\providecommand{\partname}{Part}
+\providecommand{\chaptername}{Chapter}
+\providecommand{\partautorefname}{Part}
+\providecommand{\chapterautorefname}{Chapter}
+
+\titleclass{\chapter}{straight}[\section]
+\newcounter{chapter}
+\renewcommand{\thechapter}{\arabic{chapter}}
+
+\titleformat{\part}[display]
+  {\centering\normalfont\Huge\bfseries}
+  {\partname~\thepart}
+  {0pt}
+  {}
+  [\vspace{1ex}\titlerule]
+\titlespacing*{\part}{0pt}{-10pt}{30pt}
+
+\titleformat{\chapter}[display]
+  {\normalfont\Huge\bfseries}
+  {\chaptername~\thechapter}
+  {0pt}
+  {}
+  [\vspace{1ex}\titlerule]
+\titlespacing*{\chapter}{0pt}{-10pt}{24pt}
+
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+\renewcommand{\thesection}{\thechapter.\arabic{section}}
+\renewcommand{\thesubsection}{\thechapter.\arabic{section}.\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\thechapter.\arabic{section}.\arabic{subsection}.\arabic{subsubsection}}
+
+\crefname{chapter}{Chapter}{Chapters}
+\Crefname{chapter}{Chapter}{Chapters}
+\crefname{part}{Part}{Parts}
+\Crefname{part}{Part}{Parts}
+
+\makeatletter
+\@addtoreset{section}{chapter}
+\@addtoreset{equation}{chapter}
+\renewcommand{\theequation}{\thechapter.\arabic{equation}}
+\renewcommand{\theHchapter}{\arabic{chapter}}
+\renewcommand{\theHsection}{\theHchapter.\arabic{section}}
+\renewcommand{\theHsubsection}{\theHsection.\arabic{subsection}}
+\renewcommand{\theHsubsubsection}{\theHsubsection.\arabic{subsubsection}}
+\renewcommand{\theHequation}{\theHchapter.\arabic{equation}}
+\providecommand{\@chapapp}{\chaptername}
+\providecommand{\l@chapter}{\@dottedtocline{0}{0em}{1.5em}}
+\makeatother

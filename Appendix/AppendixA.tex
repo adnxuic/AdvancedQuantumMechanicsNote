@@ -1,4 +1,4 @@
-\section{Appendix A: Evaluation of the Fresnel Integral}
+\chapter{Evaluation of the Fresnel Integral}
 
 The value of the \textbf{Fresnel Integral} is:
 \begin{equation}
@@ -7,10 +7,10 @@ The value of the \textbf{Fresnel Integral} is:
     }
 \end{equation}
 
-\subsection{Derivation (Using Contour Integration)}
+\section{Derivation (Using Contour Integration)}
 This derivation is somewhat advanced and requires a basic understanding of complex analysis.
 
-\subsubsection{Step 1: Define the Contour}
+\textbf{Step 1: Define the Contour}
 We consider the complex function $f(z) = \me^{\mi z^2}$, where $z$ is a complex variable. We construct a closed path (contour) $C$ in the complex plane. This path is a sector of a circle, composed of three parts:
 \begin{enumerate}
     \item \textbf{Path $C_1$}: A line segment along the real axis from $0$ to $R$.
@@ -19,7 +19,7 @@ We consider the complex function $f(z) = \me^{\mi z^2}$, where $z$ is a complex 
 \end{enumerate}
 We will eventually let $R \to \infty$.
 
-\subsubsection{Step 2: Apply Cauchy's Integral Theorem}
+\textbf{Step 2: Apply Cauchy's Integral Theorem}
 The function $f(z) = \me^{\mi z^2}$ is analytic over the entire complex plane (it is an entire function) as it has no singularities. According to \textbf{Cauchy's Integral Theorem}, its integral over any closed path $C$ is zero:
 \begin{equation}
 \oint_C \me^{\mi z^2} \md z = 0
@@ -29,16 +29,16 @@ This closed-loop integral can be split into the sum of integrals over the three 
 \int_{C_1} \me^{\mi z^2} \md z + \int_{C_2} \me^{\mi z^2} \md z + \int_{C_3} \me^{\mi z^2} \md z = 0
 \end{equation}
 
-\subsubsection{Step 3: Evaluate the Integral on Each Path}
+\textbf{Step 3: Evaluate the Integral on Each Path}
 
-\paragraph{1. Integral along Path $C_1$ (The part we want to find)}
+\textbf{1. Integral along Path $C_1$ (The part we want to find)}
 On path $C_1$, we have $z=x$ (a real number) and $\md z=\md x$. Therefore:
 \begin{equation}
 \lim_{R \to \infty} \int_{C_1} \me^{\mi z^2} \md z = \int_0^{\infty} \me^{\mi x^2} \md x
 \end{equation}
 This is exactly half of the integral we wish to compute, since the integrand $\me^{\mi x^2}$ is an even function.
 
-\paragraph{2. Integral along Path $C_2$ (Show it vanishes as $R \to \infty$)}
+\textbf{2. Integral along Path $C_2$ (Show it vanishes as $R \to \infty$)}
 On path $C_2$, we parameterize $z = R\me^{\mi\theta}$, where $\theta$ varies from $0$ to $\mpi/4$. Then $\md z = \mi R\me^{\mi\theta}\md\theta$ and $z^2 = R^2\me^{\mi 2\theta}$. The integral becomes:
 \begin{equation}\begin{aligned}
 \int_{C_2} \me^{\mi z^2} \md z &= \int_0^{\mpi/4} \exp(\mi(R^2\me^{\mi 2\theta})) \cdot \mi R\me^{\mi\theta} \md\theta \\
@@ -60,7 +60,7 @@ As $R \to \infty$, this expression approaches 0. Therefore:
 \lim_{R \to \infty} \int_{C_2} \me^{\mi z^2} \md z = 0
 \end{equation}
 
-\paragraph{3. Integral along Path $C_3$ (Connection to the Gaussian Integral)}
+\textbf{3. Integral along Path $C_3$ (Connection to the Gaussian Integral)}
 On path $C_3$, we parameterize $z = r\me^{\mi\mpi/4}$, where $r$ varies from $R$ to $0$. Then $\md z = \me^{\mi\mpi/4}\md r$ and $z^2 = (r\me^{\mi\mpi/4})^2 = r^2\me^{\mi\mpi/2} = r^2\mi$. The integral becomes:
 \begin{equation}
 \int_{C_3} \me^{\mi z^2} \md z = \int_R^0 \exp(\mi(r^2\mi)) \me^{\mi\mpi/4} \md r = \int_R^0 \exp(-r^2) \me^{\mi\mpi/4} \md r
@@ -78,7 +78,7 @@ We know that the Gaussian integral $\int_0^{\infty} \exp(-x^2) \md x = \frac{\sq
 \lim_{R \to \infty} \int_{C_3} \me^{\mi z^2} \md z = -\me^{\mi\mpi/4} \frac{\sqrt{\mpi}}{2}
 \end{equation}
 
-\subsubsection{Step 4: Combine the Results}
+\textbf{Step 4: Combine the Results}
 Returning to the equation from Step 2 and taking the limit as $R \to \infty$:
 \begin{equation}
 \left( \int_0^{\infty} \me^{\mi x^2} \md x \right) + (0) + \left( -\me^{\mi\mpi/4} \frac{\sqrt{\mpi}}{2} \right) = 0
@@ -88,7 +88,7 @@ Rearranging the terms, we find:
 \int_0^{\infty} \me^{\mi x^2} \md x = \me^{\mi\mpi/4} \frac{\sqrt{\mpi}}{2}
 \end{equation}
 
-\subsubsection{Step 5: Calculate the Final Integral}
+\textbf{Step 5: Calculate the Final Integral}
 The integral we want to evaluate is from $-\infty$ to $\infty$. Since the integrand $\me^{\mi x^2} = \cos(x^2) + \mi\sin(x^2)$ is an even function (i.e., $f(-x) = f(x)$), we have:
 \begin{equation}\begin{aligned}
 \int_{-\infty}^{\infty} \me^{\mi x^2} \md x &= 2 \int_0^{\infty} \me^{\mi x^2} \md x \\
@@ -103,7 +103,7 @@ Substituting this into our result gives:
 \int_{-\infty}^{\infty} \me^{\mi x^2} \md x = \sqrt{\mpi} \cdot \frac{1+\mi}{\sqrt{2}} = \sqrt{\frac{\mpi}{2}}(1+\mi)
 \end{equation}
 
-\subsection{Conclusion}
+\section{Conclusion}
 The result of the integral is a complex number. Its real and imaginary parts correspond to two other important integrals:
 \begin{equation}
 \int_{-\infty}^{\infty} \cos(x^2) \md x = \sqrt{\frac{\mpi}{2}}
