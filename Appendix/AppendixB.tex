@@ -3,7 +3,7 @@
 The multivariate Gaussian integral:
 \begin{equation}
     \colorboxed{
-        I = \int \prod_{n=1}^{N} \mathrm{d}x_n \, \exp\left(-\frac{1}{2} \bm{x}^\mathsf{T} A \bm{x} - \bm{x}^\mathsf{T} \bm{y}\right) = (2\pi)^{N/2} (\det A)^{-\frac{1}{2}} \exp\left(\frac{1}{2} \bm{y}^\mathsf{T} A^{-1} \bm{y}\right)
+        I = \int \prod_{n=1}^{N} \mathrm{d}x_n \, \exp\left(-\frac{1}{2} \bm{x}^\mathsf{T} A \bm{x} - \bm{x}^\mathsf{T} \bm{y}\right) = (2\pi)^{\frac{N}{2}} (\det A)^{-\frac{1}{2}} \exp\left(\frac{1}{2} \bm{y}^\mathsf{T} A^{-1} \bm{y}\right)
     }
 \end{equation}
 where:
@@ -110,21 +110,21 @@ We use the standard formula for a 1D Gaussian integral: $\int_{-\infty}^{\infty}
 \end{equation}
 Multiplying these $N$ results together:
 \begin{equation}
-I_0 = \prod_{i=1}^{N} \sqrt{\frac{2\pi}{\lambda_i}} = (2\pi)^{N/2} \prod_{i=1}^{N} (\lambda_i)^{-1/2} = (2\pi)^{N/2} \left(\prod_{i=1}^{N} \lambda_i\right)^{-1/2}
+I_0 = \prod_{i=1}^{N} \sqrt{\frac{2\pi}{\lambda_i}} = (2\pi)^{\frac{N}{2}} \prod_{i=1}^{N} (\lambda_i)^{-\frac{1}{2}} = (2\pi)^{\frac{N}{2}} \left(\prod_{i=1}^{N} \lambda_i\right)^{-\frac{1}{2}}
 \end{equation}
 The determinant of a matrix is equal to the product of its eigenvalues. Thus, $\det A = \det D = \prod_{i=1}^{N} \lambda_i$.
 \begin{equation}
-I_0 = (2\pi)^{N/2} (\det A)^{-1/2}
+I_0 = (2\pi)^{\frac{N}{2}} (\det A)^{-\frac{1}{2}}
 \end{equation}
 
 \textbf{Step 5: Combining the Results}
 
 Finally, we substitute the value of $I_0$ back into our expression for $I$ from Step 2:
 \begin{equation}
-I = \exp\left(\frac{1}{2} \bm{y}^\mathsf{T} A^{-1} \bm{y}\right) \cdot I_0 = \exp\left(\frac{1}{2} \bm{y}^\mathsf{T} A^{-1} \bm{y}\right) (2\pi)^{N/2} (\det A)^{-1/2}
+I = \exp\left(\frac{1}{2} \bm{y}^\mathsf{T} A^{-1} \bm{y}\right) \cdot I_0 = \exp\left(\frac{1}{2} \bm{y}^\mathsf{T} A^{-1} \bm{y}\right) (2\pi)^{\frac{N}{2}} (\det A)^{-\frac{1}{2}}
 \end{equation}
 Rearranging the terms yields the final result:
 \begin{equation}
-I = (2\pi)^{N/2} (\det A)^{-\frac{1}{2}} \exp\left(\frac{1}{2} \bm{y}^\mathsf{T} A^{-1} \bm{y}\right)
+I = (2\pi)^{\frac{N}{2}} (\det A)^{-\frac{1}{2}} \exp\left(\frac{1}{2} \bm{y}^\mathsf{T} A^{-1} \bm{y}\right)
 \end{equation}
 This completes the proof.
