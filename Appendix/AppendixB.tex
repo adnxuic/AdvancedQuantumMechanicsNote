@@ -1,8 +1,6 @@
 \chapter{Multivariate Gaussian Integral}
 
-\section{Proof of the Multivariate Gaussian Integral}
-
-The formula to be proven is the multivariate Gaussian integral:
+The multivariate Gaussian integral:
 \begin{equation}
     \colorboxed{
         I = \int \prod_{n=1}^{N} \mathrm{d}x_n \, \exp\left(-\frac{1}{2} \bm{x}^\mathsf{T} A \bm{x} - \bm{x}^\mathsf{T} \bm{y}\right) = (2\pi)^{N/2} (\det A)^{-\frac{1}{2}} \exp\left(\frac{1}{2} \bm{y}^\mathsf{T} A^{-1} \bm{y}\right)
@@ -14,9 +12,13 @@ where:
     \item $A$ is an $N \times N$ real, symmetric, and positive-definite matrix.
     \item The notation $\int \prod_{n=1}^{N} \mathrm{d}x_n$ denotes integration over all components of $\bm{x}$ from $-\infty$ to $+\infty$.
 \end{itemize}
+
+\section{Proof of the Multivariate Gaussian Integral}
+
 The proof relies on the assumptions that $A$ is symmetric ($A^\mathsf{T} = A$) and positive-definite (all eigenvalues are positive), which ensures the integral converges. The proof proceeds in several key steps.
 
 \textbf{Step 1: Completing the Square}
+
 The primary technique is to complete the square for the quadratic form in the exponent. We want to rewrite the argument of the exponential, $-\frac{1}{2} \bm{x}^\mathsf{T} A \bm{x} - \bm{x}^\mathsf{T} \bm{y}$, into the form $-\frac{1}{2} (\bm{x} - \bm{x}_0)^\mathsf{T} A (\bm{x} - \bm{x}_0) + C$, where $\bm{x}_0$ and $C$ are constants with respect to $\bm{x}$.
 
 Expanding this target form, we get:
@@ -56,6 +58,7 @@ So, the exponent is:
 \end{equation}
 
 \textbf{Step 2: Change of Variables (Translation)}
+
 Substituting the completed square back into the integral:
 \begin{equation}
 I = \int \prod_{n=1}^{N} \mathrm{d}x_n \, \exp\left[-\frac{1}{2} (\bm{x} + A^{-1}\bm{y})^\mathsf{T} A (\bm{x} + A^{-1}\bm{y}) + \frac{1}{2} \bm{y}^\mathsf{T} A^{-1} \bm{y}\right]
@@ -75,6 +78,7 @@ I_0 = \int \prod \mathrm{d}z_n \, \exp(-\frac{1}{2} \bm{z}^\mathsf{T} A \bm{z})
 \end{equation}
 
 \textbf{Step 3: Diagonalization}
+
 To compute $I_0$, we diagonalize the matrix $A$. Since $A$ is a real symmetric matrix, it is orthogonally diagonalizable:
 \begin{equation}
 A = P D P^\mathsf{T}
@@ -91,6 +95,7 @@ We perform another change of variables. Let $\bm{w} = P^\mathsf{T}\bm{z}$. This 
 This is because $D$ is a diagonal matrix.
 
 \textbf{Step 4: Computing the Decoupled Integral}
+
 The integral $I_0$ now becomes:
 \begin{equation}
 I_0 = \int \prod_{n=1}^{N} \mathrm{d}w_n \, \exp\left(-\frac{1}{2} \sum_{i=1}^{N} \lambda_i w_i^2\right)
@@ -113,6 +118,7 @@ I_0 = (2\pi)^{N/2} (\det A)^{-1/2}
 \end{equation}
 
 \textbf{Step 5: Combining the Results}
+
 Finally, we substitute the value of $I_0$ back into our expression for $I$ from Step 2:
 \begin{equation}
 I = \exp\left(\frac{1}{2} \bm{y}^\mathsf{T} A^{-1} \bm{y}\right) \cdot I_0 = \exp\left(\frac{1}{2} \bm{y}^\mathsf{T} A^{-1} \bm{y}\right) (2\pi)^{N/2} (\det A)^{-1/2}
