@@ -339,10 +339,12 @@ So we can rewrite the integral as:
 \int \mathcal{D}p \cdot \exp \left[ \frac{\mathrm{i}}{2m\hbar} (-\bm{p}^T \bm{p} + 2m \bm{p}^T \dot{\bm{x}}) \Delta t \right]
 \end{equation}
 
-We have an useful formula for Gaussian integral:
+We have an useful formula for Gaussian integral (Proof in \ref{appendix:gaussian-integral}):
 \begin{equation}
-\int \prod_{n = 1}^{N} \mathrm{d}x_n \exp \left[ -\frac{1}{2}\bm{x}^T A \bm{x} - \bm{x}^T \bm{y} \right] 
-= (2\pi)^{\frac{N}{2}} (\det A)^{-\frac{1}{2}} \exp \left[ \frac{1}{2} \bm{y}^T A^{-1} \bm{y} \right]
+    \colorboxed{
+    \int \prod_{n = 1}^{N} \mathrm{d}x_n \exp \left[ -\frac{1}{2}\bm{x}^T A \bm{x} - \bm{x}^T \bm{y} \right] 
+    = (2\pi)^{\frac{N}{2}} (\det A)^{-\frac{1}{2}} \exp \left[ \frac{1}{2} \bm{y}^T A^{-1} \bm{y} \right]
+    }
 \end{equation}
 where, $\bm{x}, \bm{y}$ are real vectors and $A$ is real symmetric matrix.
 
@@ -354,20 +356,20 @@ Let:
     - \bm{p}^T \dot{\bm{x}}' \right]
     \end{aligned}
 \end{equation}
-where $A = \frac{\mathrm{i}\Delta t}{m\hbar} \hat{\mathbb{I}}_{N \times N}$ and $ \dot{\bm{x}}' = -\frac{\mathrm{i}\Delta t}{\hbar} \dot{\bm{x}}$, 
-$\hat{\mathbb{I}}_{N \times N}$ is a $N \times N$ identity matrix.
+where $A = \frac{\mathrm{i}\Delta t}{m\hbar} \mathbb{I}_{N \times N}$ and $ \dot{\bm{x}}' = -\frac{\mathrm{i}\Delta t}{\hbar} \dot{\bm{x}}$, 
+$\mathbb{I}_{N \times N}$ is the $N \times N$ identity matrix.
 
 So we can get:
 \begin{equation}
 \left\{
 \begin{aligned}
 &(\det A)^{-\frac{1}{2}} = \left( \frac{\mathrm{i}\Delta t}{m\hbar} \right)^{-\frac{N}{2}}\\
-&A^{-1} = \frac{m\hbar}{\mathrm{i}\Delta t} \hat{\mathbb{I}}_{N \times N}
+&A^{-1} = \frac{m\hbar}{\mathrm{i}\Delta t} \mathbb{I}_{N \times N}
 \end{aligned}
 \right.
 \end{equation}
 
-So we can get:
+The exponent term is:
 \begin{equation}
 \begin{aligned}
 \frac{1}{2} \dot{\bm{x}}'^T A^{-1} \dot{\bm{x}}' 
@@ -396,119 +398,135 @@ So we can get the integration without $p$:
 \end{aligned}
 \end{equation}
 
-So 
+So the path-integral is proportional to :
 \begin{equation}
-\mathrm{i}G \propto \int \mathcal{D}x \cdot e^{\frac{\mathrm{i}}{\hbar}S[x(t)]}
+    \colorboxed{
+    \mathrm{i}G \propto \int \mathcal{D}x \cdot e^{\frac{\mathrm{i}}{\hbar}S[x(t)]}
+    }
 \end{equation}
 where, $S[x(t)] = \int_{t_0}^{t} \mathrm{d}t \, \mathcal{L}(x, \dot{x})$ is action
 and $\mathcal{L}(x, \dot{x}) = \frac{m\dot{x}^2}{2} - V(x)$ is Lagrangean.
 
 From the Path-integral in real space-time, we can get some information about Physics Picture:
 \begin{enumerate}[(1)]
-    \item Each path is weighted with a U(1) phase factor $e^{\frac{\mathrm{i}}{\hbar}S}$.
-    The Quantum interference between different paths.
-    \item Since $\hbar \sim 10^{-34} \, \mathrm{J \cdot s}$, any "small change" in S (we change S to $S+\delta S$), will drastically lead to quantum destructive interference. So the only the paths that satisfy $\delta S=0$ make dominant contributions to the path-integral.
-    \item Remarkably, $\delta S=0$ is exactly Hamilton's Principle in classical mechanics. So the classical paths ($\delta S=0$) dominate the path integral in the limit $\hbar \to 0$. In other words, in classical mechanics, as $\hbar \to 0$, it neglects the contribution of the integral over all other paths near the path with those with $\delta S=0$. So we can get the conclusion:
+    \item Each path is weighted with a $U(1)$ phase factor $e^{\frac{\mathrm{i}}{\hbar}S}$.
+    The Quantum interference effect between different paths.
+    \item Since $\hbar \sim 10^{-34} \, \mathrm{J \cdot s}$, any "small change" in S (we change S to $S+\delta S$), 
+    will drastically lead to quantum destructive interference. 
+    So only the paths that satisfy $\delta S=0$ make dominant contributions to the path-integral.
+    \item Remarkably, $\delta S=0$ is exactly Hamilton's Principle in classical mechanics. 
+    So the classical paths ($\delta S=0$) dominate the path integral in the limit $\hbar \to 0$. In other words, 
+    in classical mechanics, as $\hbar \to 0$, 
+    it neglects the contribution of the integral over all other paths near the path with $\delta S=0$. 
+    So we can get the conclusion:
     \begin{equation*}
     \text{Quantum system} \xrightarrow{\hbar \to 0} \text{classical system}
     \end{equation*}
 \end{enumerate}
 
-\subsection{Example: Computing the path-integral of free particles}
+\begin{example}
+    Free particles' Hamiltonian is $H = \frac{p^2}{2m}$.\
 
-Free particles' Hamiltonian is $H = \frac{p^2}{2m}$.
-Using this Hamiltonian, we can get the path-integral:
-\begin{equation}
-\mathrm{i}G = \left( \frac{m}{i 2\pi\hbar\Delta t} \right)^{\frac{N}{2}} 
-\int \mathcal{D}x \exp\left[\frac{\mathrm{i}}{\hbar} \sum_{l=1}^N \frac{m}{2} (\frac{x_l-x_{l-1}}{\Delta t})^2 \Delta t \right].
-\end{equation}
+    Using this Hamiltonian, we can get the path-integral:
+    \begin{equation}
+    \mathrm{i}G = \left( \frac{m}{i 2\pi\hbar\Delta t} \right)^{\frac{N}{2}} 
+    \int \mathcal{D}x \exp\left[\frac{\mathrm{i}}{\hbar} \sum_{l=1}^N \frac{m}{2} (\frac{x_l-x_{l-1}}{\Delta t})^2 \Delta t \right].
+    \end{equation}
 
-we let:
-\begin{equation}
-I = \int \mathcal{D}x \exp\left[\frac{\mathrm{i}m}{2\hbar\Delta t} \sum_{l=1}^N (x_l^2 - 2x_l x_{l-1} + x_{l-1}^2)\right]
-\end{equation}
+    we let:
+    \begin{equation}
+    I = \int \mathcal{D}x \exp\left[\frac{\mathrm{i}m}{2\hbar\Delta t} \sum_{l=1}^N (x_l^2 - 2x_l x_{l-1} + x_{l-1}^2)\right]
+    \end{equation}
 
-In order to use Gaussian integral:
-\begin{equation}
-\int \prod_{n=1}^N \mathrm{d}x_n \, e^{-\frac{1}{2}\bm{x}^T A \bm{x} - \bm{x}^T \bm{y}} 
-= (2\pi)^{\frac{N}{2}} (\det A)^{-\frac{1}{2}} e^{\frac{1}{2}\bm{y}^T A^{-1} \bm{y}}
-\end{equation}
-we should rewrite the form of $\exp[\frac{\mathrm{i}m}{2\hbar\Delta t} \sum (x_l^2-2x_l x_{l-1} + x_{l-1}^2)]$,
-so we let:
-\begin{equation}
-A = \frac{-\mathrm{i}m}{\hbar\Delta t}
-\begin{bmatrix}
-2 & -1 & & \\
--1 & 2 & -1 & \\
-& \ddots & \ddots & \ddots \\
-& & -1 & 2 & -1 \\
-& & & -1 & 2
-\end{bmatrix}_{(N-1)\times(N-1)},
-\quad
-\bm{x} = \begin{bmatrix} x_{N-1} \\ \vdots \\ x_1 \end{bmatrix},
-\quad
-\bm{y} = \frac{-\mathrm{i}m}{\hbar\Delta t}
-\begin{bmatrix}
--x_N \\ 0 \\ \vdots \\ \text{all zero} \\ \vdots \\ 0 \\ x_0
-\end{bmatrix}
-\end{equation}
+    In order to use Gaussian integral:
+    \begin{equation}
+        \colorboxed{
+        \int \prod_{n=1}^N \mathrm{d}x_n \, e^{-\frac{1}{2}\bm{x}^T A \bm{x} - \bm{x}^T \bm{y}} 
+        = (2\pi)^{\frac{N}{2}} (\det A)^{-\frac{1}{2}} e^{\frac{1}{2}\bm{y}^T A^{-1} \bm{y}}
+        }
+    \end{equation}
+    we should rewrite the form of $\exp[\frac{\mathrm{i}m}{2\hbar\Delta t} \sum (x_l^2-2x_l x_{l-1} + x_{l-1}^2)]$,
+    so we let:
+    \begin{equation}
+    A = \frac{-\mathrm{i}m}{\hbar\Delta t}
+    \begin{bmatrix}
+    2 & -1 & & \\
+    -1 & 2 & -1 & \\
+    & \ddots & \ddots & \ddots \\
+    & & -1 & 2 & -1 \\
+    & & & -1 & 2
+    \end{bmatrix}_{(N-1)\times(N-1)}
+    \end{equation}
+    and:
+    \begin{equation}
+    \bm{x} = \begin{bmatrix} x_{N-1} \\ \vdots \\ x_1 \end{bmatrix},
+    \quad
+    \bm{y} = \frac{-\mathrm{i}m}{\hbar\Delta t}
+    \begin{bmatrix}
+    -x_N \\ 0 \\ \vdots \\ \text{all zero} \\ \vdots \\ 0 \\ x_0
+    \end{bmatrix}
+    \end{equation}
 
-We get the new form of the exponent term:
-\begin{equation}
-\exp\left[\frac{\mathrm{i}m}{2\hbar\Delta t} \sum_{l=1}^{N-1} (x_l^2-2x_l x_{l-1} + x_{l-1}^2)\right] 
-= \exp(-\frac{1}{2}\bm{x}^T A \bm{x} - \bm{x}^T \bm{y}) e^{\frac{\mathrm{i}m}{2\hbar\Delta t}(x_N^2+x_0^2)}
-\end{equation}
+    We get the new form of the exponent term:
+    \begin{equation}
+    \exp\left[\frac{\mathrm{i}m}{2\hbar\Delta t} \sum_{l=1}^{N-1} (x_l^2-2x_l x_{l-1} + x_{l-1}^2)\right] 
+    = \exp(-\frac{1}{2}\bm{x}^T A \bm{x} - \bm{x}^T \bm{y}) e^{\frac{\mathrm{i}m}{2\hbar\Delta t}(x_N^2+x_0^2)}
+    \end{equation}
 
-Because of $\mathcal{D}x = \prod_{l=1}^{N-1} \mathrm{d}x_l$ without $x_N$ and $x_0$, so:
-\begin{equation}
-\mathrm{i}G = \left(\frac{m}{i 2\pi\hbar\Delta t}\right)^{\frac{N}{2}} \cdot e^{\frac{\mathrm{i}m}{2\hbar\Delta t}(x_N^2+x_0^2)} \int \mathcal{D}x 
-\, e^{-\frac{1}{2}\bm{x}^T A \bm{x} - \bm{x}^T \bm{y}}
-\end{equation}
+    Because of $\mathcal{D}x = \prod_{l=1}^{N-1} \mathrm{d}x_l$ without $x_N$ and $x_0$, so:
+    \begin{equation}
+    \mathrm{i}G = \left(\frac{m}{i 2\pi\hbar\Delta t}\right)^{\frac{N}{2}} \cdot e^{\frac{\mathrm{i}m}{2\hbar\Delta t}(x_N^2+x_0^2)} \int \mathcal{D}x 
+    \, e^{-\frac{1}{2}\bm{x}^T A \bm{x} - \bm{x}^T \bm{y}}
+    \end{equation}
 
-So we can compute $(\det A) = N \cdot \left(\frac{-\mathrm{i}m}{\hbar\Delta t}\right)^N$
-and get:
-\begin{equation}
-    \label{eq:path_integral_free_particles}
-    \mathrm{i}G = \left(\frac{m}{i 2\pi\hbar\Delta t}\right)^{\frac{N}{2}} 
-    \cdot e^{\frac{\mathrm{i}m}{2\hbar\Delta t}(x_N^2+x_0^2)} (2\pi)^{\frac{N}{2}} N^{-1/2} 
-    \left(\frac{-\mathrm{i}m}{\hbar\Delta t}\right)^{-\frac{N}{2}} \cdot e^{\frac{1}{2}\bm{y}^T A^{-1} \bm{y}}
-\end{equation}
+    So we can compute $(\det A) = N \cdot \left(\frac{-\mathrm{i}m}{\hbar\Delta t}\right)^N$ (Proof in \ref{appendix:special-matrix})
+    and get:
+    \begin{equation}
+        \label{eq:path_integral_free_particles}
+        \mathrm{i}G = \left(\frac{m}{i 2\pi\hbar\Delta t}\right)^{\frac{N}{2}} 
+        \cdot e^{\frac{\mathrm{i}m}{2\hbar\Delta t}(x_N^2+x_0^2)} (2\pi)^{\frac{N}{2}} N^{-1/2} 
+        \left(\frac{-\mathrm{i}m}{\hbar\Delta t}\right)^{-\frac{N}{2}} \cdot e^{\frac{1}{2}\bm{y}^T A^{-1} \bm{y}}
+    \end{equation}
 
-Although $A^{-1}$ is difficult to compute, we notice that
-$\bm{y} = \begin{bmatrix} -x_N \\ 0 \\ \vdots \\ 0 \\ x_0 \end{bmatrix}$ only have two non-zero elements,
-which locate in the first row and the last row respectively.
+    Although $A^{-1}$ is difficult to compute, we notice that
+    $\bm{y} = \begin{bmatrix} -x_N \\ 0 \\ \vdots \\ 0 \\ x_0 \end{bmatrix}$ only have two non-zero elements,
+    which locate in the first row and the last row respectively.
+    So we only need to calculate the first and last columns of matrix $A^{-1}$, 
+    denoted $\bm{A}_1^{-1}$ and $\bm{A}_{N-1}^{-1}$, respectively (Proof in \ref{appendix:special-matrix}):
+    \begin{equation}
+    \bm{A}_1^{-1} = \frac{\mathrm{i}\hbar\Delta t}{mN}
+    \begin{bmatrix} N-1 \\ N-2 \\ \vdots \\ 1 \end{bmatrix},
+    \quad
+    \bm{A}_{N-1}^{-1} = \frac{\mathrm{i}\hbar\Delta t}{mN}
+    \begin{bmatrix} 1 \\ 2 \\ \vdots \\ N-1 \end{bmatrix}
+    \end{equation}
 
-So we only need to calculate the first and last columns of matrix $A^{-1}$, denoted $\bm{A}_1^{-1}$ and $\bm{A}_{N-1}^{-1}$, respectively.
-\begin{equation}
-\bm{A}_1^{-1} = \frac{\mathrm{i}\hbar\Delta t}{mN}
-\begin{bmatrix} N-1 \\ N-2 \\ \vdots \\ 1 \end{bmatrix},
-\quad
-\bm{A}_{N-1}^{-1} = \frac{\mathrm{i}\hbar\Delta t}{mN}
-\begin{bmatrix} 1 \\ 2 \\ \vdots \\ N-1 \end{bmatrix}
-\end{equation}
+    The last term of the propagator\eqref{eq:path_integral_free_particles} is:
+    \begin{equation}
+    \begin{aligned}
+    -\frac{1}{2} \bm{y}^T A^{-1} \bm{y} &= \frac{1}{2} \bm{y}^T [x_N \bm{A}_1^{-1} + x_0 \bm{A}_{N-1}^{-1}] \\
+    &= \frac{\mathrm{i}m}{2\hbar\Delta t} \left[-(x_N^2+x_0^2) + \frac{(x_N-x_0)^2}{N}\right]
+    \end{aligned}
+    \end{equation}
 
-The last term of the propagator\eqref{eq:path_integral_free_particles} is:
-\begin{equation}
-\begin{aligned}
--\frac{1}{2} \bm{y}^T A^{-1} \bm{y} &= \frac{1}{2} \bm{y}^T [x_N \bm{A}_1^{-1} + x_0 \bm{A}_{N-1}^{-1}] \\
-&= \frac{\mathrm{i}m}{2\hbar\Delta t} \left[-(x_N^2+x_0^2) + \frac{(x_N-x_0)^2}{N}\right]
-\end{aligned}
-\end{equation}
+    So we can get the complete integral :
+    \begin{equation}
+    \begin{aligned}
+    \mathrm{i}G &= \left(\frac{m}{i 2\pi\hbar\Delta t}\right)^{\frac{N}{2}} (2\pi)^{\frac{N}{2}} N^{-\frac{1}{2}} 
+    \left(\frac{-\mathrm{i}m}{\hbar\Delta t}\right)^{-\frac{N-1}{2}} e^{\frac{\mathrm{i}}{\hbar} \frac{m(x_N-x_0)^2}{2N\Delta t}} \\
+    &= \left(\frac{m}{i 2\pi\hbar\Delta t N}\right)^{\frac{1}{2}} e^{\frac{\mathrm{i}}{\hbar} \frac{m(x_N-x_0)^2}{2N\Delta t}}
+    \end{aligned}
+    \end{equation}
 
-So we can get the complete integral :
-\begin{equation}
-\begin{aligned}
-\mathrm{i}G &= \left(\frac{m}{i 2\pi\hbar\Delta t}\right)^{\frac{N}{2}} (2\pi)^{\frac{N}{2}} N^{-\frac{1}{2}} 
-\left(\frac{-\mathrm{i}m}{\hbar\Delta t}\right)^{-\frac{N-1}{2}} e^{\frac{\mathrm{i}}{\hbar} \frac{m(x_N-x_0)^2}{2N\Delta t}} \\
-&= \left(\frac{m}{i 2\pi\hbar\Delta t N}\right)^{\frac{1}{2}} e^{\frac{\mathrm{i}}{\hbar} \frac{m(x_N-x_0)^2}{2N\Delta t}}
-\end{aligned}
-\end{equation}
+    where $t-t_0=N\Delta t$, $x=x_N$.
+    So the free particle's propagator is:
+    \begin{equation}
+        \colorboxed{
+        \mathrm{i}G = \left[\frac{m}{i 2\pi\hbar(t-t_0)}\right]^{\frac{1}{2}} \cdot e^{\frac{\mathrm{i}}{\hbar} \cdot \frac{m(x-x_0)^2}{2(t-t_0)}}
+        }
+    \end{equation}
 
-where $t-t_0=N\Delta t$, $x=x_N$.
-So:
-\begin{equation}
-\mathrm{i}G = \left[\frac{m}{i 2\pi\hbar(t-t_0)}\right]^{\frac{1}{2}} \cdot e^{\frac{\mathrm{i}}{\hbar} \cdot \frac{m(x-x_0)^2}{2(t-t_0)}}
-\end{equation}
+\end{example}
 
 \newpage
 \chapter{Stationary Phase Approximation}

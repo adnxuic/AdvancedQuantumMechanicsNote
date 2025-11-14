@@ -1,0 +1,135 @@
+\chapter{Evaluation of the Fresnel Integral}
+\label{appendix:fresnel}
+
+The value of the \textbf{Fresnel Integral} is:
+\begin{equation}
+    \colorboxed{
+        \int_{-\infty}^{\infty} \me^{\mi x^2} \md x = \sqrt{\frac{\mpi}{2}}(1+\mi) = \sqrt{\mpi} \me^{\mi\mpi/4}
+    }
+\end{equation}
+
+\section{Derivation (Using Contour Integration)}
+\textbf{Step 1: Define the Contour}
+
+We consider the complex function $f(z) = \me^{\mi z^2}$, where $z$ is a complex variable. We construct a closed path (contour) $C$ in the complex plane. This path is a sector of a circle, composed of three parts:
+\begin{enumerate}
+    \item \textbf{Path $C_1$}: A line segment along the real axis from $0$ to $R$.
+    \item \textbf{Path $C_2$}: A circular arc of radius $R$, centered at the origin, running counter-clockwise from $R$ to $R\me^{\mi\mpi/4}$.
+    \item \textbf{Path $C_3$}: A line segment from $R\me^{\mi\mpi/4}$ back to the origin $0$.
+\end{enumerate}
+We will eventually let $R \to \infty$.
+
+\textbf{Step 2: Apply Cauchy's Integral Theorem}
+
+The function $f(z) = \me^{\mi z^2}$ is analytic over the entire complex plane (it is an entire function) as it has no singularities. According to \textbf{Cauchy's Integral Theorem}, its integral over any closed path $C$ is zero:
+\begin{equation}
+\oint_C \me^{\mi z^2} \md z = 0
+\end{equation}
+This closed-loop integral can be split into the sum of integrals over the three paths:
+\begin{equation}
+\int_{C_1} \me^{\mi z^2} \md z + \int_{C_2} \me^{\mi z^2} \md z + \int_{C_3} \me^{\mi z^2} \md z = 0
+\end{equation}
+
+\textbf{Step 3: Evaluate the Integral on Each Path}
+
+\textbf{1. Integral along Path $C_1$ (The part we want to find)}
+
+On path $C_1$, we have $z=x$ (a real number) and $\md z=\md x$. Therefore:
+\begin{equation}
+\lim_{R \to \infty} \int_{C_1} \me^{\mi z^2} \md z = \int_0^{\infty} \me^{\mi x^2} \md x
+\end{equation}
+This is exactly half of the integral we wish to compute, since the integrand $\me^{\mi x^2}$ is an even function.
+
+\textbf{2. Integral along Path $C_2$ (Show it vanishes as $R \to \infty$)}
+
+On path $C_2$, we parameterize $z = R\me^{\mi\theta}$, where $\theta$ varies from $0$ to $\mpi/4$. Then $\md z = \mi R\me^{\mi\theta}\md\theta$ and $z^2 = R^2\me^{\mi 2\theta}$. The integral becomes:
+\begin{equation}\begin{aligned}
+\int_{C_2} \me^{\mi z^2} \md z &= \int_0^{\mpi/4} \exp(\mi(R^2\me^{\mi 2\theta})) \cdot \mi R\me^{\mi\theta} \md\theta \\
+&= \int_0^{\mpi/4} \exp(\mi R^2(\cos(2\theta) + \mi\sin(2\theta))) \cdot \mi R\me^{\mi\theta} \md\theta \\
+&= \int_0^{\mpi/4} \exp(-R^2\sin(2\theta)) \exp(\mi(R^2\cos(2\theta)+\theta)) \cdot \mi R \md\theta
+\end{aligned}\end{equation}
+
+Taking the magnitude:
+\begin{equation}
+\left| \int_{C_2} \me^{\mi z^2} \md z \right| \le \int_0^{\mpi/4} \left| \exp(-R^2\sin(2\theta)) \right| \cdot R \md\theta = \int_0^{\mpi/4} R\exp(-R^2\sin(2\theta)) \md\theta
+\end{equation}
+
+On the interval $[0, \mpi/4]$, $2\theta$ is in $[0, \mpi/2]$. We can use Jordan's inequality, which states $\sin(x) \ge \frac{2x}{\mpi}$ for $x \in [0, \mpi/2]$. Thus, $\sin(2\theta) \ge \frac{4\theta}{\mpi}$.
+\begin{equation}
+    \begin{aligned}
+    \left| \int_{C_2} \me^{\mi z^2} \md z \right| &\le \int_0^{\mpi/4} R\exp(-R^2(4\theta/\mpi)) \md\theta \\
+    &= R \left.\left[ \frac{-\mpi}{4R^2} \exp(-4R^2\theta/\mpi) \right] \right|_0^{\mpi/4} \\
+    &= \frac{\mpi}{4R} (1 - \exp(-R^2))
+    \end{aligned}
+\end{equation}
+
+As $R \to \infty$, this expression approaches 0. Therefore:
+\begin{equation}
+\lim_{R \to \infty} \int_{C_2} \me^{\mi z^2} \md z = 0
+\end{equation}
+
+\textbf{3. Integral along Path $C_3$ (Connection to the Gaussian Integral)}
+
+On path $C_3$, we parameterize $z = r\me^{\mi\mpi/4}$, where $r$ varies from $R$ to $0$. Then $\md z = \me^{\mi\mpi/4}\md r$ and $z^2 = (r\me^{\mi\mpi/4})^2 = r^2\me^{\mi\mpi/2} = r^2\mi$. The integral becomes:
+\begin{equation}
+\int_{C_3} \me^{\mi z^2} \md z = \int_R^0 \exp(\mi(r^2\mi)) \me^{\mi\mpi/4} \md r = \int_R^0 \exp(-r^2) \me^{\mi\mpi/4} \md r
+\end{equation}
+
+Reversing the limits of integration and factoring out the constant:
+\begin{equation}
+= -\me^{\mi\mpi/4} \int_0^R \exp(-r^2) \md r
+\end{equation}
+
+As $R \to \infty$, we get the well-known Gaussian integral:
+\begin{equation}
+\lim_{R \to \infty} \int_{C_3} \me^{\mi z^2} \md z = -\me^{\mi\mpi/4} \int_0^{\infty} \exp(-r^2) \md r
+\end{equation}
+
+We know that the Gaussian integral $\int_0^{\infty} \exp(-x^2) \md x = \frac{\sqrt{\mpi}}{2}$. So:
+\begin{equation}
+\lim_{R \to \infty} \int_{C_3} \me^{\mi z^2} \md z = -\me^{\mi\mpi/4} \frac{\sqrt{\mpi}}{2}
+\end{equation}
+
+\textbf{Step 4: Combine the Results}
+
+Returning to the equation from Step 2 and taking the limit as $R \to \infty$:
+\begin{equation}
+\left( \int_0^{\infty} \me^{\mi x^2} \md x \right) + (0) + \left( -\me^{\mi\mpi/4} \frac{\sqrt{\mpi}}{2} \right) = 0
+\end{equation}
+
+Rearranging the terms, we find:
+\begin{equation}
+\int_0^{\infty} \me^{\mi x^2} \md x = \me^{\mi\mpi/4} \frac{\sqrt{\mpi}}{2}
+\end{equation}
+
+\textbf{Step 5: Calculate the Final Integral}
+
+The integral we want to evaluate is from $-\infty$ to $\infty$. Since the integrand $\me^{\mi x^2} = \cos(x^2) + \mi\sin(x^2)$ is an even function (i.e., $f(-x) = f(x)$), we have:
+\begin{equation}\begin{aligned}
+\int_{-\infty}^{\infty} \me^{\mi x^2} \md x &= 2 \int_0^{\infty} \me^{\mi x^2} \md x \\
+&= 2 \cdot \left( \me^{\mi\mpi/4} \frac{\sqrt{\mpi}}{2} \right) = \sqrt{\mpi} \me^{\mi\mpi/4}
+\end{aligned}\end{equation}
+
+Finally, we can use Euler's formula, $\me^{\mi\theta} = \cos\theta + \mi\sin\theta$, to expand $\me^{\mi\mpi/4}$:
+\begin{equation}
+\me^{\mi\mpi/4} = \cos(\mpi/4) + \mi\sin(\mpi/4) = \frac{\sqrt{2}}{2} + \mi\frac{\sqrt{2}}{2} = \frac{1+\mi}{\sqrt{2}}
+\end{equation}
+
+Substituting this into our result gives:
+\begin{equation}
+\int_{-\infty}^{\infty} \me^{\mi x^2} \md x = \sqrt{\mpi} \cdot \frac{1+\mi}{\sqrt{2}} = \sqrt{\frac{\mpi}{2}}(1+\mi)
+\end{equation}
+
+\section{Conclusion}
+
+The result of the integral is a complex number. Its real and imaginary parts correspond to two other important integrals:
+\begin{equation}
+    \left\{
+    \begin{aligned}
+    \int_{-\infty}^{\infty} \cos(x^2) \md x &= \sqrt{\frac{\mpi}{2}} \\
+    \int_{-\infty}^{\infty} \sin(x^2) \md x &= \sqrt{\frac{\mpi}{2}}
+    \end{aligned}
+    \right.
+\end{equation}
+
+\newpage

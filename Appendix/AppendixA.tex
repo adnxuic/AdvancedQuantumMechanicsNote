@@ -1,134 +1,131 @@
-\chapter{Evaluation of the Fresnel Integral}
+\chapter{Multivariate Gaussian Integral}
+\label{appendix:gaussian-integral}
 
-The value of the \textbf{Fresnel Integral} is:
+The multivariate Gaussian integral:
 \begin{equation}
     \colorboxed{
-        \int_{-\infty}^{\infty} \me^{\mi x^2} \md x = \sqrt{\frac{\mpi}{2}}(1+\mi) = \sqrt{\mpi} \me^{\mi\mpi/4}
+        I = \int \prod_{n=1}^{N} \mathrm{d}x_n \, \exp\left(-\frac{1}{2} \bm{x}^\mathsf{T} A \bm{x} - \bm{x}^\mathsf{T} \bm{y}\right) = (2\pi)^{\frac{N}{2}} (\det A)^{-\frac{1}{2}} \exp\left(\frac{1}{2} \bm{y}^\mathsf{T} A^{-1} \bm{y}\right)
     }
 \end{equation}
+where:
+\begin{itemize}
+    \item $\bm{x}$ and $\bm{y}$ are $N$-dimensional column vectors.
+    \item $A$ is an $N \times N$ real, symmetric, and positive-definite matrix.
+    \item The notation $\int \prod_{n=1}^{N} \mathrm{d}x_n$ denotes integration over all components of $\bm{x}$ from $-\infty$ to $+\infty$.
+\end{itemize}
 
-\section{Derivation (Using Contour Integration)}
-\textbf{Step 1: Define the Contour}
+\section{Proof of the Multivariate Gaussian Integral}
 
-We consider the complex function $f(z) = \me^{\mi z^2}$, where $z$ is a complex variable. We construct a closed path (contour) $C$ in the complex plane. This path is a sector of a circle, composed of three parts:
-\begin{enumerate}
-    \item \textbf{Path $C_1$}: A line segment along the real axis from $0$ to $R$.
-    \item \textbf{Path $C_2$}: A circular arc of radius $R$, centered at the origin, running counter-clockwise from $R$ to $R\me^{\mi\mpi/4}$.
-    \item \textbf{Path $C_3$}: A line segment from $R\me^{\mi\mpi/4}$ back to the origin $0$.
-\end{enumerate}
-We will eventually let $R \to \infty$.
+The proof relies on the assumptions that $A$ is symmetric ($A^\mathsf{T} = A$) and positive-definite (all eigenvalues are positive), which ensures the integral converges. The proof proceeds in several key steps.
 
-\textbf{Step 2: Apply Cauchy's Integral Theorem}
+\textbf{Step 1: Completing the Square}
 
-The function $f(z) = \me^{\mi z^2}$ is analytic over the entire complex plane (it is an entire function) as it has no singularities. According to \textbf{Cauchy's Integral Theorem}, its integral over any closed path $C$ is zero:
+The primary technique is to complete the square for the quadratic form in the exponent. We want to rewrite the argument of the exponential, $-\frac{1}{2} \bm{x}^\mathsf{T} A \bm{x} - \bm{x}^\mathsf{T} \bm{y}$, into the form $-\frac{1}{2} (\bm{x} - \bm{x}_0)^\mathsf{T} A (\bm{x} - \bm{x}_0) + C$, where $\bm{x}_0$ and $C$ are constants with respect to $\bm{x}$.
+
+Expanding this target form, we get:
 \begin{equation}
-\oint_C \me^{\mi z^2} \md z = 0
+\begin{aligned}
+-\frac{1}{2} (\bm{x} - \bm{x}_0)^\mathsf{T} A (\bm{x} - \bm{x}_0) &= -\frac{1}{2} (\bm{x}^\mathsf{T} - \bm{x}_0^\mathsf{T}) A (\bm{x} - \bm{x}_0) \\
+&= -\frac{1}{2} (\bm{x}^\mathsf{T} A \bm{x} - \bm{x}^\mathsf{T} A \bm{x}_0 - \bm{x}_0^\mathsf{T} A \bm{x} + \bm{x}_0^\mathsf{T} A \bm{x}_0)
+\end{aligned}
 \end{equation}
-This closed-loop integral can be split into the sum of integrals over the three paths:
+Since $A$ is symmetric ($A = A^\mathsf{T}$), the scalar term $\bm{x}_0^\mathsf{T} A \bm{x}$ is equal to its own transpose: $(\bm{x}_0^\mathsf{T} A \bm{x})^\mathsf{T} = \bm{x}^\mathsf{T} A^\mathsf{T} \bm{x}_0 = \bm{x}^\mathsf{T} A \bm{x}_0$. Thus, the two cross-terms are equal.
 \begin{equation}
-\int_{C_1} \me^{\mi z^2} \md z + \int_{C_2} \me^{\mi z^2} \md z + \int_{C_3} \me^{\mi z^2} \md z = 0
+-\frac{1}{2} (\bm{x} - \bm{x}_0)^\mathsf{T} A (\bm{x} - \bm{x}_0) = -\frac{1}{2} \bm{x}^\mathsf{T} A \bm{x} + \bm{x}^\mathsf{T} A \bm{x}_0 - \frac{1}{2} \bm{x}_0^\mathsf{T} A \bm{x}_0
 \end{equation}
-
-\textbf{Step 3: Evaluate the Integral on Each Path}
-
-\textbf{1. Integral along Path $C_1$ (The part we want to find)}
-
-On path $C_1$, we have $z=x$ (a real number) and $\md z=\md x$. Therefore:
+Comparing this to the original exponent, $-\frac{1}{2} \bm{x}^\mathsf{T} A \bm{x} - \bm{x}^\mathsf{T} \bm{y}$, we can equate the terms linear in $\bm{x}$:
 \begin{equation}
-\lim_{R \to \infty} \int_{C_1} \me^{\mi z^2} \md z = \int_0^{\infty} \me^{\mi x^2} \md x
+-\bm{x}^\mathsf{T} \bm{y} = \bm{x}^\mathsf{T} A \bm{x}_0 \implies A \bm{x}_0 = -\bm{y}
 \end{equation}
-This is exactly half of the integral we wish to compute, since the integrand $\me^{\mi x^2}$ is an even function.
-
-\textbf{2. Integral along Path $C_2$ (Show it vanishes as $R \to \infty$)}
-
-On path $C_2$, we parameterize $z = R\me^{\mi\theta}$, where $\theta$ varies from $0$ to $\mpi/4$. Then $\md z = \mi R\me^{\mi\theta}\md\theta$ and $z^2 = R^2\me^{\mi 2\theta}$. The integral becomes:
-\begin{equation}\begin{aligned}
-\int_{C_2} \me^{\mi z^2} \md z &= \int_0^{\mpi/4} \exp(\mi(R^2\me^{\mi 2\theta})) \cdot \mi R\me^{\mi\theta} \md\theta \\
-&= \int_0^{\mpi/4} \exp(\mi R^2(\cos(2\theta) + \mi\sin(2\theta))) \cdot \mi R\me^{\mi\theta} \md\theta \\
-&= \int_0^{\mpi/4} \exp(-R^2\sin(2\theta)) \exp(\mi(R^2\cos(2\theta)+\theta)) \cdot \mi R \md\theta
-\end{aligned}\end{equation}
-
-Taking the magnitude:
+Since $A$ is positive-definite, it is invertible. We can solve for $\bm{x}_0$:
 \begin{equation}
-\left| \int_{C_2} \me^{\mi z^2} \md z \right| \le \int_0^{\mpi/4} \left| \exp(-R^2\sin(2\theta)) \right| \cdot R \md\theta = \int_0^{\mpi/4} R\exp(-R^2\sin(2\theta)) \md\theta
+\bm{x}_0 = -A^{-1} \bm{y}
 \end{equation}
-
-On the interval $[0, \mpi/4]$, $2\theta$ is in $[0, \mpi/2]$. We can use Jordan's inequality, which states $\sin(x) \ge \frac{2x}{\mpi}$ for $x \in [0, \mpi/2]$. Thus, $\sin(2\theta) \ge \frac{4\theta}{\mpi}$.
+With this definition of $\bm{x}_0$, the original exponent can be written as:
 \begin{equation}
-    \begin{aligned}
-    \left| \int_{C_2} \me^{\mi z^2} \md z \right| &\le \int_0^{\mpi/4} R\exp(-R^2(4\theta/\mpi)) \md\theta \\
-    &= R \left.\left[ \frac{-\mpi}{4R^2} \exp(-4R^2\theta/\mpi) \right] \right|_0^{\mpi/4} \\
-    &= \frac{\mpi}{4R} (1 - \exp(-R^2))
-    \end{aligned}
+-\frac{1}{2} \bm{x}^\mathsf{T} A \bm{x} - \bm{x}^\mathsf{T} \bm{y} = -\frac{1}{2} (\bm{x} + A^{-1}\bm{y})^\mathsf{T} A (\bm{x} + A^{-1}\bm{y}) + \frac{1}{2} (A^{-1}\bm{y})^\mathsf{T} A (A^{-1}\bm{y})
+\end{equation}
+Let's simplify the constant term (the term not involving $\bm{x}$):
+\begin{equation}
+\begin{aligned}
+\frac{1}{2} (A^{-1}\bm{y})^\mathsf{T} A (A^{-1}\bm{y}) &= \frac{1}{2} \bm{y}^\mathsf{T} (A^{-1})^\mathsf{T} A A^{-1} \bm{y} \\
+&= \frac{1}{2} \bm{y}^\mathsf{T} A^{-1} A A^{-1} \bm{y} \quad (\text{since } (A^{-1})^\mathsf{T} = (A^\mathsf{T})^{-1} = A^{-1}) \\
+&= \frac{1}{2} \bm{y}^\mathsf{T} I A^{-1} \bm{y} = \frac{1}{2} \bm{y}^\mathsf{T} A^{-1} \bm{y}
+\end{aligned}
+\end{equation}
+So, the exponent is:
+\begin{equation}
+-\frac{1}{2} \bm{x}^\mathsf{T} A \bm{x} - \bm{x}^\mathsf{T} \bm{y} = -\frac{1}{2} (\bm{x} + A^{-1}\bm{y})^\mathsf{T} A (\bm{x} + A^{-1}\bm{y}) + \frac{1}{2} \bm{y}^\mathsf{T} A^{-1} \bm{y}
 \end{equation}
 
-As $R \to \infty$, this expression approaches 0. Therefore:
+\textbf{Step 2: Change of Variables (Translation)}
+
+Substituting the completed square back into the integral:
 \begin{equation}
-\lim_{R \to \infty} \int_{C_2} \me^{\mi z^2} \md z = 0
+I = \int \prod_{n=1}^{N} \mathrm{d}x_n \, \exp\left[-\frac{1}{2} (\bm{x} + A^{-1}\bm{y})^\mathsf{T} A (\bm{x} + A^{-1}\bm{y}) + \frac{1}{2} \bm{y}^\mathsf{T} A^{-1} \bm{y}\right]
+\end{equation}
+The term $\exp(\frac{1}{2} \bm{y}^\mathsf{T} A^{-1} \bm{y})$ is constant with respect to $\bm{x}$ and can be factored out of the integral:
+\begin{equation}
+I = \exp\left(\frac{1}{2} \bm{y}^\mathsf{T} A^{-1} \bm{y}\right) \int \prod_{n=1}^{N} \mathrm{d}x_n \, \exp\left[-\frac{1}{2} (\bm{x} + A^{-1}\bm{y})^\mathsf{T} A (\bm{x} + A^{-1}\bm{y})\right]
+\end{equation}
+Now, we perform a change of variables. Let $\bm{z} = \bm{x} + A^{-1}\bm{y}$. This is a simple translation of the coordinate system. The differential element $\prod \mathrm{d}x_n$ transforms as $\prod \mathrm{d}z_n$, as the Jacobian of this transformation is 1. The limits of integration remain from $-\infty$ to $+\infty$.
+The integral becomes:
+\begin{equation}
+I = \exp\left(\frac{1}{2} \bm{y}^\mathsf{T} A^{-1} \bm{y}\right) \int \prod_{n=1}^{N} \mathrm{d}z_n \, \exp\left(-\frac{1}{2} \bm{z}^\mathsf{T} A \bm{z}\right)
+\end{equation}
+The problem is now reduced to evaluating the simpler, centered Gaussian integral:
+\begin{equation}
+I_0 = \int \prod \mathrm{d}z_n \, \exp(-\frac{1}{2} \bm{z}^\mathsf{T} A \bm{z})
 \end{equation}
 
-\textbf{3. Integral along Path $C_3$ (Connection to the Gaussian Integral)}
+\textbf{Step 3: Diagonalization}
 
-On path $C_3$, we parameterize $z = r\me^{\mi\mpi/4}$, where $r$ varies from $R$ to $0$. Then $\md z = \me^{\mi\mpi/4}\md r$ and $z^2 = (r\me^{\mi\mpi/4})^2 = r^2\me^{\mi\mpi/2} = r^2\mi$. The integral becomes:
+To compute $I_0$, we diagonalize the matrix $A$. Since $A$ is a real symmetric matrix, it is orthogonally diagonalizable:
 \begin{equation}
-\int_{C_3} \me^{\mi z^2} \md z = \int_R^0 \exp(\mi(r^2\mi)) \me^{\mi\mpi/4} \md r = \int_R^0 \exp(-r^2) \me^{\mi\mpi/4} \md r
+A = P D P^\mathsf{T}
+\end{equation}
+where $P$ is an orthogonal matrix ($P P^\mathsf{T} = P^\mathsf{T} P = I$) whose columns are the orthonormal eigenvectors of $A$, and $D$ is a diagonal matrix whose entries are the corresponding eigenvalues $\lambda_1, \lambda_2, \dots, \lambda_N$.
+Substituting this into the quadratic form $\bm{z}^\mathsf{T} A \bm{z}$:
+\begin{equation}
+\bm{z}^\mathsf{T} A \bm{z} = \bm{z}^\mathsf{T} (P D P^\mathsf{T}) \bm{z} = (\bm{z}^\mathsf{T} P) D (P^\mathsf{T} \bm{z}) = (P^\mathsf{T} \bm{z})^\mathsf{T} D (P^\mathsf{T} \bm{z})
+\end{equation}
+We perform another change of variables. Let $\bm{w} = P^\mathsf{T}\bm{z}$. This transformation corresponds to a rotation of the coordinate system. The Jacobian determinant is $|\det(P^\mathsf{T})| = 1$, so the volume element is unchanged: $\prod \mathrm{d}z_n = \prod \mathrm{d}w_n$. The quadratic form simplifies to:
+\begin{equation}
+\bm{w}^\mathsf{T} D \bm{w} = \sum_{i=1}^{N} \lambda_i w_i^2
+\end{equation}
+This is because $D$ is a diagonal matrix.
+
+\textbf{Step 4: Computing the Decoupled Integral}
+
+The integral $I_0$ now becomes:
+\begin{equation}
+I_0 = \int \prod_{n=1}^{N} \mathrm{d}w_n \, \exp\left(-\frac{1}{2} \sum_{i=1}^{N} \lambda_i w_i^2\right)
+\end{equation}
+The exponential of a sum is the product of exponentials, which allows us to separate the multidimensional integral into a product of $N$ one-dimensional integrals:
+\begin{equation}
+I_0 = \int \prod_{n=1}^{N} \mathrm{d}w_n \prod_{i=1}^{N} \exp\left(-\frac{1}{2} \lambda_i w_i^2\right) = \prod_{i=1}^{N} \left( \int_{-\infty}^{\infty} \exp\left(-\frac{1}{2} \lambda_i w_i^2\right) \mathrm{d}w_i \right)
+\end{equation}
+We use the standard formula for a 1D Gaussian integral: $\int_{-\infty}^{\infty} \exp(-au^2) \mathrm{d}u = \sqrt{\pi/a}$. In our case, $a = \lambda_i/2$.
+\begin{equation}
+\int_{-\infty}^{\infty} \exp\left(-\frac{1}{2} \lambda_i w_i^2\right) \mathrm{d}w_i = \sqrt{\frac{\pi}{\lambda_i/2}} = \sqrt{\frac{2\pi}{\lambda_i}}
+\end{equation}
+Multiplying these $N$ results together:
+\begin{equation}
+I_0 = \prod_{i=1}^{N} \sqrt{\frac{2\pi}{\lambda_i}} = (2\pi)^{\frac{N}{2}} \prod_{i=1}^{N} (\lambda_i)^{-\frac{1}{2}} = (2\pi)^{\frac{N}{2}} \left(\prod_{i=1}^{N} \lambda_i\right)^{-\frac{1}{2}}
+\end{equation}
+The determinant of a matrix is equal to the product of its eigenvalues. Thus, $\det A = \det D = \prod_{i=1}^{N} \lambda_i$.
+\begin{equation}
+I_0 = (2\pi)^{\frac{N}{2}} (\det A)^{-\frac{1}{2}}
 \end{equation}
 
-Reversing the limits of integration and factoring out the constant:
+\textbf{Step 5: Combining the Results}
+
+Finally, we substitute the value of $I_0$ back into our expression for $I$ from Step 2:
 \begin{equation}
-= -\me^{\mi\mpi/4} \int_0^R \exp(-r^2) \md r
+I = \exp\left(\frac{1}{2} \bm{y}^\mathsf{T} A^{-1} \bm{y}\right) \cdot I_0 = \exp\left(\frac{1}{2} \bm{y}^\mathsf{T} A^{-1} \bm{y}\right) (2\pi)^{\frac{N}{2}} (\det A)^{-\frac{1}{2}}
 \end{equation}
-
-As $R \to \infty$, we get the well-known Gaussian integral:
+Rearranging the terms yields the final result:
 \begin{equation}
-\lim_{R \to \infty} \int_{C_3} \me^{\mi z^2} \md z = -\me^{\mi\mpi/4} \int_0^{\infty} \exp(-r^2) \md r
+I = (2\pi)^{\frac{N}{2}} (\det A)^{-\frac{1}{2}} \exp\left(\frac{1}{2} \bm{y}^\mathsf{T} A^{-1} \bm{y}\right)
 \end{equation}
-
-We know that the Gaussian integral $\int_0^{\infty} \exp(-x^2) \md x = \frac{\sqrt{\mpi}}{2}$. So:
-\begin{equation}
-\lim_{R \to \infty} \int_{C_3} \me^{\mi z^2} \md z = -\me^{\mi\mpi/4} \frac{\sqrt{\mpi}}{2}
-\end{equation}
-
-\textbf{Step 4: Combine the Results}
-
-Returning to the equation from Step 2 and taking the limit as $R \to \infty$:
-\begin{equation}
-\left( \int_0^{\infty} \me^{\mi x^2} \md x \right) + (0) + \left( -\me^{\mi\mpi/4} \frac{\sqrt{\mpi}}{2} \right) = 0
-\end{equation}
-
-Rearranging the terms, we find:
-\begin{equation}
-\int_0^{\infty} \me^{\mi x^2} \md x = \me^{\mi\mpi/4} \frac{\sqrt{\mpi}}{2}
-\end{equation}
-
-\textbf{Step 5: Calculate the Final Integral}
-
-The integral we want to evaluate is from $-\infty$ to $\infty$. Since the integrand $\me^{\mi x^2} = \cos(x^2) + \mi\sin(x^2)$ is an even function (i.e., $f(-x) = f(x)$), we have:
-\begin{equation}\begin{aligned}
-\int_{-\infty}^{\infty} \me^{\mi x^2} \md x &= 2 \int_0^{\infty} \me^{\mi x^2} \md x \\
-&= 2 \cdot \left( \me^{\mi\mpi/4} \frac{\sqrt{\mpi}}{2} \right) = \sqrt{\mpi} \me^{\mi\mpi/4}
-\end{aligned}\end{equation}
-
-Finally, we can use Euler's formula, $\me^{\mi\theta} = \cos\theta + \mi\sin\theta$, to expand $\me^{\mi\mpi/4}$:
-\begin{equation}
-\me^{\mi\mpi/4} = \cos(\mpi/4) + \mi\sin(\mpi/4) = \frac{\sqrt{2}}{2} + \mi\frac{\sqrt{2}}{2} = \frac{1+\mi}{\sqrt{2}}
-\end{equation}
-
-Substituting this into our result gives:
-\begin{equation}
-\int_{-\infty}^{\infty} \me^{\mi x^2} \md x = \sqrt{\mpi} \cdot \frac{1+\mi}{\sqrt{2}} = \sqrt{\frac{\mpi}{2}}(1+\mi)
-\end{equation}
-
-\section{Conclusion}
-
-The result of the integral is a complex number. Its real and imaginary parts correspond to two other important integrals:
-\begin{equation}
-    \left\{
-    \begin{aligned}
-    \int_{-\infty}^{\infty} \cos(x^2) \md x &= \sqrt{\frac{\mpi}{2}} \\
-    \int_{-\infty}^{\infty} \sin(x^2) \md x &= \sqrt{\frac{\mpi}{2}}
-    \end{aligned}
-    \right.
-\end{equation}
-
-\newpage
+This completes the proof.
