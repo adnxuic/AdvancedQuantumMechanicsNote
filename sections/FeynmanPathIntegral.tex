@@ -529,4 +529,303 @@ From the Path-integral in real space-time, we can get some information about Phy
 \end{example}
 
 \newpage
-\chapter{Stationary Phase Approximation}
+\chapter{Stationary Phase Approximation (Semiclassical Approximation)}
+We have got the propagator $\mathrm{i}G$ for a partide to travel from an spacetime point $(x_0, t_0)$ to a final spacetime point $(x_f, t_f)$, 
+with which is given by the Feynman path integral:
+\begin{equation}
+\mathrm{i}G = K(x_f, t_f; x_0, t_0) = \int \mathcal{D}[x(t)] \mathrm{e}^{\frac{\mathrm{i}}{\hbar} S[x(t)]}
+\end{equation}
+where:
+\begin{itemize}
+    \item $x(t)$ is the passition position of the particle at time $t$, respresenting a possible path.
+    \item $\mathcal{D}[x(t)]$ is the functional measure for integrating over all paths that satisfy the boundary conditions $x(t_0)=x_0$ and $x(t_f)=x_f$.
+    \item $S[x(t)]$ is the action for a path $x(t)$;
+\end{itemize}
+This integral is infinite-dimensional and generally very difficult to calculate directly. So we need a effective method to approximate it. 
+The stationary phase approximation provides a method for approximating it.
+
+\section{One-dimensional integral of stationary phase approximation}
+Consider a integral:
+\begin{equation}
+I = \int \mathrm{e}^{\mathrm{i} f(x)/a} \mathrm{d}x
+\end{equation}
+where $a$ is a small parameter. and the function $f(x)$ is real-valued and regular.
+
+Our objective is to understant the physical picture of the startiomong phuse approximation for the propagutor ph path integral through this one dimensional integral stortionary phase approximation.
+
+let's further define a new notation $\Theta(x)$ by:
+\begin{equation}
+\Theta(x) = \frac{1}{a} f(x)
+\end{equation}
+$\Theta(x)$ is a phase angle, so
+\begin{equation}
+I = \int \mathrm{e}^{\mathrm{i}\Theta(x)} \mathrm{d}x
+\end{equation}
+This integral can be " physically regarded as an interference experiment. 
+Because each source at $x$ contributes a phase factor $\mathrm{e}^{\mathrm{i}\Theta(x)}$, 
+so the total integral $I$ is the result of adding up all these infinite tiny vectors.
+
+In order to compute the integral $I$, what we really need to do is to find "dominant contribution" to $I$.
+
+Firstly, let's pick up a point $x_0$ and evaluate the integral near $x_0$. 
+The vicinity of $x_0$ is given by $x \in (x_0-\frac{\Delta x}{2}, x_0+\frac{\Delta x}{2})$. 
+Within this small domain, we may linearize $\Theta(x)$ by:
+\begin{equation}
+\begin{aligned}
+\Theta(x) &\approx \Theta(x_0) + \left.\frac{\mathrm{d}\Theta}{\mathrm{d}x}\right|_{x=x_0} (x-x_0) \\
+&= \frac{f(x_0)}{a} + \frac{f'(x_0)}{a} (x-x_0)
+\end{aligned}
+\end{equation}
+
+The contributions to $I$ in the small domain near $x_0$ are given by:
+\begin{equation}
+\begin{aligned}
+I_{x_0}^{\Delta x}(x_0) &= \int_{x_0-\frac{\Delta x}{2}}^{x_0+\frac{\Delta x}{2}} \mathrm{d}x \ \mathrm{e}^{\mathrm{i}\Theta(x_0)} \cdot \mathrm{e}^{\frac{\mathrm{i}f'(x_0)}{a} (x-x_0)} \\
+&= \mathrm{e}^{\mathrm{i}\Theta(x_0)} \int_{x_0-\frac{\Delta x}{2}}^{x_0+\frac{\Delta x}{2}} \mathrm{d}x \ \mathrm{e}^{\frac{\mathrm{i}f'(x_0)}{a} (x-x_0)}
+\end{aligned}
+\end{equation}
+we let $\Theta(x_0)=\Theta_0$ and $f'(x_0)=f'_0$, so:
+\begin{equation}
+\begin{aligned}
+I_{(x_0)}^{\Delta x} &\sim \mathrm{e}^{\mathrm{i}\Theta_0} \frac{a}{\mathrm{i}f'_0} \cdot \left. \mathrm{e}^{\frac{\mathrm{i}f'_0}{a}(x-x_0)} \right|_{x_0-\frac{\Delta x}{2}}^{x_0+\frac{\Delta x}{2}} \\
+&= \mathrm{e}^{\mathrm{i}\Theta_0} \frac{2a}{\mathrm{i}f'_0} \sin \frac{f'_0 \Delta x}{2a}.
+\end{aligned}
+\end{equation}
+let $\alpha = \frac{f'_0 \Delta x}{2a}$, so:
+\begin{equation}
+I^{\Delta x}(x_0) \approx \mathrm{e}^{\mathrm{i}\Theta_0} \Delta x \cdot \frac{\sin \alpha}{\alpha}
+\end{equation}
+
+Because $a$ is a small parameter very small but nonzero parameter (in quantum mechanics, it corresponds to $\hbar$ being a very small but nonzero number),
+if $f'_0=0$, $\alpha$ is strictly equal to 0 and it is not infinitely large near the zero point. 
+So if we consider the case $f'(x_0)=0$, we get:
+\begin{equation}
+I^{\Delta x}(x_0) = \mathrm{e}^{\mathrm{i}\Theta(x_0)} \cdot \Delta x
+\end{equation}
+Physically, the result means that all U(1) phase in the vicinity of $x_0$ are completely the same. It's a perfect phase-coherence. The superposition of constant phases leads to linearly enhanced amplitude "$\Delta x$".
+
+Next, let us consider $f'(x_0) \neq 0$. Because $a$ is a very small parameter, $\alpha = \frac{f'_0 \Delta x}{2a}$ is very large. So:
+\begin{equation}
+\frac{\sin\alpha}{\alpha} \rightarrow 0, \implies I^{\Delta x}(x_0) \approx 0
+\end{equation}
+Physically, the summation of all U(1) phases in the vicinity of $x_0$ leads to destructive interference. 
+The parameter $a$ is smaller, the destructive interference is more severe.
+
+In conclusion, if we consider small enough but nozero parameter $a$, 
+it is computationlly economic to merely focus on the integral contributions from the vicinity of these special point (denoted by a set $\{x_0^i\}$) that satisfy $f'(x_0^i)=0$.
+
+\begin{center}
+\begin{tikzpicture}
+\draw[->] (-0.5,0) -- (5,0) node[right] {$x$};
+\draw[->] (0,-0.2) -- (0,2.5) node[above] {$I$};
+\draw[domain=1:2, smooth, variable=\x] plot ({\x}, {2*exp(-20*(\x-1.5)^2)});
+\node at (1.5, -0.2) {$x_0$};
+\draw[domain=3:4, smooth, variable=\x] plot ({\x}, {1.8*exp(-20*(\x-3.5)^2)});
+\node at (3.5, -0.2) {$x_0^i$};
+\end{tikzpicture}
+\end{center}
+
+We consider the quadratic approximation in the vicinity of $x_0$:
+\begin{equation}
+\begin{aligned}
+f(x) &\approx f(x_0) + f'(x_0)(x-x_0) + \frac{1}{2} f''(x_0)(x-x_0)^2 \\
+&= f(x_0) + \frac{1}{2} f''(x_0)(x-x_0)^2
+\end{aligned}
+\end{equation}
+As a result, the original integral $I$ can be evaluated by:
+\begin{equation}
+\begin{aligned}
+I &\approx \sum_{\{x_0^i\}} I^{\Delta x}(x_0^i) \\
+&= \sum_{\{x_0^i\}} \mathrm{e}^{\frac{\mathrm{i}}{a} f(x_0^i)} \int_{x_0^i-\frac{\Delta x}{2}}^{x_0^i+\frac{\Delta x}{2}} \mathrm{d}x \ \mathrm{e}^{\frac{\mathrm{i}}{2a} f''(x_0^i)(x-x_0^i)^2}
+\end{aligned}
+\end{equation}
+Because parameter $a$ is a very small number, far away the stationary point $x_0^i$, 
+the contributions of $\mathrm{e}^{\frac{\mathrm{i}}{2a} f''(x_0^i)(x-x_0^i)^2}$ to the integral cancel each other out through destructive interference.
+
+So in the above Gaussian integral near $x_0$, we can extend the integral bounds to infinity:
+\begin{equation}
+\begin{aligned}
+I &\approx \sum_{\{x_0^i\}} \mathrm{e}^{\frac{\mathrm{i}f(x_0^i)}{a}} \int_{-\infty}^{\infty} \mathrm{d}x \cdot \mathrm{e}^{\frac{\mathrm{i}}{2a} f''(x_0^i)(x-x_0^i)^2} \\
+&= \sum_{\{x_0^i\}} \mathrm{e}^{\frac{\mathrm{i}f(x_0^i)}{a}} \sqrt{\frac{2\pi a \mathrm{i}}{f''(x_0^i)}}
+\end{aligned}
+\end{equation}
+
+\section{Semiclassical approximation of Feynman path integrals}
+We have discussed that if $\hbar$ tends to zero, then the quantum system will transitions to the classical system. 
+We only need to treat $f(x)$ as $S[x(t)]$ and the parameter $a$ as $\hbar$, then we can see the reason based on the discussion in the previous section. 
+If $\hbar$ is zero, $I^{\Delta x}(x_0)$ equal to zero strictly for $x \neq x_0$ and is nonzero only at $x=x_0$. 
+So we only need to consider the classical. path. with $\delta S=0$ and not need to consider the quantum fluctuation near the classical path. 
+But if $\hbar$ is a very small but nonzero number, we need to consider the quantum fluctuation near the classical path. 
+In other word, in classical mechanics, 
+$\hbar=0$, $I^{\Delta x} \propto \frac{\sin\alpha}{\alpha}$ is equal to zero in $(x_0-\frac{\Delta x}{2}, x_0) \cup (x_0, x_0+\frac{\Delta x}{2})$, 
+because $\alpha = \frac{f'_0 \Delta x}{2a}$ tends to infinity no matter how small the radius of this deleted neighbourhood is. 
+But in quantum mechanics, $\hbar \sim 10^{-34} \mathrm{J}\cdot\mathrm{s}$, 
+$I$ is not equal to zero in the neighbourhood whose radius length matches to the order of magnitude of $\hbar$. 
+Therefore, we cannot ignore the impact generated by $I$ in this neighbourhood.
+
+The Feynman path integral:
+\begin{equation}
+K(x_f, t_f; x_0, t_0) \propto \int \mathcal{D}[x(t)] \cdot \mathrm{e}^{\frac{\mathrm{i}}{\hbar}S[x(t)]}
+\end{equation}
+it can be regarded as path integral version of $\int \mathrm{d}x \mathrm{e}^{\frac{\mathrm{i}}{a}f(x)}$. $f(x)$ is replaced by Classical action $S_c$ when $\delta S_c=0$. Liking the previous section, we consider. the quadratic approximation in the vicinity of classical. path:
+\begin{equation}
+\begin{aligned}
+S &= S_c + \delta S + \frac{1}{2} \delta^2 S \\
+&= S_c + \frac{1}{2} \delta^2 S.
+\end{aligned}
+\end{equation}
+
+Now, we consider can decompose the path near classical path into the classical path $x_c(t)$ plus a quantum fluctuation $y(t)$ around it:
+\begin{equation}
+x(t) = x_c(t) + y(t)
+\end{equation}
+$x(t)$ must satisfy the same boundary conditions, so:
+\begin{equation}
+\begin{cases}
+y(t_0) = 0 \\
+y(t_f) = 0
+\end{cases}
+\end{equation}
+let's perform a functional Taylor expansion of the action $S[x(t)]$ around the classical path $x_c(t)$:
+\begin{equation}
+\begin{aligned}
+S[x(t)] = S[x_c+y] &= S[x_c] + \int_{t_0}^{t_f} \mathrm{d}t \left.\frac{\delta S}{\delta x(t)}\right|_{x=x_c} y(t) \\
+&\quad + \frac{1}{2} \int_{t_0}^{t_f} \mathrm{d}t_1 \int_{t_0}^{t_f} \mathrm{d}t_2 \left.\frac{\delta^2 S}{\delta x(t_1) \delta x(t_2)}\right|_{x=x_c} y(t_1) y(t_2) + O(y^3)
+\end{aligned}
+\end{equation}
+In semiclassical approximation, we assume the fluctuations $y$ are small, so we neglect terms of $O(y^3)$ and higher. At the same time, $\delta S=0$, so the action $S[x(t)]$:
+\begin{equation}
+S[x(t)] \approx S_c + \frac{1}{2} \int \int \mathrm{d}t_1 \mathrm{d}t_2 \ y(t_1) \cdot \left.\frac{\delta^2 S}{\delta x(t_1) \delta x(t_2)}\right|_{x=x_c} \cdot y(t_2)
+\end{equation}
+
+Now, let's solve the fluctuation term $\delta^2 S$:
+\begin{equation}
+\delta^2 S = \iint \mathrm{d}t_1 \mathrm{d}t_2 \cdot y(t_1) \cdot \left.\frac{\delta^2 S}{\delta x(t_1) \delta x(t_2)}\right|_{x=x_c} \cdot y(t_2)
+\end{equation}
+Consider a standard Lagrangian $\mathcal{L} = \frac{1}{2}m\dot{x}^2 - V(x)$, so the action is:
+\begin{equation}
+S = \int \mathrm{d}t \left[\frac{1}{2}m\dot{x}^2 - V(x)\right]
+\end{equation}
+it's second variation is:
+\begin{equation}
+\delta^2 S = \int \mathrm{d}t \cdot \left(\frac{1}{2}m\dot{y}^2 - \frac{1}{2}V''(x_c) \cdot y^2\right)
+\end{equation}
+We substitute the approximated action back into the path integral. expression:
+\begin{equation}
+\begin{aligned}
+K &\approx \int \mathcal{D}[x(t)] \exp\left\{\frac{\mathrm{i}}{\hbar}\left[S_c + \frac{1}{2}\delta^2 S\right]\right\} \\
+&= \int \mathcal{D}[x(t)] \mathrm{e}^{\frac{\mathrm{i}}{\hbar}S_c} \exp\left[\int \mathrm{d}t \left(\frac{1}{2}m\dot{y}^2 - \frac{1}{2}V''(x_c)y^2\right)\right]
+\end{aligned}
+\end{equation}
+Now, we need to change the integration variable from an integral over all paths $x(t)$ to an integral over all fluctuations $y(t)$. Since $x_c(t)$ is a fixed. path, the path measure:
+\begin{equation}
+\mathcal{D}[x(t)] = \mathcal{D}[x_c(t)+y(t)] = \mathcal{D}[y(t)]
+\end{equation}
+and $S_c$ is a constant, it can be factored out of integral:
+\begin{equation}
+K \approx \mathrm{e}^{\frac{\mathrm{i}}{\hbar}S_c} \cdot \int \mathcal{D}[y(t)] \cdot \mathrm{e}^{\frac{\mathrm{i}}{2\hbar} \int \mathrm{d}t \left(\frac{1}{2}m\dot{y}^2 - \frac{1}{2}V''(x_c)y^2\right)}
+\end{equation}
+\begin{equation}
+= F(t_f, t_0) \cdot \mathrm{e}^{\frac{\mathrm{i}}{\hbar}S_c}.
+\end{equation}
+where:
+\begin{enumerate}
+    \item $\mathrm{e}^{\frac{\mathrm{i}}{\hbar}S_c}$ is the Classical Phase Factor. It tells us that in the semiclassical approximation, the evolution of the system's quantum phase is dominated by the classical action. This is a bridge connecting classical and quantum mechanics.
+    \item $F(t_f, t_0) = \int \mathcal{D}[y(t)] \mathrm{e}^{\frac{\mathrm{i}}{2\hbar}\delta^2 S}$ is the Quantum Fluctuation Prefactor. It describes the collective contribution of all the small quantum fluctuations around the classical path.
+\end{enumerate}
+Now let's see a example: one dimensional free particle.
+\begin{example}
+    For free particle:
+    \begin{equation}
+    \mathcal{L}(x, \dot{x}) = \frac{1}{2}m\dot{x}^2.
+    \end{equation}
+    First, we need to calculate the classical action. It is given by the Euler-Lagrange equertion:
+    \begin{equation}
+    \frac{\mathrm{d}}{\mathrm{d}t}\left(\frac{\partial\mathcal{L}}{\partial\dot{x}}\right) - \frac{\partial\mathcal{L}}{\partial x} = 0
+    \end{equation}
+    For free particle:
+    \begin{equation}
+    \begin{cases}
+    \frac{\partial\mathcal{L}}{\partial\dot{x}} = m\dot{x} \\
+    \frac{\partial\mathcal{L}}{\partial x} = 0
+    \end{cases}
+    \end{equation}
+    so the equation of motion is:
+    \begin{equation}
+    \frac{\mathrm{d}}{\mathrm{d}t}(m\dot{x}) = m\ddot{x} = 0
+    \end{equation}
+    we can get the general solution:
+    \begin{equation}
+    x_c(t) = at + b
+    \end{equation}
+    we impose the boundary conditions:
+    \begin{equation}
+    \begin{cases}
+    x_c(t_0) = x_0 \\
+    x_c(t_f) = x_f
+    \end{cases}
+    \end{equation}
+    to determin a and b:
+    \begin{equation}
+    \begin{cases}
+    a = \frac{x_f - x_0}{t_f - t_0} \\
+    b = x_i - t_i \left(\frac{x_f - x_0}{t_f - t_0}\right)
+    \end{cases}
+    \end{equation}
+    the classical action is:
+    \begin{equation}
+    S_c = \int_{t_i}^{t_f} \mathrm{d}t \cdot \frac{1}{2}m(\dot{x}_c)^2 = \int_{t_i}^{t_f} \mathrm{d}t \cdot \frac{1}{2}ma^2 = \frac{m(x_f - x_0)^2}{2(t_f - t_0)}
+    \end{equation}
+
+    So the classical phase factor is:
+    \begin{equation}
+    \mathrm{e}^{\frac{\mathrm{i}}{\hbar}S_c} = \mathrm{e}^{\frac{\mathrm{i}m(x_f - x_0)^2}{2\hbar(t_f - t_i)}}
+    \end{equation}
+    now let's calculate the quantum fluctuation factor:
+    \begin{equation}
+    \begin{aligned}
+    F(t_f, t_0) &= \int \mathcal{D}[y(t)] \exp\left\{\frac{\mathrm{i}m}{2\hbar} \int_{t_0}^{t_f} \left(\frac{\mathrm{d}y}{\mathrm{d}t}\right)^2 \mathrm{d}t\right\} \\
+    &= \int \prod_{i=1}^{N-1} \mathrm{d}y_i \exp\left[\frac{\mathrm{i}m}{2\hbar} \sum_{i=1}^{N} \frac{(y_i - y_{i-1})^2}{\Delta t^2} \Delta t\right]
+    \end{aligned}
+    \end{equation}
+    because $y_N = y_0 = 0$, we can rewrite the sum as:
+    \begin{equation}
+    \frac{\mathrm{i}m}{2\hbar} \sum_{i=1}^{N} \frac{(y_i - y_{i-1})^2}{\Delta t} = -\frac{1}{2} \bm{y}^T M \bm{y}
+    \end{equation}
+    where
+    \begin{equation}
+    M = \frac{m}{\mathrm{i}\hbar\Delta t}
+    \begin{pmatrix}
+    2 & -1 & & \\
+    -1 & 2 & -1 & \\
+    & \ddots & \ddots & \ddots \\
+    & & -1 & 2 & -1 \\
+    & & & -1 & 2
+    \end{pmatrix}_{(N-1)\times(N-1)},
+    \quad
+    \bm{y} =
+    \begin{pmatrix}
+    y_{N-1} \\
+    \vdots \\
+    y_1 
+    \end{pmatrix}
+    \end{equation}
+    and use the Gaussion integral:
+    \begin{equation}
+    \begin{aligned}
+    F(t_f, t_0) &= (2\pi)^{(N-1)/2} (\det M)^{-1/2} \\
+    &= (2\pi)^{(N-1)/2} \left(\left(\frac{\mathrm{i}\hbar\Delta t}{m}\right)^{N-1} N \right)^{-1/2}
+    \end{aligned}
+    \end{equation}
+
+    So we can get the complete propagator of free partide:
+    \begin{equation}
+    \begin{aligned}
+    K &= J \cdot \left(\frac{2\pi\mathrm{i}\hbar\Delta t}{m}\right)^{N/2} \cdot \left(\frac{m}{2\pi\mathrm{i}N\Delta t}\right)^{1/2} \cdot \mathrm{e}^{\frac{\mathrm{i}S_c}{\hbar}} \\
+    &= \left(\frac{m}{2\pi\mathrm{i}\hbar\Delta t}\right)^{N/2} \cdot \left(\frac{2\pi\mathrm{i}\hbar\Delta t}{m}\right)^{N/2} \cdot \left(\frac{m}{2\pi\mathrm{i}(t_f-t_0)}\right)^{1/2} \cdot \mathrm{e}^{\frac{\mathrm{i}S_c}{\hbar}} \\
+    &= \left(\frac{m}{2\pi\mathrm{i}(t_f-t_0)}\right)^{1/2} \cdot \mathrm{e}^{\frac{\mathrm{i}S_c}{\hbar}}
+    \end{aligned}
+    \end{equation}
+    where, $S_c = \frac{m}{2} \frac{(x_f-x_0)^2}{t_f-t_0}$.
+
+\end{example}
