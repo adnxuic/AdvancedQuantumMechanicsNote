@@ -16,6 +16,13 @@ Here, $\ket{\uparrow}$ represents the "spin up" state and $\ket{\downarrow}$ rep
 \end{itemize}
 where $\opI$ is the identity operator in $\hilbert$.
 
+But this simple, discrete basis has two drawbacks:
+\begin{itemize}
+    \item This discrete parametrized complete-set 
+    is not convenient for constructing the path integral formalism of quantum spins.
+    \item $SU(2)$ spin symmetry is broken either explicitly or not manifest.
+\end{itemize}
+
 \section{Spin Coherent States}
 
 A general, normalized state $\ket{\psi}$ in the spin-1/2 Hilbert space can be written as a complex linear combination of the basis states:
@@ -23,8 +30,6 @@ A general, normalized state $\ket{\psi}$ in the spin-1/2 Hilbert space can be wr
     \ket{\psi} = z_1 \ket{\uparrow} + z_2 \ket{\downarrow}
 \end{equation}
 where $z_1, z_2 \in \mathbb{C}$ are complex coefficients.
-
-\subsection{Degrees of Freedom and Normalization}
 
 The normalization condition $\braket{\psi}{\psi} = 1$ imposes a constraint on these coefficients:
 \begin{equation}
@@ -35,8 +40,6 @@ A complex number $z = x + \mi y$ has two real parameters. Therefore, the pair $(
 Furthermore, in quantum mechanics, the overall phase of a state vector is unphysical. The states $\ket{\psi}$ and $\me^{\mi\gamma} \ket{\psi}$ (for any real $\gamma$) represent the same physical state (i.e., they belong to the same ray in Hilbert space). This "gauge freedom" removes one more degree of freedom.
 
 This leaves $4 - 1 - 1 = 2$ real, physical degrees of freedom. This is a crucial observation: the state space of a spin-1/2 particle is topologically equivalent to the surface of a 2D sphere, which is also parameterized by two angles (like latitude and longitude).
-
-\subsection{Parametrization}
 
 We can explicitly parameterize $z_1$ and $z_2$ using two angles, $\theta$ and $\phi$, which will map directly to the surface of a sphere. A standard (but not unique) parametrization for the spin coherent state, labeled by a unit vector $\bm{n}$, is:
 \begin{equation}
@@ -98,7 +101,6 @@ In the $\ket{\uparrow}, \ket{\downarrow}$ basis, $\ket{\bm{n}}$ is represented b
     = \frac{1}{2} \sin\theta \sin\phi
 \end{aligned}\end{equation}
 
-\subsection{Conclusion: The Classical Spin Vector}
 Combining these results, the expectation value of the spin vector is:
 \begin{equation}
     \langle \vecS \rangle = \frac{1}{2} \left( \sin\theta \cos\phi, \; \sin\theta \sin\phi, \; \cos\theta \right)
@@ -113,69 +115,70 @@ This formalism treats all directions $\bm{n}$ on an equal footing, making the SU
 
 \subsection{Coherent State as an Eigenvector}
 
-The formula presented in the original notes, $\langle\bm{n}|\vecS \cdot \vecn|\bm{n}\rangle = \frac{1}{2} \ket{\bm{n}}$, appears to contain a typographical error, as an expectation value (a scalar) cannot be equal to a state vector.
-
-The more fundamental property, which is likely intended, is the eigenvector equation:
+The eigenvector equation:
 \begin{equation}
     (\vecS \cdot \vecn) \ket{\bm{n}} = \frac{1}{2} \ket{\bm{n}}
 \end{equation}
 This equation signifies that the coherent state $\ket{\bm{n}}$ is, by definition, the "spin up" eigenvector of the spin operator projected along its own pointing direction $\vecn$, with the eigenvalue $+1/2$ (with $\hbar=1$).
 
-\textbf{Proof:}
-We first construct the operator $\vecS \cdot \vecn$ in matrix form:
-\begin{equation}\begin{aligned}
-    \vecS \cdot \vecn &= \op{S}_x n_x + \op{S}_y n_y + \op{S}_z n_z \\
-    &= \frac{1}{2} (\op{\sigma}_x n_x + \op{\sigma}_y n_y + \op{\sigma}_z n_z) \\
-    &= \frac{1}{2} \left[ \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix} \sin\theta \cos\phi + \begin{pmatrix} 0 & -\mi \\ \mi & 0 \end{pmatrix} \sin\theta \sin\phi + \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix} \cos\theta \right] \\
-    &= \frac{1}{2} \begin{pmatrix}
-    \cos\theta & \sin\theta (\cos\phi - \mi \sin\phi) \\
-    \sin\theta (\cos\phi + \mi \sin\phi) & -\cos\theta
-    \end{pmatrix} \\
-    &= \frac{1}{2} \begin{pmatrix}
-    \cos\theta & \sin\theta \, \me^{-\mi\phi} \\
-    \sin\theta \, \me^{\mi\phi} & -\cos\theta
-    \end{pmatrix}
-\end{aligned}\end{equation}
-Now, we apply this operator to the coherent state vector $\ket{\bm{n}}$:
-\begin{equation}
-    (\vecS \cdot \vecn) \ket{\bm{n}} = \frac{1}{2} \begin{pmatrix}
-    \cos\theta & \sin\theta \, \me^{-\mi\phi} \\
-    \sin\theta \, \me^{\mi\phi} & -\cos\theta
-    \end{pmatrix}
-    \begin{pmatrix}
-    \cos(\theta/2) \, \me^{-\mi\phi/2} \\
-    \sin(\theta/2) \, \me^{\mi\phi/2}
-    \end{pmatrix}
-\end{equation}
-We compute the top and bottom components of the resulting vector separately.
 
-\textbf{Top component:}
-\begin{equation}\begin{aligned}
-    & \frac{1}{2} \left[ \cos\theta \cos(\theta/2) \me^{-\mi\phi/2} + \sin\theta \me^{-\mi\phi} \sin(\theta/2) \me^{\mi\phi/2} \right] \\
-    &= \frac{1}{2} \me^{-\mi\phi/2} \left[ \cos\theta \cos(\theta/2) + \sin\theta \sin(\theta/2) \right] \\
-    &= \frac{1}{2} \me^{-\mi\phi/2} \left[ \cos(\theta - \theta/2) \right] \quad \text{(using } \cos(A-B) \text{ identity)} \\
-    &= \frac{1}{2} \cos(\theta/2) \me^{-\mi\phi/2}
-\end{aligned}\end{equation}
-This is precisely $\frac{1}{2}$ times the top component of $\ket{\bm{n}}$.
+\begin{proof}
+    We first construct the operator $\vecS \cdot \vecn$ in matrix form:
+    \begin{equation}\begin{aligned}
+        \vecS \cdot \vecn &= \op{S}_x n_x + \op{S}_y n_y + \op{S}_z n_z \\
+        &= \frac{1}{2} (\op{\sigma}_x n_x + \op{\sigma}_y n_y + \op{\sigma}_z n_z) \\
+        &= \frac{1}{2} \left[ \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix} \sin\theta \cos\phi + \begin{pmatrix} 0 & -\mi \\ \mi & 0 \end{pmatrix} \sin\theta \sin\phi + \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix} \cos\theta \right] \\
+        &= \frac{1}{2} \begin{pmatrix}
+        \cos\theta & \sin\theta (\cos\phi - \mi \sin\phi) \\
+        \sin\theta (\cos\phi + \mi \sin\phi) & -\cos\theta
+        \end{pmatrix} \\
+        &= \frac{1}{2} \begin{pmatrix}
+        \cos\theta & \sin\theta \, \me^{-\mi\phi} \\
+        \sin\theta \, \me^{\mi\phi} & -\cos\theta
+        \end{pmatrix}
+    \end{aligned}\end{equation}
+    Now, we apply this operator to the coherent state vector $\ket{\bm{n}}$:
+    \begin{equation}
+        (\vecS \cdot \vecn) \ket{\bm{n}} = \frac{1}{2} \begin{pmatrix}
+        \cos\theta & \sin\theta \, \me^{-\mi\phi} \\
+        \sin\theta \, \me^{\mi\phi} & -\cos\theta
+        \end{pmatrix}
+        \begin{pmatrix}
+        \cos(\theta/2) \, \me^{-\mi\phi/2} \\
+        \sin(\theta/2) \, \me^{\mi\phi/2}
+        \end{pmatrix}
+    \end{equation}
+    We compute the top and bottom components of the resulting vector separately.
 
-\textbf{Bottom component:}
-\begin{equation}\begin{aligned}
-    & \frac{1}{2} \left[ \sin\theta \me^{\mi\phi} \cos(\theta/2) \me^{-\mi\phi/2} - \cos\theta \sin(\theta/2) \me^{\mi\phi/2} \right] \\
-    &= \frac{1}{2} \me^{\mi\phi/2} \left[ \sin\theta \cos(\theta/2) - \cos\theta \sin(\theta/2) \right] \\
-    &= \frac{1}{2} \me^{\mi\phi/2} \left[ \sin(\theta - \theta/2) \right] \quad \text{(using } \sin(A-B) \text{ identity)} \\
-    &= \frac{1}{2} \sin(\theta/2) \me^{\mi\phi/2}
-\end{aligned}\end{equation}
-This is precisely $\frac{1}{2}$ times the bottom component of $\ket{\bm{n}}$.
+    \textbf{Top component:}
+    \begin{equation}\begin{aligned}
+        & \frac{1}{2} \left[ \cos\theta \cos(\theta/2) \me^{-\mi\phi/2} + \sin\theta \me^{-\mi\phi} \sin(\theta/2) \me^{\mi\phi/2} \right] \\
+        &= \frac{1}{2} \me^{-\mi\phi/2} \left[ \cos\theta \cos(\theta/2) + \sin\theta \sin(\theta/2) \right] \\
+        &= \frac{1}{2} \me^{-\mi\phi/2} \left[ \cos(\theta - \theta/2) \right] \quad \text{(using } \cos(A-B) \text{ identity)} \\
+        &= \frac{1}{2} \cos(\theta/2) \me^{-\mi\phi/2}
+    \end{aligned}\end{equation}
+    This is precisely $\frac{1}{2}$ times the top component of $\ket{\bm{n}}$.
 
-Combining both components, we have shown:
-\begin{equation}
-    (\vecS \cdot \vecn) \ket{\bm{n}} = \frac{1}{2} \begin{pmatrix}
-    \cos(\theta/2) \me^{-\mi\phi/2} \\
-    \sin(\theta/2) \me^{\mi\phi/2}
-    \end{pmatrix}
-    = \frac{1}{2} \ket{\bm{n}}
-\end{equation}
-This completes the proof. The expectation value $\langle \vecS \cdot \vecn \rangle = \bra{\bm{n}}(\vecS \cdot \vecn)\ket{\bm{n}} = \bra{\bm{n}}(\frac{1}{2}\ket{\bm{n}}) = \frac{1}{2}\braket{\bm{n}}{\bm{n}} = \frac{1}{2}$ follows directly.
+    \textbf{Bottom component:}
+    \begin{equation}\begin{aligned}
+        & \frac{1}{2} \left[ \sin\theta \me^{\mi\phi} \cos(\theta/2) \me^{-\mi\phi/2} - \cos\theta \sin(\theta/2) \me^{\mi\phi/2} \right] \\
+        &= \frac{1}{2} \me^{\mi\phi/2} \left[ \sin\theta \cos(\theta/2) - \cos\theta \sin(\theta/2) \right] \\
+        &= \frac{1}{2} \me^{\mi\phi/2} \left[ \sin(\theta - \theta/2) \right] \quad \text{(using } \sin(A-B) \text{ identity)} \\
+        &= \frac{1}{2} \sin(\theta/2) \me^{\mi\phi/2}
+    \end{aligned}\end{equation}
+    This is precisely $\frac{1}{2}$ times the bottom component of $\ket{\bm{n}}$.
+
+    Combining both components, we have shown:
+    \begin{equation}
+        (\vecS \cdot \vecn) \ket{\bm{n}} = \frac{1}{2} \begin{pmatrix}
+        \cos(\theta/2) \me^{-\mi\phi/2} \\
+        \sin(\theta/2) \me^{\mi\phi/2}
+        \end{pmatrix}
+        = \frac{1}{2} \ket{\bm{n}}
+    \end{equation}
+    This completes the proof. 
+\end{proof}
+
 
 \section{Gauge Choice and Topological Singularities}
 
