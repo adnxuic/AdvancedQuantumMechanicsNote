@@ -1,0 +1,114 @@
+% 设置视角参数
+\tdplotsetmaincoords{70}{110}
+
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}[
+        scale=3,
+        font=\fontsize{10.95pt}{13pt}\selectfont\itshape,
+        arrowstyle/.style={
+            decoration={
+                markings,
+                mark=at position 0.4 with {\arrow{stealth}},
+                mark=at position 0.7 with {\arrow{stealth}}
+            },
+            postaction={decorate}
+        }
+    ]
+
+        % 定义球半径
+        \def\R{1.5}
+
+        % -------------------------------------------------------
+        % 1. 绘制球体轮廓 (在屏幕坐标系下绘制，保证是正圆)
+        % -------------------------------------------------------
+        % 填充淡色背景
+        \shade[ball color=white, opacity=0.1] (0,0) circle (\R);
+        % 绘制外轮廓
+        \draw[thick] (0,0) circle (\R);
+
+        % -------------------------------------------------------
+        % 2. 进入 3D 坐标系绘制几何内容
+        % -------------------------------------------------------
+        \begin{scope}[tdplot_main_coords]
+            
+            % --- 重新定义坐标 (必须在 3D scope 内定义) ---
+            \tdplotsetcoord{N}{\R}{0}{0}      % 北极
+            \tdplotsetcoord{S}{\R}{180}{0}    % 南极
+            \tdplotsetcoord{Ni}{\R}{50}{10}   % 起点
+            \tdplotsetcoord{Nf}{\R}{80}{70}   % 终点
+            \tdplotsetcoord{Mid1}{\R}{60}{30} % 控制点1
+            \tdplotsetcoord{Mid2}{\R}{75}{50} % 控制点2
+
+            % --- 绘制经纬线 (视觉辅助) ---
+            % 绘制赤道 (在 xy 平面)
+            \draw[gray!50, thin] (\R,0,0) arc (0:360:\R);
+            % 绘制几条背景经线
+            \draw[gray!30, very thin] (0,0,0) circle (\R); % 这里的 circle 在 3D 中是赤道/经线圈
+            \draw[gray!30, very thin] (0,0,0) ellipse (\R/2.5 and \R); % 假装是另一条经线
+
+            % --- 绘制并填充绿色阴影区域 (Area Ar) ---
+            \begin{scope}
+                % 填充颜色
+                \fill[mygreen, opacity=0.2] 
+                    (N) -- (Ni) 
+                    .. controls (Mid1) and (Mid2) .. (Nf) 
+                    -- cycle;
+                
+                % 裁剪以绘制网格
+                \clip (N) -- (Ni) .. controls (Mid1) and (Mid2) .. (Nf) -- cycle;
+                
+                % 经线网格
+                \foreach \phi in {10, 20, ..., 70} {
+                    \tdplotsetcoord{GridP}{\R}{90}{\phi}
+                    \draw[mygreen!80!black, very thin, opacity=0.5] (N) -- (GridP);
+                }
+                % 纬线网格
+                \foreach \theta in {15, 30, ..., 80} {
+                    \draw[mygreen!80!black, very thin, opacity=0.5] plot[domain=10:70, samples=20, smooth] 
+                    ({\R*sin(\theta)*cos(\x)}, {\R*sin(\theta)*sin(\x)}, {\R*cos(\theta)});
+                }
+            \end{scope}
+            
+            % --- 绘制路径 gamma ---
+            % 在绘制路径的同时定义一个位于路径上的精确点 (PathTarget)
+            \draw[myblue, ultra thick, arrowstyle] 
+                (Ni) .. controls (Mid1) and (Mid2) .. (Nf)
+                coordinate[pos=0.55] (PathTarget);
+
+            % --- 绘制边界线 (绿色区域的两侧) ---
+            \draw[mygreen!80!black, thin] (N) -- (Ni);
+            \draw[mygreen!80!black, thin] (N) -- (Nf);
+
+            % --- 绘制点 ---
+            % 起点 ni
+            \filldraw[fill=myyellow, draw=orange, thick] (Ni) circle (1.2pt) node[anchor=south west, xshift=2pt] {$n_i$};
+            % 终点 nf
+            \filldraw[fill=myyellow, draw=orange, thick] (Nf) circle (1.2pt) node[anchor=north east, xshift=-2pt, yshift=-2pt] {$n_f$};
+            
+            % 北极点 N (修改：增加实心点)
+            \filldraw[fill=myyellow, draw=orange, thick] (N) circle (1.2pt) node[anchor=south, yshift=2pt] {$N$};
+            
+            % 南极点 S (修改：增加实心点)
+            \filldraw[fill=myyellow, draw=orange, thick] (S) circle (1.2pt) node[anchor=north, yshift=-2pt] {$S$};
+
+            % --- 添加标注 (Labels) ---
+            
+            % Area 标注 (修改：合并为一个节点，让线从整体右侧发出)
+            \node[align=center, font=\fontsize{12pt}{14pt}\selectfont\itshape] (LabelAreaTotal) at (-2.0, 1.2, 1) {
+                \color{mygreen!60!black} $\mathcal{A}_\gamma$ \\[-3pt]
+                \color{gray}\scalebox{0.8}{area}
+            };
+            % 箭头指向绿色区域，从文字块的东(右)侧出发
+            \draw[-stealth, myblue, thin] (LabelAreaTotal.east) to[out=0, in=120] ($ (N)!0.5!(Mid1) $);
+            
+            % Path 标注
+            \node[text=myblue] (LabelPath) at (1.8, 1.5, 0.5) {path $\gamma$};
+            \draw[myblue, thin] (LabelPath) to[out=180, in=-20] (PathTarget);
+
+        \end{scope}
+
+    \end{tikzpicture}
+    \caption{The integral path $\gamma$ in the Bloch sphere}
+    \label{fig:IntegralPathInBlochSphere}
+\end{figure}

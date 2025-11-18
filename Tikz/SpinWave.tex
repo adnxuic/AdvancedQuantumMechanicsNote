@@ -1,0 +1,111 @@
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}[
+        % 定义样式
+        scale=0.85,
+        >=Stealth, % 箭头样式
+        axis/.style={dashed, thin, darkgray}, % H场轴线样式
+        spin/.style={thick, blue, ->}, % 自旋磁矩M样式
+        orbit/.style={
+            black, thin,
+            postaction={decorate},
+            decoration={
+                markings,
+                mark=at position 0.6 with {\arrow{>}} % 在椭圆轨迹上添加方向箭头
+            }
+        }
+    ]
+
+    % 循环生成12个图 (索引 k 从 0 到 11)
+    \foreach \k in {0,...,11} {
+        
+        % --- 计算逻辑 ---
+        % 1. 计算行列位置 (每行6个)
+        \pgfmathsetmacro{\row}{int(\k / 6)}
+        \pgfmathsetmacro{\col}{int(mod(\k, 6))}
+        
+        % 2. 定义每个子图的偏移量 (X间距3.3, Y间距4.5)
+        \pgfmathsetmacro{\xshift}{\col * 3.3}
+        \pgfmathsetmacro{\yshift}{-\row * 4.5}
+        
+        % 3. 计算旋转角度
+        % 图片中每个相位增加 2pi/11。
+        % 360度 / 11 ≈ 32.72度
+        % 我们设定起始角度为 -20度以匹配图片的视觉效果(Phase 0指向右下方)
+        \pgfmathsetmacro{\angledeg}{-30 + \k * (360/11)}
+        
+        % --- [新增] 绘制红色波形连线 ---
+        % 只有当不是每行的第一个元素时，才连接前一个点
+        \ifnum\col>0
+            % 计算前一个点的参数
+            \pgfmathsetmacro{\prevK}{int(\k-1)}
+            \pgfmathsetmacro{\prevAngle}{-30 + \prevK * (360/11)}
+            \pgfmathsetmacro{\prevXShift}{(\col-1) * 3.3}
+            
+            % 计算前一个点的绝对坐标
+            \pgfmathsetmacro{\prevTipX}{\prevXShift + 1.0 * cos(\prevAngle)}
+            \pgfmathsetmacro{\prevTipY}{\yshift + 1.5 + 0.4 * sin(\prevAngle)}
+            
+            % 计算当前点的绝对坐标
+            \pgfmathsetmacro{\currTipX}{\xshift + 1.0 * cos(\angledeg)}
+            \pgfmathsetmacro{\currTipY}{\yshift + 1.5 + 0.4 * sin(\angledeg)}
+            
+            % 绘制红色虚线连接
+            \draw[red, dashed, thick] (\prevTipX, \prevTipY) -- (\currTipX, \currTipY);
+        \fi
+
+        % 4. 标签文本逻辑
+        \pgfmathsetmacro{\numerator}{int(\k * 2)}
+        \def\phasetext{Phase $= \frac{\numerator\pi}{11}$}
+        
+        % 特殊情况处理：第一个和最后一个显示为 0
+        \ifnum\k=0 \def\phasetext{Phase $= 0$} \fi
+        \ifnum\k=11 \def\phasetext{Phase $= 0$} \fi
+
+        % --- 开始在指定位置绘图 ---
+        \begin{scope}[shift={(\xshift, \yshift)}]
+            
+            % 定义关键坐标
+            \coordinate (origin) at (0,0);       % 圆锥顶点
+            \coordinate (center) at (0, 1.5);    % 椭圆中心 (圆锥底部中心)
+            \coordinate (top) at (0, 2.2);       % H轴顶部
+
+            % 1. 绘制椭圆轨迹 (进动轨迹)
+            % 椭圆长轴1.0，短轴0.4
+            \draw[orbit] (center) ellipse (1.0 and 0.4);
+
+            % 2. 绘制 H 场 (中轴线)
+            % 也就是圆锥的中轴，用虚线表示
+            \draw[axis] (origin) -- (center);
+            \draw[axis, ->] (center) -- (top);
+            
+            % 仅在第一个图中标注 H 向量
+            \ifnum\k=0
+                \node[left, font=\footnotesize] at (0, 2.0) {$\vec{H}$};
+            \fi
+
+            % 3. 绘制 M 磁矩 (自旋向量)
+            % 计算箭头在椭圆上的落点
+            % x = x_radius * cos(angle)
+            % y = y_center + y_radius * sin(angle)
+            \pgfmathsetmacro{\tipx}{1.0 * cos(\angledeg)}
+            \pgfmathsetmacro{\tipy}{1.5 + 0.4 * sin(\angledeg)}
+            \coordinate (tip) at (\tipx, \tipy);
+
+            % 画蓝色箭头
+            \draw[spin] (origin) -- (tip);
+
+            % 仅在第一个图中标注 M 向量
+            \ifnum\k=0
+                \node[right, blue, font=\footnotesize] at (tip) {$\vec{M}$};
+            \fi
+            
+            % 4. 绘制底部的 Phase 标签
+            \node[below, font=\small] at (0, -0.2) {\phasetext};
+
+        \end{scope}
+    }
+
+    \end{tikzpicture}
+    \caption{Schematic diagram of spin wave phase variation}
+\end{figure}

@@ -1,0 +1,91 @@
+\begin{tikzpicture}[>=Stealth, scale=2]
+
+    % --- Parameters ---
+    \def\R{2.0}       % Radius of the large sphere
+    \def\r{0.35}      % Radius of the monopole (inner sphere)
+    \def\exAngle{15}  % Angle at which the string exits (degrees)
+    \def\exRad{2.0}   % Distance to exit point (should match \R roughly)
+  
+    % Colors
+    \definecolor{monopoleBlue}{RGB}{30, 144, 255}
+  
+    % Coordinates
+    \coordinate (O) at (0,0);
+    % Exit point on the surface of the sphere (polar coordinates)
+    \coordinate (Exit) at (\exAngle:\R);
+    
+    % --- 1. Background Elements (Back of Sphere) ---
+    % Vertical Meridian (Back half - Dashed)
+    % Ellipse parameters: x-radius=0.3*R, y-radius=R
+    % Drawing the left half as dashed (assuming front is right half)
+    \draw[dashed, gray, line width=0.6pt] (0,\R) arc (90:270:{0.35*\R} and \R);
+  
+    % Horizontal Equator (Back half - Dashed)
+    % Ellipse parameters: x-radius=R, y-radius=0.3*R
+    % Drawing the top half as dashed
+    % FIX: Added \space after \R to prevent "2.0and" concatenation error
+    \draw[dashed, gray, line width=0.6pt] (\R,0) arc (0:180:\R\space and {0.35*\R});
+  
+  
+    % --- 2. Inner Monopole (Source) ---
+    % Shaded ball at the center
+    \shade[ball color=monopoleBlue] (O) circle (\r);
+    
+    % Optional: Highlight on the monopole
+    \fill[white, opacity=0.3] (0.1, 0.1) circle (0.05);
+  
+  
+    % --- 3. Dirac String (Internal Part) ---
+    % Dashed "ladder" style line from center to surface
+    % We use a thick line with a specific dash pattern to mimic the "tube" look
+    \draw[line width=2.5pt, dashed, dash pattern=on 3pt off 2pt] (O) -- (Exit);
+    
+    % Internal Arrow (Modified: changed > to < to point inward, and used \path)
+    \path[decoration={markings, mark=at position 0.6 with {\arrow[scale=0.8]{<}}}, postaction={decorate}] (O) -- (Exit);
+  
+  
+    % --- 4. Foreground Elements (Front of Sphere) ---
+    % Main Sphere Outline
+    \draw[thick] (O) circle (\R);
+  
+    % Vertical Meridian (Front half - Solid)
+    % Drawing the right half
+    \draw[thick] (0,-\R) arc (-90:90:{0.35*\R} and \R);
+  
+    % Horizontal Equator (Front half - Solid)
+    % Drawing the bottom half
+    % FIX: Added \space after \R to prevent "2.0and" concatenation error
+    \draw[thick] (-\R,0) arc (180:360:\R\space and {0.35*\R});
+  
+  
+    % --- 5. Exit Point Intersection ---
+    % A small ring showing where the tube exits the sphere
+    \begin{scope}[shift={(Exit)}, rotate=\exAngle]
+      \draw[thick, fill=white] (0,0) ellipse (0.08 and 0.16);
+    \end{scope}
+  
+  
+    % --- 6. Dirac String (External Part) ---
+    % Thick solid line curving outwards
+    % We define a path coordinates
+    \coordinate (StringEnd) at ($(Exit) + (15:2.8)$);
+    
+    % Draw the flux tube
+    \draw[line width=3.5pt] (Exit) to[out=\exAngle, in=195] coordinate[pos=0.4] (Mid) coordinate[pos=0.85] (Tip) (StringEnd);
+    
+    % Draw arrows on the flux tube
+    % Using markings for cleaner arrow placement on curved paths
+    % Modified: Used Stealth[reversed] to point arrows inward (from outside to inside)
+    \path[decoration={markings, 
+        mark=at position 0.35 with {\arrow[scale=1.5, thick]{Stealth[reversed]}},
+        mark=at position 0.85 with {\arrow[scale=1.5, thick]{Stealth[reversed]}}
+    }, postaction={decorate}] 
+    (Exit) to[out=\exAngle, in=195] (StringEnd);
+
+    % --- 7. Labels ---
+    % Label text rotated along the string
+    \node[anchor=north west, rotate=12, xshift=0.2cm, yshift=-0.1cm] at (Mid) {
+    \footnotesize $4\pi S$ flux tube (Dirac String)
+    };
+
+\end{tikzpicture}

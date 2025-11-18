@@ -1,0 +1,82 @@
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}[
+        scale=1.5,
+        >=Stealth,
+        % Style for placing an arrow in the middle of a path
+        midarrow/.style={
+            decoration={
+                markings,
+                mark=at position 0.6 with {\arrow[scale=1.2]{>}}
+            },
+            postaction={decorate}
+        },
+        axis/.style={->, thick, draw=black!80},
+        label node/.style={font=\small\itshape}
+    ]
+
+        % --- COORDINATES ---
+        \coordinate (Origin) at (0,0); % (tc, xc)
+        \coordinate (Target) at (3,4); % Destination point
+
+        % --- AXES ---
+        % Vertical Axis (Time)
+        \draw[axis] (0, -0.5) -- (0, 5.5) node[left] {\Large Time};
+        % Horizontal Axis (Space)
+        \draw[axis] (-0.5, 0) -- (5, 0) node[below] {\Large Space};
+
+        % --- TICKS AND LABELS ---
+        % Origin labels (tc, xc)
+        \node[below left] at (Origin) {\large $t_c, x_c$};
+        \filldraw[black] (Origin) circle (1.5pt);
+
+        % Target labels (ta, xa) projections
+        \draw[dashed, gray] (Target) -- (0, 4) node[left, black] {\large $t_a$};
+        \draw[dashed, gray] (Target) -- (3, 0) node[below, black] {\large $x_a$};
+        \draw[dashed, gray] (0,0) -- (0,0); % Dummy for anchor
+
+        % --- PATHS ---
+
+        % 1. Quantum Paths (The "Sum over histories")
+        % Using Bezier curves to simulate random paths
+        
+        % Path Left 1
+        \draw[thick, midarrow, gray!80] (Origin) .. controls (-1, 1) and (-0.5, 3) .. (Target);
+        
+        % Path Left 2 (Wider)
+        \draw[thick, midarrow, gray!80] (Origin) .. controls (-2, 1.5) and (-1, 3.5) .. (Target);
+        
+        % Path Right 1
+        \draw[thick, midarrow, gray!80] (Origin) .. controls (1.5, 0.5) and (2.5, 2) .. (Target);
+        
+        % Path Right 2 (Wider loop)
+        \draw[thick, midarrow, gray!80] (Origin) .. controls (4, 1) and (4.5, 3) .. (Target);
+        
+        % Path Middle Wiggle
+        \draw[thick, midarrow, gray!80] (Origin) .. controls (0.5, 2) and (2.5, 2) .. (Target);
+
+        % Path Cross-over
+        \draw[thick, midarrow, gray!80] (Origin) .. controls (1, 3) and (-1, 2) .. (Target);
+
+        % 2. Classical Path (The Red Line - Newton's Law)
+        % Drawn last to be on top
+        \draw[red, very thick, midarrow] (Origin) -- (Target);
+        
+        % Target Point Dot
+        \filldraw[white, draw=black, thick] (Target) circle (2pt);
+
+        % --- ANNOTATION TEXT ---
+        % "This red path is 'classical path'..."
+        \node[align=left, text=red!80!black, font=\small] (annotation) at (5.5, 4.5) {
+            This red path is ``classical path'' \\
+            for free particle \\
+            (Newton's law)
+        };
+
+        % Arrow from annotation to the red path
+        \draw[->, red!80!black, dashed, thick] (annotation.west) to[bend right=20] (1.6, 2.2);
+
+    \end{tikzpicture}
+    \caption{Schematic of Feynman Path Integral. The red path is the classical path (Newton's law) for a free particle, while the gray paths represent the quantum sum over histories.}
+    \label{fig:path_integral}
+\end{figure}

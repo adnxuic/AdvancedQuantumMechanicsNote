@@ -1,0 +1,144 @@
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}[
+        >=Stealth,
+        % Define global styles
+        axis/.style={->, thick},
+        axis label/.style={font=\itshape},
+        point label/.style={font=\scriptsize},
+        slice line/.style={dashed, green!60!black, thin},
+        classical/.style={red, thick},
+        quantum/.style={black!70, thin},
+        % Style for arrows in the middle of paths
+        mid arrow/.style={postaction={decorate}, decoration={
+            markings,
+            mark=at position 0.55 with {\arrow{>}}
+        }},
+        % Style for the big block arrows connecting diagrams
+        block arrow/.style={
+            single arrow, draw=black, fill=white, 
+            minimum height=1.5cm, minimum width=1.5cm,
+            single arrow head extend=0.3cm,
+            drop shadow
+        }
+    ]
+        % -----------------------------------------------------
+        % STAGE 1: ONE TIME SLICE (Top Left)
+        % -----------------------------------------------------
+        \begin{scope}[local bounding box=stage1]
+            \coordinate (O1) at (0,0);
+            \coordinate (Start1) at (0.5, 0.5);
+            \coordinate (End1) at (3.5, 3.5);
+            
+            % Axes
+            \draw[axis] (0,0) -- (4.5,0) node[right, axis label] {\small Space};
+            \draw[axis] (0,0) -- (0,4) node[above, axis label] {\small Time};
+            
+            % Time Slices (N=1)
+            \draw[slice line] (0, 2) -- (4, 2);
+            \node[green!60!black, font=\scriptsize, fill=black!5, rounded corners, inner sep=1pt] at (2.5, 2) {time slice};
+            
+            % Projections
+            \draw[dashed, gray] (Start1) -- (0, 0.5) node[left, point label] {$t_c$};
+            \draw[dashed, gray] (End1) -- (0, 3.5) node[left, point label] {$t_a$};
+
+            % Paths (Piecewise linear with 1 kink)
+            % Classical (Straight)
+            \draw[classical, mid arrow] (Start1) -- (End1);
+            
+            % Quantum (Kinked at slice)
+            % Path A (Left side)
+            \draw[quantum, mid arrow] (Start1) -- (0.2, 2) -- (End1);
+            % Path B (Right side)
+            \draw[quantum, mid arrow] (Start1) -- (3.8, 2) -- (End1);
+            % Path C (Small kink)
+            \draw[quantum, mid arrow] (Start1) -- (2.5, 2) -- (End1);
+
+            % Points
+            \filldraw[black] (Start1) circle (1.5pt) node[below, point label] {$x_c$};
+            \filldraw[white, draw=black, thick] (End1) circle (1.5pt);
+        \end{scope}
+
+        % -----------------------------------------------------
+        % STAGE 2: THREE TIME SLICES (Top Right)
+        % -----------------------------------------------------
+        \begin{scope}[xshift=7cm, local bounding box=stage2]
+            \coordinate (Start2) at (0.5, 0.5);
+            \coordinate (End2) at (3.5, 3.5);
+            
+            % Axes
+            \draw[axis] (0,0) -- (4.5,0) node[right, axis label] {\small Space};
+            \draw[axis] (0,0) -- (0,4) node[above, axis label] {\small Time};
+            
+            % Time Slices (N=3)
+            \foreach \y in {1.25, 2.0, 2.75} {
+                \draw[slice line] (0, \y) -- (4, \y);
+            }
+            \node[green!60!black, font=\scriptsize, draw, rounded corners] at (3.5, 2.0) {3 slices};
+            
+            % Paths (Piecewise linear with 3 kinks)
+            % Classical
+            \draw[classical, mid arrow] (Start2) -- (End2);
+            
+            % Quantum Path A (Wide zig-zag)
+            \draw[quantum, mid arrow] (Start2) -- (0.2, 1.25) -- (0.5, 2.0) -- (0.8, 2.75) -- (End2);
+            % Quantum Path B (Other side)
+            \draw[quantum, mid arrow] (Start2) -- (3.5, 1.25) -- (3.0, 2.0) -- (3.8, 2.75) -- (End2);
+            % Quantum Path C (Near classical)
+            \draw[quantum, mid arrow] (Start2) -- (1.5, 1.25) -- (1.8, 2.0) -- (2.5, 2.75) -- (End2);
+
+            % Points
+            \filldraw[black] (Start2) circle (1.5pt) node[below, point label] {$x_c$};
+            \filldraw[white, draw=black, thick] (End2) circle (1.5pt);
+        \end{scope}
+
+        % -----------------------------------------------------
+        % STAGE 3: INFINITE SLICES / SMOOTH (Bottom Center)
+        % -----------------------------------------------------
+        \begin{scope}[xshift=3.5cm, yshift=-6.5cm, local bounding box=stage3]
+            \coordinate (Start3) at (0.5, 0.5);
+            \coordinate (End3) at (3.5, 3.5);
+            
+            % Axes
+            \draw[axis] (0,0) -- (5.5,0) node[right, axis label] {Space ($x$)};
+            \draw[axis] (0,0) -- (0,4.5) node[above, axis label] {Time ($t$)};
+            
+            % Slices (Implied/Many) - represented by text
+            \node[align=left, text width=3cm, draw=black, rounded corners, inner sep=4pt] 
+                at (6.5, 2.5) 
+                {\textbf{``Infinite'' slices} \\ \scriptsize (Superposition)};
+            
+            % Paths (Smooth Curves)
+            % Classical
+            \draw[classical, mid arrow] (Start3) -- (End3) node[midway, above left, red, font=\tiny] {Classical};
+            
+            % Quantum (Smooth Bezier)
+            \draw[quantum, mid arrow] (Start3) .. controls (4.5, 1.5) and (4.5, 2.5) .. (End3);
+            \draw[quantum, mid arrow] (Start3) .. controls (3.0, 1.5) and (3.5, 3.0) .. (End3);
+            \draw[quantum, mid arrow] (Start3) .. controls (-1.5, 1.5) and (-1.0, 3.0) .. (End3);
+            \draw[quantum, mid arrow] (Start3) .. controls (0.0, 2.0) and (1.5, 3.0) .. (End3);
+            \draw[quantum, mid arrow] (Start3) .. controls (1.5, 2.0) and (2.0, 1.5) .. (End3);
+
+            % Points
+            \filldraw[black] (Start3) circle (1.5pt) node[below, point label] {$x_c$};
+            \filldraw[white, draw=black, thick] (End3) circle (1.5pt) node[left=2pt, point label] {$t_a$} node[below=2pt, point label] {$x_a$};
+            
+            % Projections
+            \draw[dashed, gray] (Start3) -- (0, 0.5) node[left, point label] {$t_c$};
+            \draw[dashed, gray] (End3) -- (0, 3.5);
+
+        \end{scope}
+
+        % -----------------------------------------------------
+        % TRANSITION ARROWS
+        % -----------------------------------------------------
+        % Arrow 1: Stage 1 -> Stage 2
+        \node[block arrow, rotate=0, fill=black!10] at (5.75, 2) {\scriptsize Refine};
+        
+        % Arrow 2: Stage 1/2 -> Stage 3 (Pointing down/center)
+        \node[block arrow, rotate=-90, fill=black!10, minimum height=1.2cm] at (5.75, -1.2) {\scriptsize $N \to \infty$};
+
+    \end{tikzpicture}
+    \caption{Evolution of the path integral formulation: (Top Left) A single time slice yields coarse, kinked paths. (Top Right) Adding more slices ($N=3$) refines the grid. (Bottom) Taking the limit of infinite time slices ($N \to \infty$) recovers the smooth paths of standard quantum mechanics.}
+    \label{fig:smoothing_path_full}
+\end{figure}

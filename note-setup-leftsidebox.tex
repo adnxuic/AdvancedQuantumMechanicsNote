@@ -14,6 +14,12 @@
 \linespread{1.25} % 修改行距
 
 %===================================
+% 字体
+%===================================
+
+\usepackage{fix-cm} % 允许 Computer Modern 字体按需缩放，避免缺失字号警告
+
+%===================================
 % 编辑体验
 %===================================
 
@@ -415,3 +421,14 @@
 \providecommand{\@chapapp}{\chaptername}
 \providecommand{\l@chapter}{\@dottedtocline{0}{0em}{1.5em}}
 \makeatother
+
+\usepackage{tikz-3dplot}
+\usetikzlibrary{arrows.meta, decorations.markings, calc, backgrounds,positioning}
+\usetikzlibrary{patterns, decorations.markings, arrows.meta, bending, calc, shadows}
+\usetikzlibrary{arrows.meta, decorations.markings, , backgrounds, shapes.arrows, shadows}
+
+% 定义颜色
+\definecolor{myblue}{RGB}{30, 144, 255}
+\definecolor{mygreen}{RGB}{50, 205, 50}
+\definecolor{myyellow}{RGB}{255, 255, 224}
+\definecolor{darkgray}{RGB}{40, 40, 40}

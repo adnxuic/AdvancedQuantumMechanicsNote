@@ -239,6 +239,10 @@ Next, we try to \enquote{smooth} the path along time directly.
 We can insert more time slices between $x$ and $x_0$.
 If we insert infinite time slices, the path become smooth.
 
+\begin{center}
+\input{Tikz/SmoothIntegralPathProcess.tex}
+\end{center}
+
 Firstly, let's discretize time. domain $[t_0, t]$ into $N$ pieces of equal length $\Delta t = \frac{t-t_0}{N}$:
 \begin{equation}
 \begin{aligned}
@@ -320,6 +324,10 @@ Finally, we can get the propagators by the path integral:
     \end{equation}
     where, the pair of $p(t)$ and $\dot{x}(t)$ characterizes a path in the px phase space.
 \end{theorem}
+
+\begin{center}
+\input{Tikz/SmoothIntegralPath.tex}
+\end{center}
 
 \section{Gaussian Integration}
 
@@ -615,14 +623,7 @@ In conclusion, if we consider small enough but nozero parameter $a$,
 it is computationlly economic to merely focus on the integral contributions from the vicinity of these special point (denoted by a set $\{x_0^i\}$) that satisfy $f'(x_0^i)=0$.
 
 \begin{center}
-\begin{tikzpicture}
-\draw[->] (-0.5,0) -- (5,0) node[right] {$x$};
-\draw[->] (0,-0.2) -- (0,2.5) node[above] {$I$};
-\draw[domain=1:2, smooth, variable=\x] plot ({\x}, {2*exp(-20*(\x-1.5)^2)});
-\node at (1.5, -0.2) {$x_0$};
-\draw[domain=3:4, smooth, variable=\x] plot ({\x}, {1.8*exp(-20*(\x-3.5)^2)});
-\node at (3.5, -0.2) {$x_0^i$};
-\end{tikzpicture}
+\input{Tikz/stationary_points.tex}
 \end{center}
 
 We consider the quadratic approximation in the vicinity of $x_0$:

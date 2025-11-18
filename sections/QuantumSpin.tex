@@ -52,7 +52,7 @@ Here, the spherical coordinate angles have the domains $\theta \in [0, \mpi]$ an
 \end{equation}
 This set of states $\{\ket{\bm{n}}\}$ is continuously parameterized by the angles $(\theta, \phi)$, addressing the first drawback of the discrete basis.
 
-\section{Physical Interpretation: The Bloch Sphere}
+\subsection{Physical Interpretation: The Bloch Sphere}
 
 To understand the physical meaning of $\theta$ and $\phi$, we compute the expectation value of the vector spin operator $\vecS$ in the state $\ket{\bm{n}}$. We will set $\hbar = 1$ from here on for simplicity. The spin operator is $\vecS = \frac{1}{2}\vecsigma$, where $\vecsigma = (\op{\sigma}_x, \op{\sigma}_y, \op{\sigma}_z)$ is the vector of Pauli matrices:
 \begin{equation}
@@ -113,7 +113,7 @@ Thus, the state $\ket{\bm{n}}$ is the quantum state that "points" in the classic
 
 This formalism treats all directions $\bm{n}$ on an equal footing, making the SU(2) rotational symmetry manifest. This addresses the second drawback of the discrete basis.
 
-\subsection{Coherent State as an Eigenvector}
+% \subsection{Coherent State as an Eigenvector}
 
 The eigenvector equation:
 \begin{equation}
@@ -180,7 +180,7 @@ This equation signifies that the coherent state $\ket{\bm{n}}$ is, by definition
 \end{proof}
 
 
-\section{Gauge Choice and Topological Singularities}
+\subsection{Gauge Choice and Topological Singularities}
 
 The parametrization in Eq. \eqref{eq:coherent_state} is not unique, and it hides a subtle topological problem.
 \begin{itemize}
@@ -210,7 +210,7 @@ This state is regular at the South Pole ($\ket{\bm{n}}_S = \ket{\downarrow}$) bu
 
 This unavoidable singularity is topological in nature and is the origin of the \textbf{Berry Phase}, or the "topological term," in the coherent-state path integral.
 
-\section{Over-Completeness and Orthogonality}
+\subsection{Over-Completeness and Orthogonality}
 
 The set of all coherent states $\{\ket{\bm{n}}\}$ for all $\bm{n}$ on the sphere is an \textbf{over-complete} basis. The Hilbert space is only 2-dimensional, but we have an infinite, continuous set of states. This means the states are not, in general, orthogonal.
 \begin{equation}
@@ -261,7 +261,7 @@ By simple inspection, these two state vectors are clearly not identical. They ar
 
 The state $\ket{-\bm{n}}$ represents a spin pointing in the \textit{opposite direction} (e.g., spin down), while $-\ket{\bm{n}}$ represents the \textit{same physical state} as $\ket{\bm{n}}$ but with a phase shift of $\mpi$ (since $\me^{\mi\mpi} = -1$).
 
-\section{Completeness Relation}
+\subsection{Completeness Relation}
 Despite being over-complete, the spin coherent states provide a resolution of the identity operator $\opI$.
 
 Let's call the integral $J = \int \mathrm{d}\Omega \, \ketbra{\bm{n}}{\bm{n}} = \int_0^{2\mpi} \md\phi \int_0^{\mpi} \sin\theta \, \md\theta \, \ketbra{\bm{n}}{\bm{n}}$.
@@ -294,3 +294,236 @@ Dividing by $2\mpi$, we arrive at the completeness relation:
     \frac{1}{2\mpi} \int \mathrm{d}\Omega \, \ketbra{\bm{n}}{\bm{n}} = \opI
 \end{equation}
 This relation is the foundation for the coherent-state path integral. It allows us to insert the identity operator at infinitesimally small time steps, $t_j$, as an integral over the Bloch sphere: $\opI = \int \frac{\mathrm{d}\Omega_j}{2\mpi} \ketbra{\bm{n}_j}{\bm{n}_j}$. Summing over all paths becomes an integral over all $\bm{n}_j$ at all times $t_j$.
+
+\section{Coherent-state path integral for spin}
+
+Consider the quantum amplitude ($\hbar=1$):
+\begin{equation}
+\langle n_f | \mathrm{e}^{-\mathrm{i}\hat{H}(t_f-t_i)} |n_i\rangle \xrightarrow{\mathrm{i}(t_f-t_i) \rightarrow T} \langle n_f | \mathrm{e}^{-\hat{H}T} |n_i\rangle
+\end{equation}
+
+First, consider $\hat{H}$ that is an isolated spin
+we divide the total time interval $T$ into $N$ small slices of
+duration $\Delta t = \frac{T}{N}$. In the limit $N \to \infty$ and $\Delta t \to 0$, the time evolution
+operator can be written as a product of infinitesimal operators:
+\begin{equation}
+\mathrm{e}^{-\mathrm{i}\hat{H}T} = \left( \mathrm{e}^{-\mathrm{i}\hat{H}\Delta t} \right)^N
+\end{equation}
+
+The amplitude is the:
+\begin{equation}
+\langle n_f | \mathrm{e}^{-\mathrm{i}\hat{H}\Delta t} \dots \mathrm{e}^{-\mathrm{i}\hat{H}\Delta t} |n_i\rangle
+\end{equation}
+
+We now insert the resolution of identity operator: let's label our
+initial state as $|n_0\rangle=|n_i\rangle$ and final state as $|n_N\rangle=|n_f\rangle$
+\begin{equation}
+\begin{aligned}
+K &= \langle n_N | \mathrm{e}^{-\mathrm{i}\hat{H}\Delta t} \cdot \left( \int \frac{\mathrm{d}\bm{n}_{N-1}}{2\pi} |n_{N-1}\rangle\langle n_{N-1}| \right) \cdot \mathrm{e}^{-\mathrm{i}\hat{H}\Delta t} \dots \mathrm{e}^{-\mathrm{i}\hat{H}\Delta t} |n_0\rangle \\
+&= \int \left( \prod_{l=1}^{N-1} \frac{\mathrm{d}\bm{n}_l}{2\pi} \right) \cdot \left( \prod_{l=1}^N \langle n_l | \mathrm{e}^{-\mathrm{i}\hat{H}\Delta t} | n_{l-1}\rangle \right)
+\end{aligned}
+\end{equation}
+
+Since $\Delta t$ is small, we can expand the exponential to first order:
+\begin{equation}
+\mathrm{e}^{-\mathrm{i}\hat{H}\Delta t} \approx \hat{\mathbb{I}} - \mathrm{i}\hat{H}\Delta t
+\end{equation}
+The matrix element becomes:
+\begin{equation}
+\begin{aligned}
+\langle n_l | \mathrm{e}^{-\mathrm{i}\hat{H}\Delta t} | n_{l-1}\rangle &= \langle n_l | \hat{\mathbb{I}} - \mathrm{i}\hat{H}\Delta t | n_{l-1}\rangle \\
+&= \langle n_l | n_{l-1}\rangle - \mathrm{i} \Delta t \langle n_l | \hat{H} | n_{l-1}\rangle
+\end{aligned}
+\end{equation}
+
+let's represent the state at time $t_l$ as a small deviation
+from the state at $t_{l-1}$
+\begin{equation}
+|n_l\rangle \approx |n_{l-1}\rangle + \delta|n_{l-1}\rangle = |n_{l-1}\rangle + \frac{\mathrm{d}|n(t)\rangle}{\mathrm{d}t}\Big|_{t=t_{l-1}} \cdot \Delta t
+\end{equation}
+
+The overlap is then:
+\begin{equation}
+\begin{aligned}
+\langle n_l | n_{l-1}\rangle &\approx \langle n_{l-1} | n_{l-1}\rangle + \left( \frac{\mathrm{d}\langle n(t)|}{\mathrm{d}t}\Big|_{t=t_{l-1}} \right) |n_{l-1}\rangle \Delta t \\
+&= 1 + \left( \frac{\mathrm{d}\langle n_l|}{\mathrm{d}t}\Big|_{t=t_{l-1}} \right) |n_{l-1}\rangle \cdot \Delta t
+\end{aligned}
+\end{equation}
+
+This can be written in more suggestive exponential form for small $\Delta t$:
+\begin{equation}
+\langle n_l | n_{l-1}\rangle \approx \mathrm{e}^{\langle \dot{n}_{l-1} | n_{l-1}\rangle \cdot \Delta t}
+\end{equation}
+where, $\langle \dot{n}_{l-1}| = \frac{\mathrm{d}\langle n(t)|}{\mathrm{d}t}\Big|_{t=t_{l-1}}$
+
+By the way, from the equation:
+\begin{equation}
+\frac{\mathrm{d}}{\mathrm{d}t}\langle n_l | n_l\rangle = \left( \frac{\mathrm{d}}{\mathrm{d}t}\langle n_l| \right) |n_l\rangle + \langle n_l | \left( \frac{\mathrm{d}}{\mathrm{d}t}|n_l\rangle \right) = 0
+\end{equation}
+
+we can get:
+\begin{equation}
+\begin{aligned}
+\langle \dot{n}_l | n_l\rangle &= - \langle n_l | \dot{n}_l\rangle \\
+&= - \langle \dot{n}_l | n_l\rangle^*
+\end{aligned}
+\end{equation}
+So $\langle \dot{n}_l | n_l\rangle$ is purely imaginary
+
+Because we only retain first-order small quantities, so the
+second term of matrix element becomes:
+\begin{equation}
+\begin{aligned}
+-\mathrm{i}\Delta t \langle n_l | \hat{H} | n_{l-1}\rangle &\approx -\mathrm{i}\Delta t (\langle n_{l-1}| + \langle \dot{n}_{l-1}|\Delta t) \hat{H} |n_{l-1}\rangle \\
+&= -\mathrm{i} \langle n_{l-1} | \hat{H} | n_{l-1}\rangle \Delta t + O(\Delta t^2) \\
+&\approx -\mathrm{i} \langle n_{l-1} | \hat{H} | n_{l-1}\rangle \Delta t
+\end{aligned}
+\end{equation}
+Putting everything back into the matrix elements:
+\begin{equation}
+\begin{aligned}
+\langle n_l | \mathrm{e}^{-\mathrm{i}\hat{H}\Delta t} | n_{l-1}\rangle &= 1 + (\langle \dot{n}_{l-1} | n_{l-1}\rangle - \mathrm{i} \langle n_{l-1} | \hat{H} | n_{l-1}\rangle) \Delta t \\
+&\approx \exp \left[ (\langle \dot{n}_{l-1} | n_{l-1}\rangle - \mathrm{i} \langle n_{l-1} | \hat{H} | n_{l-1}\rangle) \Delta t \right]
+\end{aligned}
+\end{equation}
+
+So the amplitude $K$ is:
+\begin{equation}
+K = \int \left( \prod_{l=1}^{N-1} \frac{\mathrm{d}\bm{n}_l}{2\pi} \right) \cdot \mathrm{e}^{\sum_{l=1}^N (\langle \dot{n}_{l-1} | n_{l-1}\rangle - \mathrm{i} \langle n_{l-1} | \hat{H} | n_{l-1}\rangle) \Delta t}
+\end{equation}
+
+The product of integrals over all intermediate states becomes the formal path integral measure $D[n(t)]$ :
+
+\begin{equation}
+\begin{aligned}
+K &= \int D[n(t)] \exp \left\{ \mathrm{i} \int_{t_i}^{t_f} [-\mathrm{i} \langle \dot{n}(t)|n(t)\rangle - \langle n(t)|\hat{H}|n(t)\rangle] \mathrm{d}t \right\} \\
+&= \int D[n(t)] \exp \{ \mathrm{i} S[n(t)] \}
+\end{aligned}
+\end{equation}
+
+Because of $-\langle \dot{n}(t)|n(t)\rangle = \langle n(t)|\dot{n}(t)\rangle$, $S[n(t)]$ can be written as:
+
+\begin{equation}
+S[n(t)] = \int_{t_i}^{t_f} \mathrm{d}t \left[ \langle n(t)| \mathrm{i} \frac{\mathrm{d}}{\mathrm{d}t} |n(t)\rangle - \langle n(t)|\hat{H}|n(t)\rangle \right]
+\end{equation}
+
+where, $\hbar=1$.
+
+\subsection{Geometrical meaning of the Geometric term}
+
+We consider a special system whose Hamiltonian is zero; So the dynamical term vanishes:
+\begin{equation}
+\langle n(t)|\hat{H}|n(t)\rangle = 0
+\end{equation}
+and the action simplifies and contains only the geometric term:
+\begin{equation}
+S[n(t)] = \int_{t_i}^{t_f} \mathrm{d}t \cdot \mathrm{i} \langle n(t)| \frac{\mathrm{d}}{\mathrm{d}t} |n(t)\rangle
+\end{equation}
+
+Again, we choose the gauge choice $\delta=\frac{\varphi}{2}$ , such that the North Pole is regular:
+\begin{equation}
+|n(t)\rangle = \cos\frac{\theta(t)}{2} |\uparrow\rangle + \mathrm{e}^{\mathrm{i}\varphi(t)} \sin\frac{\theta(t)}{2} |\downarrow\rangle
+\end{equation}
+
+So the geometric term is:
+\begin{equation}
+\begin{aligned}
+\langle n(t)| \frac{\mathrm{d}}{\mathrm{d}t} |n(t)\rangle &= \cos\frac{\theta}{2} (-\frac{1}{2}\sin\frac{\theta}{2}\cdot\dot{\theta}) + \mathrm{e}^{-\mathrm{i}\varphi} \sin\frac{\theta}{2} \cdot (\mathrm{i}\dot{\varphi}\mathrm{e}^{\mathrm{i}\varphi}\sin\frac{\theta}{2} + \mathrm{e}^{\mathrm{i}\varphi}\frac{1}{2}\cos\frac{\theta}{2}\cdot\dot{\theta}) \\
+&= \mathrm{i} \dot{\varphi} \sin^2\frac{\theta}{2} \\
+&= \mathrm{i} \dot{\varphi} \frac{(1-\cos\theta)}{2}
+\end{aligned}
+\end{equation}
+
+So the action is:
+\begin{equation}
+\begin{aligned}
+S[n(t)] &= -\frac{1}{2} \int_{t_i}^{t_f} \mathrm{d}t \cdot \dot{\varphi} (1-\cos\theta) \\
+&= -\frac{1}{2} \int_{\varphi(t_i)}^{\varphi(t_f)} (1-\cos\theta(\varphi)) \mathrm{d}\varphi
+\end{aligned}
+\end{equation}
+
+Because $\theta$ and $\varphi$ are the functions depending on $t$. we can express $\theta$ as a function of $\varphi$
+
+We can rewrite the function $1-\cos\theta(\varphi)$ as a integral:
+\begin{equation}
+1-\cos\theta(\varphi) = \int_0^{\theta(\varphi)} \mathrm{d}\theta \cdot \sin\theta
+\end{equation}
+So the action can be written as a area integral:
+\begin{equation}
+\begin{aligned}
+S[n(t)] &= -\frac{1}{2} \int_{\varphi_i}^{\varphi_f} \mathrm{d}\varphi \int_0^{\theta(\varphi)} \sin\theta \mathrm{d}\theta \\
+&= -\frac{1}{2} \iint_{\partial A_r} \mathrm{d}\Omega \\
+&= -\frac{1}{2} A_r \quad (\text{Because the radius is } 1 \text{ and } A_r = R^2 \Omega).
+\end{aligned}
+\end{equation}
+where $r$ is the path $|n(t)\rangle$ from $|n(t_i)\rangle=|n_i\rangle$ to $|n(t_f)\rangle=|n_f\rangle$
+and $A_r$ is area enclosed by three points on the sphere ($|\uparrow\rangle, |n_i\rangle, |n_f\rangle$). Obviously, $A_r$ depends on where the North pole is defined, which is kind of "gauge-dependence"
+If we multiply $|n(t)\rangle$ by a overall phase:
+\begin{equation}
+|n(t)\rangle \longrightarrow \mathrm{e}^{\mathrm{i}\delta} |n(t)\rangle.
+\end{equation}
+
+$S[n(t)]$ will be added an other term:
+\begin{equation}
+\begin{aligned}
+S'[n(t)] &= \mathrm{i} \int_{t_i}^{t_f} \mathrm{d}t \langle n(t)| ( \mathrm{e}^{\mathrm{i}\delta} \frac{\mathrm{d}}{\mathrm{d}t} |n(t)\rangle + \mathrm{i}\dot{\delta} \mathrm{e}^{\mathrm{i}\delta} |n(t)\rangle ) \\
+&= S[n(t)] + (-1) \int_{t_i}^{t_f} \mathrm{d}t \dot{\delta} \\
+&= S[n(t)] + (-1) (\delta(t_f) - \delta(t_i))
+\end{aligned}
+\end{equation}
+To be more precise, $\delta$ is a function of $\theta$ and $\varphi$
+\begin{equation}
+\delta(t_f) - \delta(t_i) = \delta(\theta_f, \varphi_f) - \delta(\theta_i, \varphi_i)
+\end{equation}
+
+So if we choose different gauge, $\Delta\delta$ is different
+and $S[n(t)]$ is gauge-dependence. 
+
+\input{Tikz/IntegralPath.tex}
+
+But if weconsider a close path ($n_f=n_i$), the $S[n(t)]$ is
+gauge-independent:
+\begin{equation}
+\begin{aligned}
+\Delta\delta &= \delta(\theta_f, \varphi_f) - \delta(\theta_i, \varphi_i) \\
+&= 2\pi \cdot N \quad (N \in \mathbb{Z})
+\end{aligned}
+\end{equation}
+The reason as follow: To ensure that the transformed
+basis is single-valued, which
+\begin{equation}
+\mathrm{e}^{\mathrm{i}\delta_i} |n_i\rangle \xrightarrow{\text{close path}} \mathrm{e}^{\mathrm{i}\delta_f} |n_f\rangle = \mathrm{e}^{\mathrm{i}\delta_i} |n_i\rangle
+\end{equation}
+and
+\begin{equation}
+\mathrm{e}^{\mathrm{i}\delta_f} |n_i\rangle = \mathrm{e}^{\mathrm{i}\delta_i} |n_i\rangle
+\end{equation}
+This implies that the value of $\delta$ can change by
+integer multiples of $2\pi$ after completing a full cycle:
+\begin{equation}
+\delta_f - \delta_i = 2\pi \cdot N \quad (N \in \mathbb{Z}).
+\end{equation}
+So for a close path, $S[n(t)]$, to be more precise,
+the geometric phase factor,
+\begin{equation}
+\mathrm{e}^{\mathrm{i}S'} = \mathrm{e}^{\mathrm{i}S+\mathrm{i}\Delta\delta} = \mathrm{e}^{\mathrm{i}S+2\pi N \cdot \mathrm{i}} = \mathrm{e}^{\mathrm{i}S}
+\end{equation}
+remains unchanged, or that the geometric phase $S$ is
+invariant under the model modulo $2\pi$ operation.
+
+\input{Tikz/IntegralClosePath.tex}
+
+\subsection{Wess-Zumino term and Witten extension}
+
+
+\begin{center}
+\input{Tikz/monopole.tex}
+\end{center}
+
+\begin{center}
+\input{Tikz/DiracString.tex}
+\end{center}
+
+\begin{center}
+\input{Tikz/SpinWave.tex}
+\end{center}

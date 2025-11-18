@@ -1,0 +1,85 @@
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}[
+        font=\sffamily,
+        >=Stealth,
+        % 样式定义
+        % 1. 球体样式升级：添加 ball color 产生3D光影，opacity 控制透明度以便看到背后的网格(如果需要)
+        sphere body/.style={shading=ball, ball color=yellow!10, opacity=0.4},
+        sphere outline/.style={color=yellow!90!black, thick},
+        latitude/.style={color=red!60, thin},
+        equator/.style={color=yellow!90!black, thick},
+        region outline/.style={color=blue, very thick},
+        region fill/.style={pattern=north east lines, pattern color=blue!40},
+        arrow style/.style={color=blue, thick, ->}
+    ]
+
+        % 定义球体半径
+        \def\R{3}
+        
+        % 0. (可选) 底部阴影，增加落地感
+        \fill[black!10] (0, -\R-0.2) ellipse ({0.8*\R} and 0.1*\R);
+
+        % 1. 绘制球体本体 (3D 填充)
+        % 这步是立体感的关键
+        \shade[sphere body] (0,0) circle (\R);
+        \draw[sphere outline] (0,0) circle (\R);
+
+        % 2. 绘制纬线 (Latitudes) - 升级为椭圆弧
+        % 视角设定：假设我们稍微从上方俯视，纬线会呈现向下弯曲的弧度
+        % y radius = 0.15 * x radius 模拟透视压缩
+        \foreach \h in {-2.4, -1.8, ..., 2.4} {
+            % 计算当前高度对应的水平半径 w
+            \pgfmathsetmacro{\w}{sqrt(\R*\R - \h*\h)}
+            
+            % 使用椭圆弧替代 bend right
+            % (180:360:...) 表示下半圆弧，产生向下弯曲的透视效果
+            \draw[latitude] ({-\w}, \h) arc (180:360:{\w} and {0.15*\w});
+        }
+
+        % 3. 绘制赤道 (Equator)
+        % 同样使用椭圆弧，加粗显示
+        \draw[equator] ({-\R}, 0) arc (180:360:{\R} and {0.15*\R});
+
+        % 标注极点 N 和 S
+        \node[yellow!80!black, above] at (0, \R) {N};
+        \node[yellow!80!black, below] at (0, -\R) {S};
+
+        % 4. 绘制不规则区域 A_gamma (蓝色区域)
+        \begin{scope}
+            % 微调坐标以适应新的透视感
+            \coordinate (A) at (-1.2, 0.2);  
+            \coordinate (B) at (0.0, -0.3); 
+            \coordinate (C) at (1.5, 0.8);  
+            \coordinate (D) at (0.8, 1.8);  
+            \coordinate (E) at (-0.8, 1.5); 
+
+            % 定义路径
+            \def\regionpath{plot[smooth cycle, tension=0.7] coordinates {(A) (B) (C) (D) (E)}}
+
+            % 填充阴影
+            \fill[region fill] \regionpath;
+
+            % 绘制带箭头的轮廓
+            \draw[region outline, decoration={
+                markings,
+                mark=at position 0.2 with {\arrow{>}},
+                mark=at position 0.55 with {\arrow{>}},
+                mark=at position 0.85 with {\arrow{>}}
+            }, postaction={decorate}] \regionpath;
+
+            % 5. 绘制点 n_f = n_i
+            \node[circle, fill=blue, inner sep=2pt] (point) at (A) {};
+        \end{scope}
+
+        % 6. 添加外部标注和指示箭头
+        \node[right, text=green!60!black, font=\Large] (LabelAg) at (\R+0.5, \R-0.5) {$A_\gamma$};
+        \draw[arrow style] (LabelAg.west) to[bend right=20] (0.5, 1.0);
+
+        \node[left, text=blue, font=\large] (LabelN) at (-\R-0.5, 0.2) {$n_f = n_i$};
+        \draw[arrow style] (LabelN.east) to[bend left=10] (point);
+
+    \end{tikzpicture}
+    \caption{The integral close path $\gamma$ in the Bloch sphere}
+    \label{fig:IntegralClosePathInBlochSphere}
+\end{figure}
