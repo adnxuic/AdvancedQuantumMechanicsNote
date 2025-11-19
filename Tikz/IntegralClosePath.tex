@@ -1,84 +1,93 @@
 \begin{figure}[htbp]
     \centering
     \begin{tikzpicture}[
-        font=\sffamily,
-        >=Stealth,
-        % 样式定义
-        % 1. 球体样式升级：添加 ball color 产生3D光影，opacity 控制透明度以便看到背后的网格(如果需要)
-        sphere body/.style={shading=ball, ball color=yellow!10, opacity=0.4},
-        sphere outline/.style={color=yellow!90!black, thick},
-        latitude/.style={color=red!60, thin},
-        equator/.style={color=yellow!90!black, thick},
-        region outline/.style={color=blue, very thick},
-        region fill/.style={pattern=north east lines, pattern color=blue!40},
-        arrow style/.style={color=blue, thick, ->}
-    ]
-
-        % 定义球体半径
-        \def\R{3}
-        
-        % 0. (可选) 底部阴影，增加落地感
-        \fill[black!10] (0, -\R-0.2) ellipse ({0.8*\R} and 0.1*\R);
-
-        % 1. 绘制球体本体 (3D 填充)
-        % 这步是立体感的关键
-        \shade[sphere body] (0,0) circle (\R);
-        \draw[sphere outline] (0,0) circle (\R);
-
-        % 2. 绘制纬线 (Latitudes) - 升级为椭圆弧
-        % 视角设定：假设我们稍微从上方俯视，纬线会呈现向下弯曲的弧度
-        % y radius = 0.15 * x radius 模拟透视压缩
-        \foreach \h in {-2.4, -1.8, ..., 2.4} {
-            % 计算当前高度对应的水平半径 w
-            \pgfmathsetmacro{\w}{sqrt(\R*\R - \h*\h)}
-            
-            % 使用椭圆弧替代 bend right
-            % (180:360:...) 表示下半圆弧，产生向下弯曲的透视效果
-            \draw[latitude] ({-\w}, \h) arc (180:360:{\w} and {0.15*\w});
-        }
-
-        % 3. 绘制赤道 (Equator)
-        % 同样使用椭圆弧，加粗显示
-        \draw[equator] ({-\R}, 0) arc (180:360:{\R} and {0.15*\R});
-
-        % 标注极点 N 和 S
-        \node[yellow!80!black, above] at (0, \R) {N};
-        \node[yellow!80!black, below] at (0, -\R) {S};
-
-        % 4. 绘制不规则区域 A_gamma (蓝色区域)
-        \begin{scope}
-            % 微调坐标以适应新的透视感
-            \coordinate (A) at (-1.2, 0.2);  
-            \coordinate (B) at (0.0, -0.3); 
-            \coordinate (C) at (1.5, 0.8);  
-            \coordinate (D) at (0.8, 1.8);  
-            \coordinate (E) at (-0.8, 1.5); 
-
-            % 定义路径
-            \def\regionpath{plot[smooth cycle, tension=0.7] coordinates {(A) (B) (C) (D) (E)}}
-
-            % 填充阴影
-            \fill[region fill] \regionpath;
-
-            % 绘制带箭头的轮廓
-            \draw[region outline, decoration={
+        scale=1.8,
+        line cap=round,
+        line join=round,
+        % 定义路径上的箭头样式 (多个箭头表示流向)
+        flowarrow/.style={
+            decoration={
                 markings,
-                mark=at position 0.2 with {\arrow{>}},
-                mark=at position 0.55 with {\arrow{>}},
-                mark=at position 0.85 with {\arrow{>}}
-            }, postaction={decorate}] \regionpath;
-
-            % 5. 绘制点 n_f = n_i
-            \node[circle, fill=blue, inner sep=2pt] (point) at (A) {};
-        \end{scope}
-
-        % 6. 添加外部标注和指示箭头
-        \node[right, text=green!60!black, font=\Large] (LabelAg) at (\R+0.5, \R-0.5) {$A_\gamma$};
-        \draw[arrow style] (LabelAg.west) to[bend right=20] (0.5, 1.0);
-
-        \node[left, text=blue, font=\large] (LabelN) at (-\R-0.5, 0.2) {$n_f = n_i$};
-        \draw[arrow style] (LabelN.east) to[bend left=10] (point);
-
+                mark=at position 0.15 with {\arrow[scale=1, >=stealth]{>}},
+                mark=at position 0.45 with {\arrow[scale=1, >=stealth]{>}},
+                mark=at position 0.75 with {\arrow[scale=1, >=stealth]{>}}
+            },
+            postaction={decorate}
+        }
+    ]
+    
+        % --- 1. 基础几何定义 ---
+        \def\R{2.5} 
+        \coordinate (O) at (0,0);
+        \coordinate (N) at (0, \R);   
+        \coordinate (S) at (0, -\R);  
+    
+        % --- 2. 绘制球体 ---
+        
+        % 球体轮廓
+        \draw[sphereoutline, thick] (O) circle (\R);
+        
+        % 纬线 (模拟手绘的透视感，上半球多画几条)
+        \foreach \y in {0.6, 1.2, 1.7, 2.1} {
+            \draw[latpink, thin] ({-sqrt(\R*\R-\y*\y)}, \y) arc (180:360: {sqrt(\R*\R-\y*\y)} and 0.15);
+        }
+        \foreach \y in {-0.6, -1.2, -1.8} {
+            \draw[latpink, thin] ({-sqrt(\R*\R-\y*\y)}, \y) arc (180:360: {sqrt(\R*\R-\y*\y)} and 0.15);
+        }
+        
+        % 赤道
+        \draw[equator, thick] (-\R,0) arc (180:360: \R cm and 0.35cm);
+        \draw[equator, thin, dashed, opacity=0.6] (\R,0) arc (0:180: \R cm and 0.35cm);
+    
+        % --- 3. 绘制闭合路径与区域 ---
+        
+        % 定义闭合形状的控制点
+        % 这是一个位于上半球的不规则闭合曲线
+        \def\closedloop{
+            plot [smooth cycle, tension=0.8] coordinates {
+                (-0.8, 1.0)  % 左侧起点 (n_i)
+                (-0.3, 1.5)  % 上方凹陷处
+                (0.4, 1.7)   % 右上
+                (1.1, 1.2)   % 右侧
+                (0.5, 0.7)   % 右下
+                (-0.4, 0.6)  % 左下
+            }
+        }
+    
+        % A. 区域填充 (使用阴影线 pattern)
+        % pattern color 控制线条颜色
+        \fill[pattern=north west lines, pattern color=textgreen!60] \closedloop;
+        % 也可以加一层淡蓝色背景增加可读性
+        \fill[textgreen, opacity=0.1] \closedloop;
+    
+        % B. 绘制路径线条 (蓝色粗线，带箭头)
+        \draw[pathblue, very thick, flowarrow] \closedloop;
+    
+        % --- 4. 极点 (改为点) ---
+        
+        % 北极点
+        \node[circle, fill=sphereoutline, inner sep=1.5pt] at (N) {};
+        \node[above=2pt] at (N) {$N$};
+        
+        % 南极点
+        \node[circle, fill=sphereoutline, inner sep=1.5pt] at (S) {};
+        \node[below=2pt] at (S) {$S$};
+    
+        % --- 5. 其他标注 ---
+    
+        % 标记点 n_f = n_i
+        \coordinate (Ni) at (-0.9, 1.02); % 对应路径上的点
+        \node[circle, fill=pathblue, inner sep=2.5pt] (PointNi) at (Ni) {};
+        
+        % 标签: n_f = n_i
+        \draw[<-, pathblue, thick] (PointNi) -- ++(-0.8, 0.1) node[left, pathblue, font=\Large] {$n_f = n_i$};
+    
+        % 标签: Ar
+        \node[labelgreen, font=\Huge] (LblAr) at (2.2, 2.2) {$A_\gamma$};
+        % 指向区域中心
+        \draw[->, labelgreen, thick, bend right=20] (LblAr.west) to (0.3, 1.2);
+    
+    
     \end{tikzpicture}
     \caption{The integral close path $\gamma$ in the Bloch sphere}
     \label{fig:IntegralClosePathInBlochSphere}
