@@ -4,30 +4,29 @@
         scale=1.8,
         line cap=round,
         line join=round,
-        % 定义路径上的箭头样式 (多个箭头表示流向)
+        % 箭头样式
         flowarrow/.style={
             decoration={
                 markings,
-                mark=at position 0.15 with {\arrow[scale=1, >=stealth]{>}},
+                mark=at position 0.14 with {\arrow[scale=1, >=stealth]{>}},
                 mark=at position 0.45 with {\arrow[scale=1, >=stealth]{>}},
-                mark=at position 0.75 with {\arrow[scale=1, >=stealth]{>}}
+                mark=at position 0.78 with {\arrow[scale=1, >=stealth]{>}}
             },
             postaction={decorate}
         }
     ]
     
-        % --- 1. 基础几何定义 ---
+        % --- 1. 基础参数 ---
         \def\R{2.5} 
         \coordinate (O) at (0,0);
         \coordinate (N) at (0, \R);   
         \coordinate (S) at (0, -\R);  
     
-        % --- 2. 绘制球体 ---
-        
-        % 球体轮廓
+        % --- 2. 绘制球体背景 ---
+        % 轮廓
         \draw[sphereoutline, thick] (O) circle (\R);
         
-        % 纬线 (模拟手绘的透视感，上半球多画几条)
+        % 纬线
         \foreach \y in {0.6, 1.2, 1.7, 2.1} {
             \draw[latpink, thin] ({-sqrt(\R*\R-\y*\y)}, \y) arc (180:360: {sqrt(\R*\R-\y*\y)} and 0.15);
         }
@@ -39,54 +38,48 @@
         \draw[equator, thick] (-\R,0) arc (180:360: \R cm and 0.35cm);
         \draw[equator, thin, dashed, opacity=0.6] (\R,0) arc (0:180: \R cm and 0.35cm);
     
-        % --- 3. 绘制闭合路径与区域 ---
+        % --- 3. 闭合区域 Ar ---
         
-        % 定义闭合形状的控制点
-        % 这是一个位于上半球的不规则闭合曲线
+        % 【关键修改】预先定义起点坐标，确保点和线重合
+        \coordinate (StartPoint) at (-0.95, 1.0);
+    
+        % 定义路径 (包含起点 StartPoint)
         \def\closedloop{
-            plot [smooth cycle, tension=0.8] coordinates {
-                (-0.8, 1.0)  % 左侧起点 (n_i)
-                (-0.3, 1.5)  % 上方凹陷处
-                (0.4, 1.7)   % 右上
-                (1.1, 1.2)   % 右侧
-                (0.5, 0.7)   % 右下
-                (-0.4, 0.6)  % 左下
+            plot [smooth cycle, tension=0.7] coordinates {
+                (StartPoint)   % 使用定义好的坐标
+                (-0.3, 1.55) 
+                (0.5, 1.65)  
+                (1.2, 1.1)   
+                (0.6, 0.6)   
+                (-0.3, 0.65) 
             }
         }
     
-        % A. 区域填充 (使用阴影线 pattern)
-        % pattern color 控制线条颜色
+        % A. 区域填充 (淡蓝底色 + 阴影线)
+        \fill[textgreen!60, opacity=0.1] \closedloop;
         \fill[pattern=north west lines, pattern color=textgreen!60] \closedloop;
-        % 也可以加一层淡蓝色背景增加可读性
-        \fill[textgreen, opacity=0.1] \closedloop;
     
-        % B. 绘制路径线条 (蓝色粗线，带箭头)
+        % B. 路径轮廓
         \draw[pathblue, very thick, flowarrow] \closedloop;
     
-        % --- 4. 极点 (改为点) ---
-        
-        % 北极点
+        % --- 4. 极点 (实心圆点) ---
         \node[circle, fill=sphereoutline, inner sep=1.5pt] at (N) {};
         \node[above=2pt] at (N) {$N$};
         
-        % 南极点
         \node[circle, fill=sphereoutline, inner sep=1.5pt] at (S) {};
         \node[below=2pt] at (S) {$S$};
     
-        % --- 5. 其他标注 ---
+        % --- 5. 标注 ---
     
-        % 标记点 n_f = n_i
-        \coordinate (Ni) at (-0.9, 1.02); % 对应路径上的点
-        \node[circle, fill=pathblue, inner sep=2.5pt] (PointNi) at (Ni) {};
+        % 标记点 n_f = n_i (直接放置在 StartPoint 上)
+        \node[circle, fill=pathblue, inner sep=2.5pt] (PointNi) at (StartPoint) {};
         
         % 标签: n_f = n_i
         \draw[<-, pathblue, thick] (PointNi) -- ++(-0.8, 0.1) node[left, pathblue, font=\Large] {$n_f = n_i$};
     
         % 标签: Ar
         \node[labelgreen, font=\Huge] (LblAr) at (2.2, 2.2) {$A_\gamma$};
-        % 指向区域中心
         \draw[->, labelgreen, thick, bend right=20] (LblAr.west) to (0.3, 1.2);
-    
     
     \end{tikzpicture}
     \caption{The integral close path $\gamma$ in the Bloch sphere}

@@ -1,0 +1,105 @@
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}[
+        scale=1.5,
+        >={Stealth[length=2mm]},
+        every node/.style={align=center},
+        % 定义颜色
+        myblue/.style={color=cyan!80!blue},
+        myred/.style={color=red!80!orange},
+    ]
+    
+        % --- 1. 绘制球体主体 ---
+        \def\R{2.5} % 球半径
+        
+        % 球的轮廓
+        \draw[thick] (0,0) circle (\R);
+        
+        % 赤道 (辅助视觉)
+        \draw[dashed, opacity=0.4] (-\R,0) arc (180:0:\R cm and 0.6cm);
+        \draw[opacity=0.4] (-\R,0) arc (180:360:\R cm and 0.6cm);
+        
+        % 经线 (辅助视觉 - 垂直线)
+        \draw[dashed, opacity=0.4] (0,-\R) -- (0,\R);
+        % 侧面经线
+        \draw[opacity=0.4] (0,\R) arc (90:-90:1.0cm and \R cm);
+        \draw[dashed, opacity=0.4] (0,\R) arc (90:270:1.0cm and \R cm);
+    
+        % --- 2. 极点标注 ---
+        % 定义北极点坐标名称为 N_point 以便连接
+        \coordinate (N_point) at (0,\R);
+        \fill (N_point) circle (1.5pt) node[above=2mm] (N_label) {$N(\kappa=1)$};
+        \fill (0,-\R) circle (1.5pt) node[below=2mm] (S) {$S$};
+    
+        % --- 3. 蓝色路径 (kappa=0 轨迹) ---
+        % 设定高度
+        \def\h{0.8}
+        \def\w{2.35} % 在该高度的宽度 sqrt(R^2 - h^2) 约等于
+        
+        % 后半部分 (虚线)
+        \draw[myblue, dashed] (-\w,\h) arc (180:0:\w cm and 0.7cm);
+        
+        % 前半部分 (实线)
+        \draw[myblue, thick, decoration={markings, mark=at position 0.3 with {\arrow{>}}}, postaction={decorate}] 
+            (-\w,\h) arc (180:360:\w cm and 0.7cm)
+            coordinate[pos=0.15] (Pn)        % 标签点
+            coordinate[pos=0.65] (P1)        % 微分面元左下角 (位于线上)
+            coordinate[pos=0.73] (P2);       % 微分面元右下角 (位于线上)
+        
+        % 绘制点 ni
+        \fill[myblue] (Pn) circle (1.2pt);
+        
+        % 蓝色标签
+        \node[myblue, left=1cm, align=right] (LabelBlue) at (Pn) {$\vec{n}_i = \vec{n}_f$\\$(\kappa=0)$};
+        \draw[myblue, ->, shorten >=2pt] (LabelBlue) to[bend left=20] (Pn);
+    
+    
+        % --- 4. 红色微分面元 (Patch) 与 红色经线 ---
+        
+        % === 新增：红色经线 (t不变，kappa变化) ===
+        % 连接 P1 到北极点，使用 bend right 模拟经线曲率，并在中间添加箭头
+        \draw[myred, thick, decoration={markings, mark=at position 0.55 with {\arrow{>}}}, postaction={decorate}] 
+            (P1) to[bend right=12] (N_point);
+    
+    
+        % 定义 P4 (左上角): 从 P1 沿着经线向上延伸 (模拟 dkappa 方向)
+        % 稍微调整 P4 的方向以匹配新画的经线的切线方向
+        \coordinate (P4) at ($(P1) + (-0.15, 0.5)$); 
+        
+        % 定义 P3 (右上角): 完成平行四边形 P3 = P2 + (P4 - P1)
+        \coordinate (P3) at ($(P2) + (P4) - (P1)$);
+        
+        % 填充阴影
+        \fill[pattern=north east lines, pattern color=red!50] (P1) -- (P2) -- (P3) -- (P4) -- cycle;
+        
+        % 绘制边框 (作为矢量)
+        \draw[myred, thick, ->] (P1) -- (P2); % dt 方向 (与蓝色路径重合)
+        \draw[myred, thick, ->] (P1) -- (P4); % dkappa 方向 (与红色经线重合)
+        \draw[myred, dashed] (P2) -- (P3);
+        \draw[myred, dashed] (P4) -- (P3);
+    
+        % dS 矢量 (从交点 P1 开始)
+        \draw[myred, thick, ->] (P1) -- ++(-0.5, -0.3) node[below left=1pt, rotate=10] {$d\overleftarrow{S}$};
+    
+        % --- 5. 红色注释标签 ---
+        
+        % 右侧标签 1 (dkappa 方向)
+        \node[myred, right, align=left, anchor=west] (LabelH) at (2.5, 1.5) {
+            $\vec{n}(t, \kappa\!+\!d\kappa) - \vec{n}(t, \kappa)$ \\
+            $= \frac{\partial \vec{n}}{\partial \kappa} d\kappa$
+        };
+        % 箭头指向 P1 -> P4 的边
+        \draw[myred, ->] (LabelH.west) to[bend right=15] ($(P1)!0.5!(P4)$);
+    
+        % 右侧标签 2 (dt 方向)
+        \node[myred, right, align=left, anchor=west] (LabelT) at (2.8, -0.2) {
+            $\vec{n}(t\!+\!dt, \kappa) - \vec{n}(t, \kappa)$ \\
+            $= \frac{\partial \vec{n}}{\partial t} dt$
+        };
+        % 箭头指向 P1 -> P2 的边
+        \draw[myred, ->] (LabelT.west) to[bend right=10] ($(P1)!0.5!(P2)$);
+    
+    \end{tikzpicture}
+    \caption{The differential of the sphere with $\kappa$ and $t$.}
+    \label{fig:sphere_differential}
+\end{figure}
