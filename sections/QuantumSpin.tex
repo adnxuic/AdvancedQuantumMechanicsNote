@@ -518,25 +518,28 @@ invariant under the model modulo $2\pi$ operation.
 
 The Wess-Zumino term is $S_{\mathrm{WZ}}$, which satisfies:
 \begin{equation}
-S = \frac{1}{2} \iint \mathrm{d}\Omega = \frac{1}{2} S_{\mathrm{WZ}} = S_{\mathrm{spin}} \cdot S_{\mathrm{WZ}}.
+S = - \frac{1}{2} \iint \mathrm{d}\Omega = \frac{1}{2} S_{\mathrm{WZ}} = S_{\mathrm{spin}} \cdot S_{\mathrm{WZ}}.
 \end{equation}
 
 It means that:
 \begin{equation}
-S_{\mathrm{WZ}} = -\iint_{Ar} \mathrm{d}\Omega = - \iint_{Ar} \bm{n} \cdot \mathrm{d}\bm{S}
+S_{\mathrm{WZ}} = -\iint_{A_{\gamma}} \mathrm{d}\Omega = - \iint_{A_{\gamma}} \bm{n} \cdot \mathrm{d}\bm{S}
 \end{equation}
 
-where $\bm{n}$ can regrad as the field strength whose charge is 1. 
+where $\bm{n}$ can regrad as the monopole's field strength whose charge is 1. 
 
 \input{Tikz/monopole.tex}
 
-Because $\bm{n}$ locate in the sphere, it can be the function of two parameter $t$ and $k$, which form an orthonormal basis on the sphere. So $\mathrm{d}\bm{S}$ can be written as:
+Because $\bm{n}$ locates on the surface of the sphere, 
+it can be the function of two parameter $t$ and $k$, 
+which form an orthonormal basis on the sphere. 
+So $\mathrm{d}\bm{S}$ can be written as:
 
 \begin{equation}
 \begin{aligned}
-\mathrm{d}\bm{S} &= \mathrm{d}\bm{n}(t, k) \times \mathrm{d}\bm{n}(t, k+\mathrm{d}k) \\
-&= (\frac{\partial \bm{n}}{\partial t} \cdot \mathrm{d}t) \times (\frac{\partial \bm{n}}{\partial k} \cdot \mathrm{d}k) \\
-&= (\frac{\partial \bm{n}}{\partial t} \times \frac{\partial \bm{n}}{\partial k}) \mathrm{d}t \cdot \mathrm{d}k.
+\mathrm{d}\bm{S} &= \mathrm{d}\bm{n}(t + \mathrm{d}t, \kappa) \times \mathrm{d}\bm{n}(t, \kappa+\mathrm{d}\kappa) \\
+&= (\frac{\partial \bm{n}}{\partial t} \cdot \mathrm{d}t) \times (\frac{\partial \bm{n}}{\partial \kappa} \cdot \mathrm{d}\kappa) \\
+&= (\frac{\partial \bm{n}}{\partial t} \times \frac{\partial \bm{n}}{\partial \kappa}) \mathrm{d}t \cdot \mathrm{d}\kappa.
 \end{aligned}
 \end{equation}
 
@@ -545,19 +548,19 @@ Because $\bm{n}$ locate in the sphere, it can be the function of two parameter $
 So the Wess-Zumion term have another expression that is broadly used:
 
 \begin{equation}
-S_{\mathrm{WZ}} = -\int_{0}^{1} \mathrm{d}k \int_{t_i}^{t_f} \mathrm{d}t \cdot \bm{n}(t, k) \cdot \left[ \frac{\partial \bm{n}}{\partial t} \times \frac{\partial \bm{n}}{\partial k} \right]
+S_{\mathrm{WZ}} = -\int_{0}^{1} \mathrm{d}\kappa \int_{t_i}^{t_f} \mathrm{d}t \cdot \bm{n}(t, \kappa) \cdot \left[ \frac{\partial \bm{n}}{\partial t} \times \frac{\partial \bm{n}}{\partial \kappa} \right]
 \end{equation}
 
-where $k$ is an auxiliary parameter, in order to extend $\bm{n}(t)$ to $\bm{n}(t, k)$ with:
+where $\kappa$ is an auxiliary parameter, in order to extend $\bm{n}(t)$ to $\bm{n}(t, \kappa)$ with:
 \begin{equation}
 \begin{cases}
 \bm{n}(t, 0) = \bm{n}(t) \\
 \bm{n}(t, 1) = \bm{n}_0 (\text{North Pole}) \\
-\bm{n}(t_i, k) = \bm{n}(t_f, k) \ (\text{Closed Path})
+\bm{n}(t_i, \kappa) = \bm{n}(t_f, \kappa) \ (\text{Closed Path})
 \end{cases}
 \end{equation}
 
-\subsection{Emergence of U(1) gauge degrees of freedom.}
+\subsection{Emergence of U(1) gauge degrees of freedom}
 
 \begin{equation}
 S = \mathrm{i} \int_{\gamma} \mathrm{d}t \langle \bm{n}(t) | \partial_t | \bm{n}(t) \rangle = \mathrm{i} \int_{\gamma} \mathrm{d}t \, \bm{z}^{\dagger} \cdot \partial_t \bm{z}
@@ -566,21 +569,22 @@ S = \mathrm{i} \int_{\gamma} \mathrm{d}t \langle \bm{n}(t) | \partial_t | \bm{n}
 where, $\bm{z} = \begin{pmatrix} z_1 \\ z_2 \end{pmatrix} = |\bm{n}\rangle$.
 Using the chain rule where $\bm{x} = (x_1, x_2)$ are coordinates on Bloch Sphere:
 \begin{equation}
-S = \mathrm{i} \int_{\gamma} \bm{z}^{\dagger} \frac{\partial \bm{z}}{\partial \bm{x}} \cdot \frac{\mathrm{d}\bm{x}}{\mathrm{d}t} \cdot \mathrm{d}t.
+S = \mathrm{i} \int_{\gamma} \bm{z}^{\dagger} \frac{\partial \bm{z}}{\partial \bm{x}} \cdot \frac{\mathrm{d}\bm{x}}{\mathrm{d}t} \cdot \mathrm{d}t
 \end{equation}
 
-define the Gauge Potential $\bm{\mathcal{A}}$:
+Define the Gauge Potential $\bm{\mathcal{A}}$:
 \begin{equation}
 \bm{\mathcal{A}} = \mathrm{i} \bm{z}^{\dagger} \cdot \frac{\partial \bm{z}}{\partial \bm{x}}
 \end{equation}
 
-so $S$ can be written as
+Therefore, $S$ can be written as:
 \begin{equation}
 S = \int_{\gamma} \bm{\mathcal{A}} \cdot \mathrm{d}\bm{l}
 \end{equation}
-
 where $\mathrm{d}\bm{l} = \frac{\mathrm{d}\bm{x}}{\mathrm{d}t} \cdot \mathrm{d}t = \bm{v} \cdot \mathrm{d}t$ is the differential of path $\gamma$.
-we apply a local gauge transformation where the state $z$ picks up a position-dependent phase $\phi(\bm{x})$.
+
+We apply a local gauge transformation 
+where the state $z$ picks up a position-dependent phase $\phi(\bm{x})$:
 \begin{equation}
 z \rightarrow z \cdot \mathrm{e}^{\mathrm{i}\phi}
 \end{equation}
