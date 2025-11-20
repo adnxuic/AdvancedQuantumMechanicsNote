@@ -409,6 +409,8 @@ S[n(t)] = \int_{t_i}^{t_f} \mathrm{d}t \left[ \langle n(t)| \mathrm{i} \frac{\ma
 
 where, $\hbar=1$.
 
+\input{Tikz/BlochSpherePaths.tex}
+
 \subsection{Geometrical meaning of the Geometric term}
 
 We consider a special system whose Hamiltonian is zero; So the dynamical term vanishes:
@@ -636,7 +638,149 @@ In the previous discussion, we have obtained path integral formalism of a single
 
 \end{theorem}
 
+\chapter{The path integral for many-spin system}
 
+\section{General theory}
+
+Consider a spin system in a $d$-dimensional lattice which is called Heisenberg Model
+\begin{equation}
+\hat{H} = J \cdot \sum_{\langle i,j \rangle} \hat{\bm{S}}_i \cdot \hat{\bm{S}}_j
+\end{equation}
+where $J$ is the exchange coupling and $\hat{\bm{S}}$ are quantum spin operators. The $\langle i,j \rangle$ denotes a summation over nearest-neighbor pairs
+
+\input{Tikz/HeisenbergModel.tex}
+
+The partition function of the spin system is:
+\begin{equation}
+\begin{aligned}
+Z &= \mathrm{Tr} \mathrm{e}^{-\beta \hat{H}} \\
+&= \int \mathrm{d}\bm{n}_0 \cdot \langle \bm{n}_0 | \mathrm{e}^{-\beta \hat{H}} | \bm{n}_0 \rangle
+\end{aligned}
+\end{equation}
+where
+$|\bm{n}_0 \rangle = \bigotimes_{i=1}^N |\bm{n}_0^i \rangle$ is the tensor product of all the state on the lattice.
+
+In the previous chapters, we have seen that we can change real time $t$ to imaginary time $T$:
+\begin{equation}
+\langle n_f | \mathrm{e}^{-\mathrm{i}\hat{H}(t_f-t_i)} | n_i \rangle \xrightarrow{\mathrm{i}(t_f-t_i) \to T} \langle n_f | \mathrm{e}^{-\hat{H}T} | n_i \rangle
+\end{equation}
+In this version, propagator $K$ can be written as (for closed path),
+\begin{equation}
+K = \int D[\bm{n}(t)] \mathrm{e}^{-S_E}
+\end{equation}
+where, $S_E = -\mathrm{i} S S_{WZ} = \mathrm{i} \cdot S \cdot A_\gamma$ for $\hat{H}=0$ and
+$S_E = -\mathrm{i} S \cdot S_{WZ} + \int_{T_i}^{T_f} \langle \bm{n}(t) | \hat{H} | \bm{n}(t) \rangle \mathrm{d}t$ for $\hat{H} \neq 0$.
+
+Because the diagonal element of partition function and propagator have the same mathematical form, so we can use the same method to solve the diagonal elements.
+
+let's make $\Delta \tau$ equal to $\frac{\beta}{N}$ ($N$ is the slice number) whose mean is that $\beta$ play a same role in the diagonal liking $T$ in the propagator. $(t_i \to t_f \Longrightarrow 0 \to \beta)$
+
+But in many-spin system, the identity operator for the entire system is the tensor product of the identities for each site:
+\begin{equation}
+\hat{\mathbb{I}}_{total} = \bigotimes_{i=1} \hat{\mathbb{I}}_i = \int (\prod_{i=1} \mathrm{d}^2 \bm{n}_i) | \vec{n}_1 \dots \vec{n}_N \rangle \langle \vec{n}_1 \dots \vec{n}_N |
+\end{equation}
+So the diagonal can be written as a mathematical form like propagator:
+\begin{equation}
+\langle \bm{n}_0 | \mathrm{e}^{-\beta \hat{H}} | \bm{n}_0 \rangle = \int D(\bm{n}) \cdot \mathrm{e}^{-S_E}
+\end{equation}
+where $D(\bm{n}) = \prod_i \prod_t \mathrm{d}^2 \bm{n}_i^t$. Because diagonal likes the propagator with close path ($\langle \bm{n}_0 | \mathrm{e}^{-\beta \hat{H}} | \bm{n}_0 \rangle$ and not $\langle \bm{n}_i | \mathrm{e}^{-\beta \hat{H}} | \bm{n}_j \rangle$ for $i \neq j$), $S_E$ can be written as:
+\begin{equation}
+S_E = \int_0^\beta \mathrm{d}\tau \langle \bm{n} | \frac{\partial}{\partial \tau} | \bm{n} \rangle + \int_0^\beta \mathrm{d}\tau \langle \bm{n} | \hat{H} | \bm{n} \rangle
+\end{equation}
+
+For the energy term:
+\begin{equation}
+\begin{aligned}
+S_e &= \int_0^\beta \mathrm{d}\tau \langle \bm{n} | \hat{H} | \bm{n} \rangle \\
+&= \int_0^\beta \mathrm{d}\tau J \sum_{\langle i,j \rangle} \langle \bm{n} | \hat{\bm{S}}_i \cdot \hat{\bm{S}}_j (\otimes | \bm{n} \rangle)
+\end{aligned}
+\end{equation}
+Use the formula:
+\begin{equation}
+\langle \bm{n} | \bm{S} | \bm{n} \rangle = S_{spin} \bm{n}
+\end{equation}
+we can get:
+\begin{equation}
+S_e = \int_0^\beta J \sum_{\langle i,j \rangle} S_{spin}^2 \bm{n}_i(\tau) \bm{n}_j(\tau)
+\end{equation}
+
+For the geometric term:
+\begin{equation}
+\begin{aligned}
+S_g &= \int_0^\beta \mathrm{d}\tau (\otimes \langle \bm{n} |) \frac{\partial}{\partial \tau} (\otimes | \bm{n} \rangle) \\
+&= \int_0^\beta \dots (\otimes \langle \bm{n} |) [\otimes (| \bm{n} \rangle + \mathrm{d} | \bm{n} \rangle)] - \otimes | \bm{n} \rangle ]
+\end{aligned}
+\end{equation}
+let's retain the first order term:
+\begin{equation}
+\begin{aligned}
+S_g &= \int_0^\beta \dots (\otimes \langle \bm{n} |) [\otimes | \bm{n} \rangle + \sum_i (\bigotimes_{j \neq i} | \bm{n}_j \rangle) \mathrm{d} | \bm{n}_i \rangle ) - \otimes | \bm{n} \rangle] \\
+&= \sum_i \int_0^\beta (\otimes \langle \bm{n} |) (\otimes_{j \neq i} | \bm{n}_j \rangle) \mathrm{d} \bm{n}_i \rangle
+\end{aligned}
+\end{equation}
+because of $\langle \bm{n}_i | \bm{n}_i \rangle = 1$, so:
+\begin{equation}
+\begin{aligned}
+S_g &= \sum_i \int_0^\beta \langle \bm{n}_i | \mathrm{d} | \bm{n}_i \rangle \\
+&= \sum_i -\mathrm{i} S \cdot S_{WZ} [\bm{n}_i] \\
+&= -\mathrm{i} S \sum_i S_{WZ} [\bm{n}_i]
+\end{aligned}
+\end{equation}
+
+let's go back to real time ($\tau \to \mathrm{i} t$):
+\begin{equation}
+    \begin{aligned}
+-S_E \to \frac{\mathrm{i}}{\hbar} S_M \\
+\Rightarrow S_M &= \hbar S \cdot \sum_i S_{WZ}[\bm{n}_i] - S^2 \int_0^\beta \mathrm{d}t \cdot \sum_{\langle \bm{n}_i, \bm{n}_j \rangle} J \bm{n}_i \cdot \bm{n}_j \\
+\frac{\mathrm{i} S_M}{\hbar} &= S \{ \sum_i S_{WZ} [\bm{n}_i] \} - \frac{S^2}{\hbar} \{ \int_0^\beta \mathrm{d}t \sum_{\langle \bm{n}_i, \bm{n}_j \rangle} J \cdot \bm{n}_i \cdot \bm{n}_j \}
+\end{aligned}
+\end{equation}
+
+So $\{ \sum_i S_{WZ} [\bm{n}_i] \}$ and $\{ \int_0^\beta \mathrm{d}t \sum_{\langle i,j \rangle} J \cdot \bm{n}_i \cdot \bm{n}_j \}$ can be regard as the phase term of action ($\mathrm{e}^{\frac{\mathrm{i}}{\hbar} \theta}$). Therefore, $S$ and $\frac{S^2}{\hbar}$ play the role of $\hbar$ in simple action.
+Here, if $S$ is very large, we called it Large-$S$ limit ($\hbar \ll 1$, so $\frac{1}{\hbar} \approx S \gg 1$) This is a semi-classical limit.
+
+\section{Quantum Ferromagnetism}
+
+let's consider a ferromagnetism system whose $J$ equal to $-|J|$. So the action is:
+\begin{equation}
+S_M = S \sum_i S_{WZ} [\bm{n}_i] + |J|S^2 \sum_{\langle i,j \rangle} \int_0^\beta \mathrm{d}t \bm{n}_i \cdot \bm{n}_j
+\end{equation}
+because $|\bm{n}|^2 = 1$, so we can rewrite the term $\bm{n}_i \cdot \bm{n}_j$ as:
+\begin{equation}
+\begin{aligned}
+-\bm{n}_i \cdot \bm{n}_j &= \frac{1}{2} (|\bm{n}_i - \bm{n}_j|^2) - 1 \\
+&= \frac{1}{2} (\bm{n}_i - \bm{n}_j)^2 - 1
+\end{aligned}
+\end{equation}
+So the energy term is
+\begin{equation}
+S_e = - \frac{|J|S^2}{2} \sum_{\langle i,j \rangle} \int_0^\beta \mathrm{d}t (\bm{n}_i - \bm{n}_j)^2 + \frac{|J|S^2}{2} \sum_{\langle i,j \rangle} \int_0^\beta \mathrm{d}t
+\end{equation}
+The second term of $S_e$ is the constant term (global phase), so we can drop it. and $S_M$ can be written as:
+\begin{equation}
+S_M = S \sum_i S_{WZ} [\bm{n}_i] - \frac{|J|S^2}{2} \sum_{\langle i,j \rangle} \int_0^\beta \mathrm{d}t (\bm{n}_i - \bm{n}_j)^2
+\end{equation}
+
+Next, we take the continuum limit where the lattice sums become integrals
+\begin{equation}
+\sum_i \to \int \frac{\mathrm{d}^d x}{a_0^d}
+\end{equation}
+where $a_0$ is the lattice spacing and finite differences become gradients:
+\begin{equation}
+\begin{aligned}
+\sum_j (\bm{n}_i - \bm{n}_j)^2 &= \dots \\
+&= a_0^2 (\nabla \bm{n})^2
+\end{aligned}
+\end{equation}
+where $\nabla \bm{n} = (\frac{\partial \bm{n}}{\partial x}, \dots)$ and not $\nabla \bm{n} = (\frac{\partial n_x}{\partial x}, \quad )$
+
+So the continuum action is:
+\begin{equation}
+\begin{aligned}
+S_M &= \int \frac{\mathrm{d}^d x}{a_0^d} S \cdot S_{WZ} [\bm{n}] - \frac{|J|S^2}{2} \int \frac{\mathrm{d}^d x}{a_0^d} \mathrm{d}t \, a_0^2 (\nabla \bm{n})^2 \\
+&= \frac{S}{a_0^d} \int \mathrm{d}^d x S_{WZ}[\bm{n}] - \frac{|J|S^2}{2a_0^{d-2}} \int \mathrm{d}^d x \mathrm{d}t (\nabla \bm{n})^2
+\end{aligned}
+\end{equation}
 
 \begin{center}
 \input{Tikz/SpinWave.tex}

@@ -1,0 +1,101 @@
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}[
+        >={Stealth[round]}, % 使用圆润的箭头风格
+        font=\sffamily,
+        line cap=round,
+        line join=round,
+        scale=1
+    ]
+
+        % --- 定义参数 ---
+        \def\R{2} % 球半径
+        \def\tilt{15} % 视觉倾角
+
+        % --- 颜色定义 (参考原图) ---
+        \definecolor{sketchYellow}{RGB}{200, 180, 50} % 球面经纬线的颜色
+        \definecolor{sketchBlue}{RGB}{30, 100, 220}   % 路径颜色
+        \definecolor{sketchRed}{RGB}{220, 50, 50}     % ni 点颜色
+        \definecolor{sketchOrange}{RGB}{230, 160, 30} % nf 点颜色
+
+        % --- 1. 绘制球体背景 ---
+        % 填充一个淡淡的背景色以增加立体感
+        \shade[ball color=white, opacity=0.15] (0,0) circle (\R);
+        
+        % 绘制球体轮廓
+        \draw[sketchYellow, thick] (0,0) circle (\R);
+
+        % --- 2. 绘制经纬线 (模拟3D透视) ---
+        % 赤道 (前面实线，后面虚线)
+        \draw[sketchYellow, dashed] (\R,0) arc (0:180:{\R} and {0.3*\R});
+        \draw[sketchYellow, thick] (\R,0) arc (0:-180:{\R} and {0.3*\R});
+
+        % 经线 (纵向椭圆)
+        % 能够看到的一条主经线
+        \draw[sketchYellow, dashed] (0,\R) arc (90:270:{0.4*\R} and {\R});
+        \draw[sketchYellow, thick] (0,\R) arc (90:-90:{0.4*\R} and {\R});
+
+        % --- 3. 定义关键点坐标 ---
+        % 使用极坐标思想估算手绘图中的位置
+        % ni 在右上前方
+        \coordinate (Ni) at (0.6*\R, 0.5*\R);
+        % nf 在左下前方
+        \coordinate (Nf) at (-0.5*\R, -0.4*\R);
+        % 北极和南极
+        \coordinate (N) at (0, \R);
+        \coordinate (S) at (0, -\R);
+
+        % --- 4. 绘制连接路径 (Path Integrals) ---
+        % 使用装饰器在路径中间添加方向箭头
+        \begin{scope}[decoration={markings, mark=at position 0.55 with {\arrow{>}}}]
+            
+            % 路径 1: 弯曲度较小的直接路径，稍微增加一点扭曲
+            \draw[sketchBlue, thick, postaction={decorate}] (Ni) .. controls ($(Ni)!0.3!(Nf) + (0.2,0.1)$) and ($(Ni)!0.7!(Nf) + (-0.1,-0.2)$) .. (Nf);
+            
+            % 路径 2: 向上弯曲的大弧线，增加一个S形扭曲
+            \draw[sketchBlue, thick, postaction={decorate}] (Ni) .. controls ($(Ni) + (-1, 1)$) and ($(Nf) + (0.5, 1.5)$) .. (Nf);
+            
+            % 路径 3: 向下弯曲的弧线，增加波浪感
+            \draw[sketchBlue, thick, postaction={decorate}] (Ni) .. controls ($(Ni) + (0.5, -1)$) and ($(Nf) + (1, -0.5)$) .. (Nf);
+            
+            % 路径 4: 稍微复杂的S形路径 (模拟随机路径)
+            \draw[sketchBlue, thick, postaction={decorate}] (Ni) .. controls ($(Ni) + (-0.5, 0.5)$) and ($(Ni)!0.5!(Nf) + (0.8, -0.8)$) .. (Nf);
+
+            % 额外增加一条路径，使路径束看起来更丰富
+            \draw[sketchBlue, thick, postaction={decorate}] (Ni) .. controls ($(Ni) + (0.2, -0.8)$) and ($(Nf) + (-0.5, 0.3)$) .. (Nf);
+            
+        \end{scope}
+
+        % --- 5. 绘制点和向量 ---
+        
+        % --- 北极/南极 ---
+        \fill[sketchRed] (N) circle (1.5pt) node[above, text=sketchRed] {$N$};
+        \fill[sketchRed] (S) circle (1.5pt) node[below, text=sketchRed] {$S$};
+
+        % --- ni 点 (红色) ---
+        \fill[sketchRed] (Ni) circle (2.5pt);
+        % 法向量 ni (从球心指向该点的方向)
+        % 修复：使用简单的标量乘法延伸向量，避免嵌套 calc 语法错误
+        \draw[->, sketchRed, very thick] (Ni) -- ($ 1.4*(Ni) $) node[above right] {$\vec{n}_i$};
+
+        % --- nf 点 (黄色/橙色) ---
+        \fill[sketchOrange] (Nf) circle (2.5pt);
+        % 法向量 nf
+        % 修复：同上
+        \draw[->, sketchOrange, very thick] (Nf) -- ($ 1.4*(Nf) $) node[below left] {$\vec{n}_f$};
+
+        % --- 6. 文字标注 ---
+        
+        % 主标题
+        \node[below=0.8cm of S, font=\Large\bfseries, fill=white, inner sep=2pt] {Bloch sphere};
+
+        % 路径说明文字
+        \node[right=3cm of Ni, align=left, text=sketchBlue, anchor=west] (LabelPath) {all paths connecting $\vec{n}_i$ and $\vec{n}_f$};
+        
+        % 从文字指向路径群的箭头
+        \draw[->, sketchBlue, thick] (LabelPath.west) to[bend right=20] ($(Ni)!0.5!(Nf) + (0.5, 0.2)$);
+
+    \end{tikzpicture}
+    \caption{The paths connecting $\vec{n}_i$ and $\vec{n}_f$ in the Bloch sphere}
+    \label{fig:BlochSpherePaths}
+\end{figure}

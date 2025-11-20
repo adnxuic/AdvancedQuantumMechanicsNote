@@ -1,0 +1,112 @@
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}[
+        % Define the perspective coordinate system
+        % x: points to the right and slightly down
+        % y: points to the right and into the background (up)
+        % z: points vertically up (Time)
+        x={(0.9cm, -0.15cm)}, 
+        y={(0.5cm, 0.5cm)}, 
+        z={(0cm, 1cm)},
+        scale=2,
+        >=Stealth, % Arrow tip style
+        axis_style/.style={thick, ->, >=Stealth},
+        grid_style/.style={thin, gray!60},
+        spin_style/.style={thick, color=red!80!black, ->, >=Latex},
+        site_style/.style={circle, fill=blue!20, draw=blue!80!black, inner sep=1.5pt, thin}
+    ]
+
+        % --- Grid Configuration ---
+        \def\Nx{4} % Number of cells in X direction
+        \def\Ny{4} % Number of cells in Y direction
+        
+        % Define central site coordinates early for comparison
+        \def\ix{2}
+        \def\iy{2}
+        
+        % --- Draw the 2D Spatial Grid ---
+        % Drawing lines along X direction
+        \foreach \y in {0,...,\Ny} {
+            \draw[grid_style] (0,\y,0) -- (\Nx,\y,0);
+        }
+        % Drawing lines along Y direction
+        \foreach \x in {0,...,\Nx} {
+            \draw[grid_style] (\x,0,0) -- (\x,\Ny,0);
+        }
+
+        % --- Draw Axes (referencing the sketch) ---
+        % Origin for axes slightly offset to the left
+        \coordinate (O) at (-1, 1, 0); 
+        
+        % Time Axis - Removed Chinese label
+        \draw[axis_style] (O) -- ++(0,0,1.5) node[above, align=center] {TIME};
+        
+        % Space Axes
+        \draw[axis_style] (O) -- ++(0.8,0,0) node[right, pos=1.0] {};
+        \draw[axis_style] (O) -- ++(0,0.8,0) node[above right, pos=1.0] {};
+        % Label for Space plane - Removed Chinese label
+        \node[rotate=15] at ($(O) + (0.6, 0.4, 0)$) {SPACE};
+
+        % --- Draw Spins and Sites ---
+        % We place spins on the grid nodes.
+        
+        \foreach \x in {0,...,\Nx} {
+            \foreach \y in {0,...,\Ny} {
+                
+                % Define coordinates for the site
+                \coordinate (Site-\x-\y) at (\x,\y,0);
+                
+                % Check if this is the central site 'i'
+                \pgfmathparse{and(\x==\ix, \y==\iy)}
+                \ifnum\pgfmathresult=1
+                    % This is site 'i', we will draw its special node and spin later.
+                    % Drawing a standard node here might be covered later, which is fine.
+                    \node[site_style] at (Site-\x-\y) {};
+                \else
+                    % This is NOT site 'i', draw standard site and spin
+                    \node[site_style] at (Site-\x-\y) {};
+                    
+                    % Determine spin direction (pseudo-random or alternating for visual interest)
+                    % Simple Antiferromagnetic-like pattern for illustration
+                    \pgfmathparse{int(mod(\x+\y,2))}
+                    \ifnum\pgfmathresult=0
+                        \draw[spin_style] (Site-\x-\y) -- ++(0,0,0.4); % Spin Up
+                    \else
+                        \draw[spin_style] (Site-\x-\y) -- ++(0,0,-0.4); % Spin Down
+                    \fi
+                \fi
+            }
+        }
+
+        % --- Highlight Site 'i' (as in the sketch) ---
+        \coordinate (SiteI) at (\ix,\iy,0);
+        
+        % Mark all 4 neighbors as 'j'
+        \foreach \dx/\dy in {1/0, -1/0, 0/1, 0/-1} {
+            \pgfmathsetmacro{\jx}{\ix+\dx}
+            \pgfmathsetmacro{\jy}{\iy+\dy}
+            \coordinate (SiteJ) at (\jx,\jy,0);
+            
+            % Draw interaction line/bond highlight (thicker and blue)
+            \draw[ultra thick, blue!50, opacity=0.6] (SiteI) -- (SiteJ);
+            
+            % Label neighbor 'j'
+            % We shift the label slightly based on position to avoid overlapping the spin arrow
+            \node[anchor=south west, font=\footnotesize, text=blue!80!black, inner sep=1pt] at ($(SiteJ)+(0.1,0.1,0)$) {$j$};
+        }
+        
+        % Re-draw central site i to ensure it's on top of the bond lines
+        % This is the ONLY spin drawn for site i now.
+        \node[circle, fill=yellow!80!orange, draw=orange!80!black, inner sep=2.5pt, thick] (NodeI) at (SiteI) {};
+        \draw[spin_style, ultra thick, red] (SiteI) -- ++(0,0,0.6); % Make the spin at i prominent
+        
+        % Label 'i'
+        \node[above right=0.1cm and 0.1cm, font=\bfseries] at (NodeI) {$i$};
+        
+        % Label interaction term J_ij on one of the bonds (e.g., the right one)
+        \node[below, font=\tiny, blue!60!black] at ($(SiteI)!0.5!(\ix+1,\iy,0)$) {$J_{ij}$};
+
+    \end{tikzpicture}
+    \caption{The Heisenberg Model on a 2D square lattice}
+    \label{fig:HeisenbergModel}
+\end{figure}
