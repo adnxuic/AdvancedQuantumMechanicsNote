@@ -398,12 +398,12 @@ I &= \left( \frac{1}{2\pi\hbar} \right)^N \cdot (2\pi)^{\frac{N}{2}} \cdot \left
 
 So we can get the integration without $p$:
 \begin{equation}
-\begin{aligned}
-\mathrm{i}G &= \left( \frac{m}{\mathrm{i} 2\pi\hbar\Delta t} \right)^{\frac{N}{2}} 
-\int \mathcal{D}x \exp \left[ \frac{\mathrm{i}}{\hbar} \sum_{l=1}^N  \frac{m}{2} (\frac{x_l-x_{l-1}}{\Delta t})^2 \Delta t - V(x_l) \Delta t \right] \\
-&= \left( \frac{m}{\mathrm{i} 2\pi\hbar\Delta t} \right)^{\frac{N}{2}} \int \mathcal{D}x 
-\exp \left[ \frac{\mathrm{i}}{\hbar} \int_{t_0}^{t} \mathrm{d} \tau \, \mathcal{L}(x, \dot{x}) \right]
-\end{aligned}
+    \begin{aligned}
+    \mathrm{i}G &= \left( \frac{m}{\mathrm{i} 2\pi\hbar\Delta t} \right)^{\frac{N}{2}} 
+    \int \mathcal{D}x \exp \left[ \frac{\mathrm{i}}{\hbar} \sum_{l=1}^N  \frac{m}{2} (\frac{x_l-x_{l-1}}{\Delta t})^2 \Delta t - V(x_l) \Delta t \right] \\
+    &= \left( \frac{m}{\mathrm{i} 2\pi\hbar\Delta t} \right)^{\frac{N}{2}} \int \mathcal{D}x 
+    \exp \left[ \frac{\mathrm{i}}{\hbar} \int_{t_0}^{t} \mathrm{d} \tau \, \mathcal{L}(x, \dot{x}) \right]
+    \end{aligned}
 \end{equation}
 
 So the path-integral is proportional to :
@@ -541,7 +541,11 @@ From the Path-integral in real space-time, we can get some information about Phy
 We have got the propagator $\mathrm{i}G$ for a partide to travel from an spacetime point $(x_0, t_0)$ to a final spacetime point $(x_f, t_f)$, 
 with which is given by the Feynman path integral:
 \begin{equation}
-\mathrm{i}G = K(x_f, t_f; x_0, t_0) = \int \mathcal{D}[x(t)] \mathrm{e}^{\frac{\mathrm{i}}{\hbar} S[x(t)]}
+    \label{eq:path-integral-without-p}
+    \colorboxed{
+    \mathrm{i}G = K(x_f, t_f; x_0, t_0) 
+    =\left( \frac{m}{\mathrm{i} 2\pi\hbar\Delta t} \right)^{\frac{N}{2}} \int \mathcal{D}[x(t)] \mathrm{e}^{\frac{\mathrm{i}}{\hbar} S[x(t)]}
+    }
 \end{equation}
 where:
 \begin{itemize}
@@ -557,27 +561,29 @@ Consider a integral:
 \begin{equation}
 I = \int \mathrm{e}^{\mathrm{i} f(x)/a} \mathrm{d}x
 \end{equation}
-where $a$ is a small parameter. and the function $f(x)$ is real-valued and regular.
+where $a$ is a small parameter and $f(x)$ is a real-valued and regular function.
 
-Our objective is to understant the physical picture of the startiomong phuse approximation for the propagutor ph path integral through this one dimensional integral stortionary phase approximation.
+Our objective is to understant the physical picture of the stationary phase approximation for the propagator path integral through this one dimensional integral stationary phase approximation.
 
-let's further define a new notation $\Theta(x)$ by:
+Let's further define a new notation $\Theta(x)$ by:
 \begin{equation}
 \Theta(x) = \frac{1}{a} f(x)
 \end{equation}
-$\Theta(x)$ is a phase angle, so
+$\Theta(x)$ is a phase angle, so:
 \begin{equation}
 I = \int \mathrm{e}^{\mathrm{i}\Theta(x)} \mathrm{d}x
 \end{equation}
-This integral can be " physically regarded as an interference experiment. 
+This integral can be physically regarded as an interference experiment. 
+
 Because each source at $x$ contributes a phase factor $\mathrm{e}^{\mathrm{i}\Theta(x)}$, 
 so the total integral $I$ is the result of adding up all these infinite tiny vectors.
 
-In order to compute the integral $I$, what we really need to do is to find "dominant contribution" to $I$.
+In order to compute the integral $I$, 
+what we really need to do is to find the "dominant contribution" to $I$.
 
 Firstly, let's pick up a point $x_0$ and evaluate the integral near $x_0$. 
 The vicinity of $x_0$ is given by $x \in (x_0-\frac{\Delta x}{2}, x_0+\frac{\Delta x}{2})$. 
-Within this small domain, we may linearize $\Theta(x)$ by:
+Within this small domain, we may linearize $\Theta(x)$ by a Taylor series:
 \begin{equation}
 \begin{aligned}
 \Theta(x) &\approx \Theta(x_0) + \left.\frac{\mathrm{d}\Theta}{\mathrm{d}x}\right|_{x=x_0} (x-x_0) \\
@@ -595,26 +601,28 @@ I_{x_0}^{\Delta x}(x_0) &= \int_{x_0-\frac{\Delta x}{2}}^{x_0+\frac{\Delta x}{2}
 we let $\Theta(x_0)=\Theta_0$ and $f'(x_0)=f'_0$, so:
 \begin{equation}
 \begin{aligned}
-I_{(x_0)}^{\Delta x} &\sim \mathrm{e}^{\mathrm{i}\Theta_0} \frac{a}{\mathrm{i}f'_0} \cdot \left. \mathrm{e}^{\frac{\mathrm{i}f'_0}{a}(x-x_0)} \right|_{x_0-\frac{\Delta x}{2}}^{x_0+\frac{\Delta x}{2}} \\
+I_{(x_0)}^{\Delta x} &\approx \mathrm{e}^{\mathrm{i}\Theta_0} \frac{a}{\mathrm{i}f'_0} \cdot \left. \mathrm{e}^{\frac{\mathrm{i}f'_0}{a}(x-x_0)} \right|_{x_0-\frac{\Delta x}{2}}^{x_0+\frac{\Delta x}{2}} \\
 &= \mathrm{e}^{\mathrm{i}\Theta_0} \frac{2a}{\mathrm{i}f'_0} \sin \frac{f'_0 \Delta x}{2a}.
 \end{aligned}
 \end{equation}
-let $\alpha = \frac{f'_0 \Delta x}{2a}$, so:
+
+Let $\alpha = \frac{f'_0 \Delta x}{2a}$, so:
 \begin{equation}
 I^{\Delta x}(x_0) \approx \mathrm{e}^{\mathrm{i}\Theta_0} \Delta x \cdot \frac{\sin \alpha}{\alpha}
 \end{equation}
 
-Because $a$ is a small parameter very small but nonzero parameter (in quantum mechanics, it corresponds to $\hbar$ being a very small but nonzero number),
+Because $a$ is a very small but nonzero parameter (in quantum mechanics, it corresponds to $\hbar$ being a very small but nonzero number),
 if $f'_0=0$, $\alpha$ is strictly equal to 0 and it is not infinitely large near the zero point. 
 So if we consider the case $f'(x_0)=0$, we get:
 \begin{equation}
 I^{\Delta x}(x_0) = \mathrm{e}^{\mathrm{i}\Theta(x_0)} \cdot \Delta x
 \end{equation}
-Physically, the result means that all U(1) phase in the vicinity of $x_0$ are completely the same. It's a perfect phase-coherence. The superposition of constant phases leads to linearly enhanced amplitude "$\Delta x$".
+Physically, the result means that all U(1) phase in the vicinity of $x_0$ are completely the same. 
+It's a perfect phase-coherence. The superposition of constant phases leads to linearly enhanced amplitude "$\Delta x$".
 
 Next, let us consider $f'(x_0) \neq 0$. Because $a$ is a very small parameter, $\alpha = \frac{f'_0 \Delta x}{2a}$ is very large. So:
 \begin{equation}
-\frac{\sin\alpha}{\alpha} \rightarrow 0, \implies I^{\Delta x}(x_0) \approx 0
+\frac{\sin\alpha}{\alpha} \rightarrow 0 \implies I^{\Delta x}(x_0) \approx 0
 \end{equation}
 Physically, the summation of all U(1) phases in the vicinity of $x_0$ leads to destructive interference. 
 The parameter $a$ is smaller, the destructive interference is more severe.
@@ -645,20 +653,29 @@ the contributions of $\mathrm{e}^{\frac{\mathrm{i}}{2a} f''(x_0^i)(x-x_0^i)^2}$ 
 
 So in the above Gaussian integral near $x_0$, we can extend the integral bounds to infinity:
 \begin{equation}
-\begin{aligned}
-I &\approx \sum_{\{x_0^i\}} \mathrm{e}^{\frac{\mathrm{i}f(x_0^i)}{a}} \int_{-\infty}^{\infty} \mathrm{d}x \cdot \mathrm{e}^{\frac{\mathrm{i}}{2a} f''(x_0^i)(x-x_0^i)^2} \\
-&= \sum_{\{x_0^i\}} \mathrm{e}^{\frac{\mathrm{i}f(x_0^i)}{a}} \sqrt{\frac{2\pi a \mathrm{i}}{f''(x_0^i)}}
-\end{aligned}
+    \colorboxed{
+    \begin{aligned}
+    I &\approx \sum_{\{x_0^i\}} \mathrm{e}^{\frac{\mathrm{i}f(x_0^i)}{a}} \int_{-\infty}^{\infty} \mathrm{d}x \cdot \mathrm{e}^{\frac{\mathrm{i}}{2a} f''(x_0^i)(x-x_0^i)^2} \\
+    &= \sum_{\{x_0^i\}} \mathrm{e}^{\frac{\mathrm{i}f(x_0^i)}{a}} \sqrt{\frac{2\pi a \mathrm{i}}{f''(x_0^i)}}
+    \end{aligned}
+    }
+\end{equation}
+
+In the above integral, we use the Fresnel integral (Proof see Appendix \ref{appendix:fresnel}):
+\begin{equation}
+    \colorboxed{
+        \int_{-\infty}^{\infty} \me^{\mi x^2} \md x = \sqrt{\frac{\mpi}{2}}(1+\mi) = \sqrt{\mpi} \me^{\mi\mpi/4}
+    }
 \end{equation}
 
 \section{Semiclassical approximation of Feynman path integrals}
 We have discussed that if $\hbar$ tends to zero, then the quantum system will transitions to the classical system. 
 We only need to treat $f(x)$ as $S[x(t)]$ and the parameter $a$ as $\hbar$, then we can see the reason based on the discussion in the previous section. 
 If $\hbar$ is zero, $I^{\Delta x}(x_0)$ equal to zero strictly for $x \neq x_0$ and is nonzero only at $x=x_0$. 
-So we only need to consider the classical. path. with $\delta S=0$ and not need to consider the quantum fluctuation near the classical path. 
+So we only need to consider the classical path with $\delta S=0$ and not need to consider the quantum fluctuation near the classical path. 
 But if $\hbar$ is a very small but nonzero number, we need to consider the quantum fluctuation near the classical path. 
 In other word, in classical mechanics, 
-$\hbar=0$, $I^{\Delta x} \propto \frac{\sin\alpha}{\alpha}$ is equal to zero in $(x_0-\frac{\Delta x}{2}, x_0) \cup (x_0, x_0+\frac{\Delta x}{2})$, 
+$\hbar=0$, $I^{\Delta x} \propto \frac{\sin\alpha}{\alpha}$ equal to zero in $(x_0-\frac{\Delta x}{2}, x_0) \cup (x_0, x_0+\frac{\Delta x}{2})$, 
 because $\alpha = \frac{f'_0 \Delta x}{2a}$ tends to infinity no matter how small the radius of this deleted neighbourhood is. 
 But in quantum mechanics, $\hbar \sim 10^{-34} \mathrm{J}\cdot\mathrm{s}$, 
 $I$ is not equal to zero in the neighbourhood whose radius length matches to the order of magnitude of $\hbar$. 
@@ -668,7 +685,9 @@ The Feynman path integral:
 \begin{equation}
 K(x_f, t_f; x_0, t_0) \propto \int \mathcal{D}[x(t)] \cdot \mathrm{e}^{\frac{\mathrm{i}}{\hbar}S[x(t)]}
 \end{equation}
-it can be regarded as path integral version of $\int \mathrm{d}x \mathrm{e}^{\frac{\mathrm{i}}{a}f(x)}$. $f(x)$ is replaced by Classical action $S_c$ when $\delta S_c=0$. Liking the previous section, we consider. the quadratic approximation in the vicinity of classical. path:
+it can be regarded as path integral version of $\int \mathrm{d}x \mathrm{e}^{\frac{\mathrm{i}}{a}f(x)}$. 
+$f(x)$ is replaced by Classical action $S_c$ when $\delta S_c=0$. 
+Liking the previous section, we consider the quadratic approximation in the vicinity of classical path:
 \begin{equation}
 \begin{aligned}
 S &= S_c + \delta S + \frac{1}{2} \delta^2 S \\
@@ -676,7 +695,7 @@ S &= S_c + \delta S + \frac{1}{2} \delta^2 S \\
 \end{aligned}
 \end{equation}
 
-Now, we consider can decompose the path near classical path into the classical path $x_c(t)$ plus a quantum fluctuation $y(t)$ around it:
+Now, we can decompose the path near classical path into the classical path $x_c(t)$ plus a quantum fluctuation $y(t)$ around it:
 \begin{equation}
 x(t) = x_c(t) + y(t)
 \end{equation}
@@ -711,23 +730,26 @@ it's second variation is:
 \begin{equation}
 \delta^2 S = \int \mathrm{d}t \cdot \left(\frac{1}{2}m\dot{y}^2 - \frac{1}{2}V''(x_c) \cdot y^2\right)
 \end{equation}
-We substitute the approximated action back into the path integral. expression:
+We substitute the approximated action back into the path integral expression:
 \begin{equation}
 \begin{aligned}
-K &\approx \int \mathcal{D}[x(t)] \exp\left\{\frac{\mathrm{i}}{\hbar}\left[S_c + \frac{1}{2}\delta^2 S\right]\right\} \\
+K &\propto \int \mathcal{D}[x(t)] \exp\left\{\frac{\mathrm{i}}{\hbar}\left[S_c + \frac{1}{2}\delta^2 S\right]\right\} \\
 &= \int \mathcal{D}[x(t)] \mathrm{e}^{\frac{\mathrm{i}}{\hbar}S_c} \exp\left[\int \mathrm{d}t \left(\frac{1}{2}m\dot{y}^2 - \frac{1}{2}V''(x_c)y^2\right)\right]
 \end{aligned}
 \end{equation}
-Now, we need to change the integration variable from an integral over all paths $x(t)$ to an integral over all fluctuations $y(t)$. Since $x_c(t)$ is a fixed. path, the path measure:
+Now, we need to change the integration variable from an integral over all paths $x(t)$ to an integral over all fluctuations $y(t)$. 
+Since $x_c(t)$ is a fixed classical path, the path measure is:
 \begin{equation}
 \mathcal{D}[x(t)] = \mathcal{D}[x_c(t)+y(t)] = \mathcal{D}[y(t)]
 \end{equation}
 and $S_c$ is a constant, it can be factored out of integral:
 \begin{equation}
-K \approx \mathrm{e}^{\frac{\mathrm{i}}{\hbar}S_c} \cdot \int \mathcal{D}[y(t)] \cdot \mathrm{e}^{\frac{\mathrm{i}}{2\hbar} \int \mathrm{d}t \left(\frac{1}{2}m\dot{y}^2 - \frac{1}{2}V''(x_c)y^2\right)}
-\end{equation}
-\begin{equation}
-= F(t_f, t_0) \cdot \mathrm{e}^{\frac{\mathrm{i}}{\hbar}S_c}.
+    \colorboxed{
+    \begin{aligned}
+    K &\propto \mathrm{e}^{\frac{\mathrm{i}}{\hbar}S_c} \cdot \int \mathcal{D}[y(t)] \cdot \mathrm{e}^{\frac{\mathrm{i}}{2\hbar} \int \mathrm{d}t \left(\frac{1}{2}m\dot{y}^2 - \frac{1}{2}V''(x_c)y^2\right)} \\
+    &= F(t_f, t_0) \cdot \mathrm{e}^{\frac{\mathrm{i}}{\hbar}S_c}.
+    \end{aligned}
+    }
 \end{equation}
 where:
 \begin{enumerate}
@@ -766,7 +788,7 @@ Now let's see a example: one dimensional free particle.
     x_c(t_f) = x_f
     \end{cases}
     \end{equation}
-    to determin a and b:
+    to determine $a$ and $b$:
     \begin{equation}
     \begin{cases}
     a = \frac{x_f - x_0}{t_f - t_0} \\
@@ -822,11 +844,13 @@ Now let's see a example: one dimensional free particle.
     So we can get the complete propagator of free partide:
     \begin{equation}
     \begin{aligned}
-    K &= J \cdot \left(\frac{2\pi\mathrm{i}\hbar\Delta t}{m}\right)^{N/2} \cdot \left(\frac{m}{2\pi\mathrm{i}N\Delta t}\right)^{1/2} \cdot \mathrm{e}^{\frac{\mathrm{i}S_c}{\hbar}} \\
+    K &= J \cdot \left(\frac{2\pi\mathrm{i}\hbar\Delta t}{m}\right)^{N/2} \cdot \left(\frac{m}{2\pi\mathrm{i} \hbar N\Delta t}\right)^{1/2} \cdot \mathrm{e}^{\frac{\mathrm{i}S_c}{\hbar}} \\
     &= \left(\frac{m}{2\pi\mathrm{i}\hbar\Delta t}\right)^{N/2} \cdot \left(\frac{2\pi\mathrm{i}\hbar\Delta t}{m}\right)^{N/2} \cdot \left(\frac{m}{2\pi\mathrm{i}(t_f-t_0)}\right)^{1/2} \cdot \mathrm{e}^{\frac{\mathrm{i}S_c}{\hbar}} \\
-    &= \left(\frac{m}{2\pi\mathrm{i}(t_f-t_0)}\right)^{1/2} \cdot \mathrm{e}^{\frac{\mathrm{i}S_c}{\hbar}}
+    &= \left(\frac{m}{2\pi\mathrm{i} \hbar (t_f-t_0)}\right)^{1/2} \cdot \mathrm{e}^{\frac{\mathrm{i}S_c}{\hbar}}
     \end{aligned}
     \end{equation}
-    where, $S_c = \frac{m}{2} \frac{(x_f-x_0)^2}{t_f-t_0}$.
+    where, $S_c = \frac{m}{2} \frac{(x_f-x_0)^2}{t_f-t_0}$ 
+    and $J = \left( \frac{m}{\mathrm{i} 2\pi\hbar\Delta t} \right)^{\frac{N}{2}}$
+    is the coefficient in front of the path integral \ref{eq:path-integral-without-p}.
 
 \end{example}

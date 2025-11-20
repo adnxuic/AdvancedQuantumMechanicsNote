@@ -451,11 +451,13 @@ We can rewrite the function $1-\cos\theta(\varphi)$ as a integral:
 
 So the action can be written as a area integral:
 \begin{equation}
-\begin{aligned}
-S[n(t)] &= -\frac{1}{2} \int_{\varphi_i}^{\varphi_f} \mathrm{d}\varphi \int_0^{\theta(\varphi)} \sin\theta \mathrm{d}\theta \\
-&= -\frac{1}{2} \iint_{\partial A_{\gamma}} \mathrm{d}\Omega \\
-&= -\frac{1}{2} A_{\gamma} \quad (\text{Because the radius is } 1 \text{ and } A_{\gamma} = R^2 \Omega)
-\end{aligned}
+    \colorboxed{
+    \begin{aligned}
+    S[n(t)] &= -\frac{1}{2} \int_{\varphi_i}^{\varphi_f} \mathrm{d}\varphi \int_0^{\theta(\varphi)} \sin\theta \mathrm{d}\theta \\
+    &= -\frac{1}{2} \iint_{\partial A_{\gamma}} \mathrm{d}\Omega \\
+    &= -\frac{1}{2} A_{\gamma} \quad (\text{Because the radius is } 1 \text{ and } A_{\gamma} = R^2 \Omega)
+    \end{aligned}
+    }
 \end{equation}
 where $\gamma$ is the path from $|n(t_i)\rangle=|n_i\rangle$ to $|n(t_f)\rangle=|n_f\rangle$
 and $A_{\gamma}$ is area enclosed by three points on the sphere ($|\uparrow\rangle, |n_i\rangle, |n_f\rangle$). Obviously, $A_{\gamma}$ depends on where the North pole is defined, which is kind of "gauge-dependence".
@@ -547,18 +549,22 @@ So $\mathrm{d}\bm{S}$ can be written as:
 
 So the Wess-Zumion term have another expression that is broadly used:
 
-\begin{equation}
-S_{\mathrm{WZ}} = -\int_{0}^{1} \mathrm{d}\kappa \int_{t_i}^{t_f} \mathrm{d}t \cdot \bm{n}(t, \kappa) \cdot \left[ \frac{\partial \bm{n}}{\partial t} \times \frac{\partial \bm{n}}{\partial \kappa} \right]
-\end{equation}
+\begin{theorem}[Wess-Zumino term]
 
-where $\kappa$ is an auxiliary parameter, in order to extend $\bm{n}(t)$ to $\bm{n}(t, \kappa)$ with:
-\begin{equation}
-\begin{cases}
-\bm{n}(t, 0) = \bm{n}(t) \\
-\bm{n}(t, 1) = \bm{n}_0 (\text{North Pole}) \\
-\bm{n}(t_i, \kappa) = \bm{n}(t_f, \kappa) \ (\text{Closed Path})
-\end{cases}
-\end{equation}
+    \begin{equation}
+    S_{\mathrm{WZ}} = -\int_{0}^{1} \mathrm{d}\kappa \int_{t_i}^{t_f} \mathrm{d}t \cdot \bm{n}(t, \kappa) \cdot \left[ \frac{\partial \bm{n}}{\partial t} \times \frac{\partial \bm{n}}{\partial \kappa} \right]
+    \end{equation}
+
+    where $\kappa$ is an auxiliary parameter, in order to extend $\bm{n}(t)$ to $\bm{n}(t, \kappa)$ with:
+    \begin{equation}
+    \begin{cases}
+    \bm{n}(t, 0) = \bm{n}(t) \\
+    \bm{n}(t, 1) = \bm{n}_0 (\text{North Pole}) \\
+    \bm{n}(t_i, \kappa) = \bm{n}(t_f, \kappa) \ (\text{Closed Path})
+    \end{cases}
+    \end{equation}
+
+\end{theorem}
 
 \subsection{Emergence of U(1) gauge degrees of freedom}
 
@@ -572,9 +578,11 @@ Using the chain rule where $\bm{x} = (x_1, x_2)$ are coordinates on Bloch Sphere
 S = \mathrm{i} \int_{\gamma} \bm{z}^{\dagger} \frac{\partial \bm{z}}{\partial \bm{x}} \cdot \frac{\mathrm{d}\bm{x}}{\mathrm{d}t} \cdot \mathrm{d}t
 \end{equation}
 
-Define the Gauge Potential $\bm{\mathcal{A}}$:
+Define the Gauge Potential $\bm{\mathcal{A}}$ as:
 \begin{equation}
-\bm{\mathcal{A}} = \mathrm{i} \bm{z}^{\dagger} \cdot \frac{\partial \bm{z}}{\partial \bm{x}}
+    \colorboxed{
+    \bm{\mathcal{A}} = \mathrm{i} \bm{z}^{\dagger} \cdot \frac{\partial \bm{z}}{\partial \bm{x}}
+    }
 \end{equation}
 
 Therefore, $S$ can be written as:
@@ -591,10 +599,12 @@ z \rightarrow z \cdot \mathrm{e}^{\mathrm{i}\phi}
 
 So the Gauge Potential change as:
 \begin{equation}
-\begin{aligned}
-\bm{\mathcal{A}}' &= \mathrm{i} \bm{z}^{\dagger} \mathrm{e}^{-\mathrm{i}\phi} (\mathrm{e}^{\mathrm{i}\phi} \frac{\partial \bm{z}}{\partial \bm{x}} + \bm{z} \mathrm{e}^{\mathrm{i}\phi} \nabla \phi) \\
-&= \bm{\mathcal{A}} + \nabla \phi
-\end{aligned}
+    \colorboxed{
+    \begin{aligned}
+    \bm{\mathcal{A}}' &= \mathrm{i} \bm{z}^{\dagger} \mathrm{e}^{-\mathrm{i}\phi} (\mathrm{e}^{\mathrm{i}\phi} \frac{\partial \bm{z}}{\partial \bm{x}} + \bm{z} \mathrm{e}^{\mathrm{i}\phi} \nabla \phi) \\
+    &= \bm{\mathcal{A}} + \nabla \phi
+    \end{aligned}
+    }
 \end{equation}
 
 So the potential $\bm{\mathcal{A}}$ is not gauge-invariant.
@@ -615,13 +625,16 @@ where $\bm{\mathcal{A}}$ can be regard as a magnetic potential that is responsib
 
 In the previous discussion, we have obtained path integral formalism of a single spin-$\frac{1}{2}$ ($S=\frac{1}{2}$).
 
-For a generic spin-$S$ ($S=\frac{1}{2}, 1, \frac{3}{2}, 2, \dots$), the action is given by:
-\begin{equation}
-\begin{cases}
-S[\bm{n}(t)] = S_{\mathrm{spin}} \cdot S_{\mathrm{WZ}}[\bm{n}(t)] \quad (\hat{H}=0) \\
-\langle \bm{n} | \bm{S} | \bm{n} \rangle = S_{\mathrm{spin}} \cdot \bm{n}
-\end{cases}
-\end{equation}
+\begin{theorem}[Action for a generic spin-$S$]
+    For a generic spin-$S$ ($S=\frac{1}{2}, 1, \frac{3}{2}, 2, \dots$), the action is given by:
+    \begin{equation}
+    \begin{cases}
+    S[\bm{n}(t)] = S_{\mathrm{spin}} \cdot S_{\mathrm{WZ}}[\bm{n}(t)] \quad (\hat{H}=0) \\
+    \langle \bm{n} | \bm{S} | \bm{n} \rangle = S_{\mathrm{spin}} \cdot \bm{n}
+    \end{cases}
+    \end{equation}
+
+\end{theorem}
 
 
 
