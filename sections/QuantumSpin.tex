@@ -792,6 +792,321 @@ S_M &= \int \frac{\mathrm{d}^d x}{a_0^d} S \cdot S_{WZ} [\bm{n}] - \frac{|J|S^2}
 \end{aligned}
 \end{equation}
 
-\begin{center}
+We want to find the classical path that minimizes the action. However, simply varying $S_m$ is incorrect because the variable $\bm{n}$ is not free; it is constrained to the surface of a sphere:
+\begin{equation}
+\bm{n}^2 - 1 = 0
+\end{equation}
+To handle this, we introduce a Lagrange multiplier field $\lambda$. So the total action becomes:
+\begin{equation}
+S_{\mathrm{tot}} = S_m + \int \mathrm{d}^d x \mathrm{d}t \cdot \frac{\lambda}{2}(\bm{n}^2 - 1)
+\end{equation}
+Now, we can safely solve the variation equation below:
+\begin{equation}
+\delta S_{\mathrm{tot}} = 0
+\end{equation}
+We first need to variation of the Wess-Zumion term $\delta S_{\mathrm{WZ}}$. Geometrically, the $S_{\mathrm{WZ}}$ is proportional to the area swept out by the spin vector on the unit sphere.
+
+From the picture, we can see that the variation of this area element $\delta(\Delta A)$ with respect to a small change in path $\delta \bm{n}$ is given by:
+\begin{equation}
+\bm{n} \cdot \delta(\Delta A) = \delta \bm{n} \times (\frac{\partial \bm{n}}{\partial t}) \mathrm{d}t
+\end{equation}
+we product $\bm{n}$ on the both sides of the equation :
+\begin{equation}
+\begin{aligned}
+\delta(\Delta A) &= \bm{n} (\delta \bm{n} \times \frac{\partial \bm{n}}{\partial t}) \mathrm{d}t \\
+&= - \delta \bm{n} (\bm{n} \times \frac{\partial \bm{n}}{\partial t}) \mathrm{d}t.
+\end{aligned}
+\end{equation}
+Therefore, the variation of the Wess-Zumion part of the action is:
+\begin{equation}
+\begin{aligned}
+\delta (\int \mathrm{d}^d x S_{\mathrm{WZ}}(\bm{n})) &= \frac{S}{a_0^d} \int \mathrm{d}^d x [\delta \bm{n} \cdot (\bm{n} \times \frac{\partial \bm{n}}{\partial t})]
+\end{aligned}
+\end{equation}
+This implies the functional derivative is:
+\begin{equation}
+\frac{\delta S_g}{\delta \bm{n}} = \frac{S}{a_0^d} \cdot (\bm{n} \times \frac{\partial \bm{n}}{\partial t})
+\end{equation}
+Next, we calculate the variation of energy term:
+\begin{equation}
+\begin{aligned}
+\delta [\int \mathrm{d}^d x \mathrm{d}t (\nabla \bm{n})^2] &= \int \mathrm{d}^d x \mathrm{d}t \frac{1}{2} \delta (\frac{\partial \bm{n}}{\partial x_i})^2 \\
+&= \int \mathrm{d}^d x \mathrm{d}t \cdot \sum_i \frac{1}{2} \cdot 2 (\frac{\partial \bm{n}}{\partial x_i}) \cdot \delta (\frac{\partial \bm{n}}{\partial x_i})
+\end{aligned}
+\end{equation}
+and we use the partial integration method:
+\begin{equation}
+\begin{aligned}
+    \int d^d x \sum_i^d 2 \left( \frac{\partial \vec{n}}{\partial x_i} \right) \cdot \delta \left( \frac{\partial \vec{n}}{\partial x_i} \right) 
+    &\overset{\frac{\partial \vec{n}}{\partial x_i} = \partial_i \vec{n}}{=\joinrel=\joinrel=} 
+    2 \int d^d x \sum_i^d (\partial_i \vec{n}) \cdot \partial_i (\delta \vec{n}) \\
+    &= 2 \left\{ \left[ \sum_i^d (\partial_i \vec{n}) \cdot \delta \vec{n} \right] \Bigg| - \int d^d x \sum_i^d \delta \vec{n} \cdot \partial_i^2 \vec{n} \right\} \\
+    &= -2 \int d^d x (\nabla^2 \vec{n}) \cdot \delta \vec{n}
+\end{aligned}
+\end{equation}
+So the variation of energy term is
+\begin{equation}
+\frac{\delta S_e}{\delta \bm{n}} = \frac{|J|S^2}{a_0^{d-2}} (\nabla^2 \bm{n})
+\end{equation}
+Finally, we calculate the variation of $\lambda$ term:
+\begin{equation}
+\delta \int \mathrm{d}^d x \mathrm{d}t \frac{\lambda}{2}(\bm{n}^2 - 1) = \int \mathrm{d}^d x \mathrm{d}t \cdot \lambda \bm{n} \delta \bm{n}
+\end{equation}
+So the variation of $\lambda$ term is:
+\begin{equation}
+\frac{\delta S_\lambda}{\delta \bm{n}} = \lambda \bm{n}
+\end{equation}
+Now we can get the total action's variation:
+\begin{equation}
+\delta S_{\mathrm{tot}} = 0 \implies \frac{S}{a_0^d} (\bm{n} \times \frac{\partial \bm{n}}{\partial t}) + \lambda \bm{n} = - \frac{|J|S^2}{a_0^{d-2}} \nabla^2 \bm{n}.
+\end{equation}
+To find the value of the Lagrange multiplier, take the dot product of the above equation with $\bm{n}$:
+\begin{equation}
+    \underbrace{ \frac{S}{a_0^d} \vec{n} \cdot \left( \vec{n} \times \frac{\partial \vec{n}}{\partial t} \right) }_{
+        \begin{subarray}{l} 
+          = \frac{S}{a_0^d} \frac{\partial \vec{n}}{\partial t} (\vec{n} \times \vec{n}) \\ 
+          = 0 
+        \end{subarray}
+      }
+      + \lambda \underbrace{ \vec{n} \cdot \vec{n} }_{=1}
+      = - \frac{|J| S^2}{a_0^{d-2}} (\vec{n} \cdot \nabla^2 \vec{n})
+\end{equation}
+Thus:
+\begin{equation}
+\lambda = - \frac{|J|S^2}{a_0^{d-2}} (\bm{n} \cdot \nabla^2 \bm{n})
+\end{equation}
+Now, substitute the $\lambda$ back into equation:
+\begin{equation}
+\frac{S}{a_0^d} \cdot (\bm{n} \times \frac{\partial \bm{n}}{\partial t}) - [\frac{|J|S^2}{a_0^{d-2}} (\bm{n} \cdot \nabla^2 \bm{n})] \bm{n} = - \frac{|J|S^2}{a_0^{d-2}} \nabla^2 \bm{n}
+\end{equation}
+Rearrange to group the derivative terms on the right:
+\begin{equation}
+\frac{S}{a_0^d} (\bm{n} \times \frac{\partial \bm{n}}{\partial t}) = - \frac{|J|S^2}{a_0^{d-2}} [\nabla^2 \bm{n} - (\bm{n} \cdot \nabla^2 \bm{n}) \cdot \bm{n}]
+\end{equation}
+If we look at: $\bm{n} \times (\bm{n} \times \nabla^2 \bm{n})$:
+\begin{equation}
+\begin{aligned}
+\bm{n} \times (\bm{n} \times \nabla^2 \bm{n}) &= \bm{n} \cdot (\bm{n} \cdot \nabla^2 \bm{n}) - \nabla^2 \bm{n} (\bm{n} \cdot \bm{n}) \\
+&= \bm{n} (\bm{n} \cdot \nabla^2 \bm{n}) - \nabla^2 \bm{n}.
+\end{aligned}
+\end{equation}
+So,
+\begin{equation}
+\frac{S}{a_0^d} (\bm{n} \times \partial_t \bm{n}) = \frac{|J|S^2}{a_0^{d-2}} [\bm{n} \times (\bm{n} \times \nabla^2 \bm{n})]
+\end{equation}
+Simplified to:
+\begin{equation}
+\bm{n} \times \frac{\partial \bm{n}}{\partial t} = \bm{n} \times [|J| S a_0^2 (\nabla^2 \bm{n})]
+\end{equation}
+We can get the Landau-Lifshitz equation:
+\begin{equation}
+\frac{\partial \bm{n}}{\partial t} = |J| S a_0^2 (\bm{n} \times \nabla^2 \bm{n}).
+\end{equation}
+
+From this equation, we can know that the spins move in a precessional fashion with an angular velocity $\bm{\Omega}$ given by:
+\begin{equation}
+\bm{\Omega} = -|J|S a_0^2 \nabla^2 \bm{n}.
+\end{equation}
+The Landau-Lifshitz equations can be solved in the linear regime. Let's parametrize $\bm{n}$ by the components:
+
+\begin{equation}
+\bm{n} = \begin{pmatrix} \sigma \\ \bm{\pi} \end{pmatrix} \text{ and } \bm{\pi} = \begin{pmatrix} \pi_1 \\ \pi_2 \end{pmatrix}
+\end{equation}
+where $\sigma$ and $\pi_i (i=1,2)$ satisfy the constraint:
+\begin{equation}
+\sigma^2 + \bm{\pi}^2 = 1
+\end{equation}
+If the system is ordered, $\sigma \sim 1$, $|\bm{\pi}|$ is very small, which means that $\bm{\pi}$ is small fluctuation around the direction of $\sigma$.
+In this situation, we can treat $\sigma$ as a constant:
+\begin{equation}
+\begin{cases}
+\sigma \approx 1 \\
+\nabla^2 \sigma \approx 0
+\end{cases}
+\end{equation}
+Therefore, we can linearize the Landau-Lifshitz equation:
+\begin{equation}
+\bm{n} \times \nabla^2 \bm{n} = \begin{pmatrix} \pi_1 \nabla^2 \pi_2 - \pi_2 \nabla^2 \pi_1 \\ -\sigma \nabla^2 \pi_2 \\ \sigma \nabla^2 \pi_1 \end{pmatrix}
+\end{equation}
+and we remain the one order term :
+\begin{equation}
+\bm{n} \times \nabla^2 \bm{n} = \begin{pmatrix} 0 \\ -\nabla^2 \pi_2 \\ \nabla^2 \pi_1 \end{pmatrix}
+\end{equation}
+So the linearizing Landau-Lifshitz equation:
+\begin{equation}
+\begin{cases}
+\partial_t \pi_1 = -|J|S a_0^2 \nabla^2 \pi_2 \\
+\partial_t \pi_2 = +|J|S a_0^2 \nabla^2 \pi_1
+\end{cases}
+\end{equation}
+
+We look for plane wave solutions (spin wave) of the term:
+\begin{equation}
+\pi_j(\bm{x}, t) = \tilde{\pi}_j e^{\mathrm{i}(\bm{p} \cdot \bm{x} - \omega t)}
+\end{equation}
+taking derivatives this ansatz converts differential operators into algebraic variables:
+\begin{equation}
+\begin{cases}
+\partial_t \to -\mathrm{i}\omega \\
+\nabla^2 \to -|\bm{p}|^2
+\end{cases}
+\end{equation}
+Substituting these into the linearized equations:
+\begin{equation}
+\begin{cases}
+-\mathrm{i}\omega \tilde{\pi}_1 = (|J|S a_0^2 |\bm{p}|^2) \tilde{\pi}_2 \\
+-\mathrm{i}\omega \tilde{\pi}_2 = -(|J|S a_0^2 |\bm{p}|^2) \tilde{\pi}_1
+\end{cases}
+\end{equation}
+let $A = |J|S a_0^2 p^2$, the system become:
+\begin{equation}
+\begin{cases}
+-\mathrm{i}\omega \tilde{\pi}_1 - A \tilde{\pi}_2 = 0 \\
+A \tilde{\pi}_1 - \mathrm{i}\omega \tilde{\pi}_2 = 0
+\end{cases}
+\end{equation}
+for a non-trivial solution $(\tilde{\pi}_1, \tilde{\pi}_2 \neq 0)$, the determinant of the coefficient matrix must be zero:
+\begin{equation}
+\begin{vmatrix}
+-\mathrm{i}\omega & -A \\
+A & -\mathrm{i}\omega
+\end{vmatrix} = 0
+\end{equation}
+
+we can get:
+\begin{equation}
+\omega = \pm A.
+\end{equation}
+So we obtain the dispersion relation for ferromagnetic spin waves:
+\begin{equation}
+|\omega| \approx |J|S a_0^2 |\bm{p}|^2
+\end{equation}
+We find that the frequency of the low-energy excitations of a quantum ferromagnetic scales as the square of the momentum.
+
 \input{Tikz/SpinWave.tex}
-\end{center}
+
+\section{Quantum Antiferromagnetic of one-dimension}
+
+Consider a spin chain with an even number of sites $N$; we can write down the action of it ($J=|J|$):
+\begin{equation}
+S_m[\bm{n}] = S \sum_{i}^N S_{WZ}[\bm{n}] - \int \mathrm{d}t \sum_{i}^N J S^2 \bm{n}(i,t) \cdot \bm{n}(i+1, t)
+\end{equation}
+where we have assumed periodic boundary conditions.
+
+\input{Tikz/spin_afm_diagram.tex}
+
+Since we expect to be close to a N\'{e}el state, we will stagger the configuration:
+\begin{equation}
+\bm{n}(j) \to (-1)^j \bm{n}(j)
+\end{equation}
+
+On a bipartite lattice, the substitution of $\{\text{ref}\}$ into $\{\text{ref}\}$ will change the sign of the exchange term of the action to a ferromagnetic:
+\begin{equation}
+S_m[\bm{n}] = S \sum_{i}^N (-1)^i S_{WZ}[\bm{n}(i)] - \frac{|J|S^2}{2} \int \mathrm{d}t \sum_{i=1}^N (-1)^i \bm{n}(i,t) \cdot (-1)^{i+1} \bm{n}(i+1,t)
+\end{equation}
+so the energy term become to:
+\begin{equation}
+S_e = \frac{|J|S^2}{2} \int \mathrm{d}t \sum_{i=1}^N \bm{n}(i,t) \bm{n}(i+1,t)
+\end{equation}
+which is similar to ferromagnetic.
+But the Wess-Zumino terms are odd under the replacement of $\{\text{ref}\}$ and thus become staggered. Thus, it is the Wess-Zumino term, a purely quantum-mechanical effect, which will distinguish ferromagnets from antiferromagnets.
+
+As ferromagnetic, we can split $\bm{n}$ into a slowly varying piece $\bm{m}$ plus a small rapidly varying part $a_0 \bm{l}$, so:
+\begin{equation}
+\bm{n}(i) = \bm{m}(i) + (-1)^i a_0 \bm{l}(i)
+\end{equation}
+
+The constraint $|\bm{n}|^2=1$ and requirement that $\bm{m}$ should obey the same constraint, and demand that $\bm{m}$ and $\bm{l}$ be orthogonal vector:
+\begin{equation}
+\begin{cases}
+|\bm{m}|^2 = 1 \\
+\bm{m} \cdot \bm{l} = 0
+\end{cases}
+\end{equation}
+The Wess-Zumino terms are rewritten as:
+\begin{equation}
+S \sum_i^N (-1)^i S_{WZ}[\bm{n}(i)] = S \sum_{r=1}^{N/2} \{ S_{WZ}[\bm{n}(2r)] - S_{WZ}[\bm{n}(2r-1)] \}
+\end{equation}
+
+\input{Tikz/afm_chain.tex}
+
+By making use of the approximation:
+\begin{equation}
+\begin{aligned}
+\bm{n}(2r) - \bm{n}(2r-1) &= \bm{m}(2r) - \bm{m}(2r-1) + a_0 [\bm{l}(2r) + \bm{l}(2r-1)] \\
+&\approx a_0 \left[ \frac{\partial \bm{m}(2r)}{\partial x} + 2 \bm{l}(2r) \right] + O(a_0^2)
+\end{aligned}
+\end{equation}
+So becomes (use the similar method of area variation, see \cref{fig:antiferromagnetic_variation})
+\begin{equation}
+\begin{aligned}
+S \sum_i^N (-1)^i S_{WZ}[\bm{n}(i)] &\approx S \sum_{i=1}^{N/2} (\bm{n}(2r) - \bm{n}(2r-1)) [\bm{n}(2r) \times \frac{\partial \bm{n}(2r)}{\partial t}] \\
+&\approx S \sum_{i=1}^{N/2} a_0 \left[ \frac{\partial \bm{m}(2r)}{\partial x} + 2 \bm{l}(2r) \right] \left[ \bm{m}(2r) \times \frac{\partial \bm{m}(2r)}{\partial t} \right]
+\end{aligned}
+\end{equation}
+
+\input{Tikz/AnitferromagneticDiagram.tex}
+
+Using continuum limit ($a_0 \to 0$):
+\begin{equation}
+\begin{aligned}
+\lim_{a_0 \to 0} S_g &\approx \frac{S}{2} \sum_{i=1}^N (\dots) \quad (\text{pre periodic boundary conditions}) \\
+&= \frac{S}{2} \int \mathrm{d}x \mathrm{d}t (\partial_x \bm{m} + 2 \bm{l}) \cdot (\bm{m} \times \partial_t \bm{m})
+\end{aligned}
+\end{equation}
+
+Thus, it can be simplified to:
+\begin{equation}
+S_g \approx \frac{S}{2} \int \mathrm{d}x \mathrm{d}t \cdot \bm{m} (\partial_t \bm{m} \times \partial_x \bm{m}) + S \int \mathrm{d}x \mathrm{d}t \bm{l} (\bm{m} \times \partial_t \bm{m})
+\end{equation}
+This term comes from alternating sum of WZ terms:
+Similarly, the continuum limit of the energy terms can also be found to be given by:
+\begin{equation}
+\begin{aligned}
+&\lim_{a_0 \to 0} \frac{|J|S^2}{2} \int \mathrm{d}t \sum_{i=1}^N \bm{n}(i,t) \bm{n}(i+1,t) \\
+\xrightarrow{\text{drop global phase}} &\lim_{a_0 \to 0} \frac{-|J|S^2}{2} \int \mathrm{d}t \sum_{i=1}^N [\bm{n}(i+1,t) - \bm{n}(i,t)]^2 \\
+&\approx \frac{-|J|S^2}{2} \int \mathrm{d}t \sum_i [ (\bm{m}(i+1) - \bm{m}(i)) + a_0 \bm{l}(i+1) + a_0 \bm{l}(i) ]^2 \\
+&\approx \frac{-|J|S^2}{2} \int \mathrm{d}t \sum_i a_0^2 (\frac{\Delta \bm{m}}{a_0} + 2\bm{l})^2 \\
+&= \frac{-|J|S^2}{2} \int \mathrm{d}t a_0 \int \mathrm{d}x [ (\partial_x \bm{m})^2 + \underbrace{4 \frac{\Delta \bm{m}}{a_0} \cdot \bm{l}}_{=0} + 4\bm{l}^2 ] \\
+&= \frac{-|J|S^2 a_0}{2} \int \mathrm{d}t \mathrm{d}x [ (\partial_x \bm{m})^2 + 4\bm{l}^2 ]
+\end{aligned}
+\end{equation}
+So the total Lagrangian density involving both the order parameter $\bm{m}$ and $\bm{l}$:
+\begin{equation}
+\mathcal{L}_m(\bm{m}, \bm{l}) = -2 a_0 |J| S^2 \bm{l}^2 + S \bm{l} (\bm{m} \times \partial_t \bm{m}) - \frac{a_0 |J| S^2}{2} (\partial_x \bm{m})^2 + \frac{S}{2} \bm{m} \cdot (\partial_t \bm{m} \times \partial_x \bm{m})
+\end{equation}
+where $\bm{m}$ is the order parameter field and $\bm{l}$ roughly represents the average spin field.
+
+The Lagrangian has a quadratic term for $\bm{l}$:
+\begin{equation}
+\mathcal{L}_{\bm{l}} = -2 a_0 |J| S^2 \bm{l}^2 + S (\bm{m} \times \partial_t \bm{m}) \bm{l}.
+\end{equation}
+To integrate out $\bm{l}$, we minimize the action with respect to $\bm{l}$
+\begin{equation}
+\frac{\partial \mathcal{L}_{\bm{l}}}{\partial \bm{l}} = -4 a_0 |J| S^2 \bm{l} + S (\bm{m} \times \partial_t \bm{m}) = 0
+\end{equation}
+so we solve for $\bm{l}$:
+\begin{equation}
+\bm{l} = \frac{1}{4 a_0 |J| S} (\bm{m} \times \partial_t \bm{m})
+\end{equation}
+Now we subsitute the expression for $\bm{l}$ found above back into $\mathcal{L}_{\bm{l}}$:
+\begin{equation}
+\begin{aligned}
+\mathcal{L}_{\bm{l}}^{\text{eff}} &= \frac{1}{8 a_0 |J|} (\bm{m} \times \partial_t \bm{m})^2 \quad (\bm{m} \perp \partial_t \bm{m} \text{ because } \bm{m} \text{ is on the sphere}) \\
+&= \frac{1}{8 a_0 |J|} (\partial_t \bm{m})^2
+\end{aligned}
+\end{equation}
+Final we can combine the new term with original term that do not depend on $\bm{l}$:
+\begin{equation}
+\begin{aligned}
+\mathcal{L}(\bm{m}) &= \frac{1}{8 a_0 |J|} (\partial_t \bm{m})^2 - \frac{a_0 J S^2}{2} (\partial_x \bm{m})^2 + \frac{S}{2} \bm{m} (\partial_t \bm{m} \times \partial_x \bm{m}) \\
+&= \frac{1}{2g} [ \frac{1}{v_s} (\partial_t \bm{m})^2 - v_s (\partial_x \bm{m})^2 ] + \frac{\theta}{8 \pi} \epsilon_{\mu\nu} \bm{m} (\partial_\mu \bm{m} \times \partial_\nu \bm{m})
+\end{aligned}
+\end{equation}
+where $g$ and $v_s$ are respectively the coupling constant and spin-wave velocity:
+\begin{equation}
+\begin{cases}
+g = \frac{2}{S} \\
+v_s = 2 a_0 |J| S
+\end{cases}
+\end{equation}

@@ -1,0 +1,75 @@
+\begin{figure}[htbp]
+    \centering
+    \resizebox{\textwidth}{!}{%
+    \begin{tikzpicture}[
+        % Spin styles
+        spin/.style={circle, inner sep=0pt, minimum size=0.8cm, draw=none},
+        % Spin Down (Blue ball, down arrow)
+        spin down/.style={spin, fill=blue!60, 
+            path picture={
+                \draw[->, white, ultra thick, >=Stealth] (0, 0.25) -- (0, -0.25);
+            }
+        },
+        % Spin Up (Red ball, up arrow)
+        spin up/.style={spin, fill=red!60, 
+            path picture={
+                \draw[->, white, ultra thick, >=Stealth] (0, -0.25) -- (0, 0.25);
+            }
+        },
+        % Dimer style
+        dimer/.style={draw, ellipse, inner sep=5pt, thick, minimum height=1.6cm},
+        % Label style
+        every label/.style={font=\large} 
+    ]
+
+        % Define spacing - Adjusted to separate dimers more
+        \def\spinsep{1.6}  % 略微增加二聚体内部两个自旋的距离
+        \def\dimersep{4.5} % 大幅增加二聚体之间的距离，防止重合
+
+        % --- Group 1 (1, 2) ---
+        \node[spin down, label=below:$1$] (s1) at (0,0) {};
+        \node[spin up, label=below:$2$] (s2) at (\spinsep,0) {};
+        \node[dimer, fit=(s1)(s2)] (d1) {};
+
+        % --- Group 2 (3, 4) ---
+        \begin{scope}[shift={(\dimersep, 0)}]
+            \node[spin down, label=below:$3$] (s3) at (0,0) {};
+            \node[spin up, label=below:$4$] (s4) at (\spinsep,0) {};
+            \node[dimer, fit=(s3)(s4)] (d2) {};
+        \end{scope}
+
+        % --- Group 3 (5, 6) ---
+        \begin{scope}[shift={(2*\dimersep, 0)}]
+            \node[spin down, label=below:$5$] (s5) at (0,0) {};
+            \node[spin up, label=below:$6$] (s6) at (\spinsep,0) {};
+            \node[dimer, fit=(s5)(s6)] (d3) {};
+        \end{scope}
+
+        % --- Group r (2r-1, 2r) ---
+        % Place at 4.5 * dimersep to leave a gap
+        \begin{scope}[shift={(4.5*\dimersep, 0)}]
+            \node[spin down, label=below:$2r-1$] (sr1) at (0,0) {};
+            \node[spin up, label=below:$2r$] (sr2) at (\spinsep,0) {};
+            \node[dimer, fit=(sr1)(sr2)] (dr) {};
+        \end{scope}
+
+        % --- Group N (N-1, N) ---
+        % Place at 7.0 * dimersep to leave another gap
+        \begin{scope}[shift={(7.0*\dimersep, 0)}]
+            \node[spin down, label=below:$N-1$] (sN1) at (0,0) {};
+            \node[spin up, label=below:$N$] (sN2) at (\spinsep,0) {};
+            \node[dimer, fit=(sN1)(sN2)] (dN) {};
+        \end{scope}
+
+        % --- Ellipses ---
+        % Draw ellipsis exactly between d3 and dr
+        \path (d3) -- node[auto=false, font=\huge] {$\cdots$} (dr);
+        
+        % Draw ellipsis exactly between dr and dN
+        \path (dr) -- node[auto=false, font=\huge] {$\cdots$} (dN);
+
+    \end{tikzpicture}
+    } % end resizebox
+    \caption{Schematic of 1D Antiferromagnetic Spin Chain}
+    \label{fig:afm_chain}
+\end{figure}

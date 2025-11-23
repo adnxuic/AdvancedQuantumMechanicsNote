@@ -1,0 +1,94 @@
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}[
+        x=1.2cm, 
+        y=1.2cm, 
+        every node/.style={font=\sffamily},
+        thick
+    ]
+
+        % --- 2. Styles Definition ---
+        \tikzset{
+            site/.style={circle, fill=black, inner sep=2.5pt},
+            arrow/.style={->, >={Stealth[round, length=3mm, width=2mm]}, very thick},
+            label text/.style={below=0.4cm, font=\large\itshape}
+        }
+
+        % --- 3. Drawing the Left Side (Start) ---
+        % Site 1
+        \node[site] (s1) at (0,0) {};
+        \node[label text] at (0,0) {$1$};
+        % Let's assume the first spin is Up -> RED
+        \draw[arrow, red] (0, 0.4) -- (0, 1.0);
+
+        % Ellipsis (...)
+        \draw[dashed, very thick] (0.8, 0) -- (2.2, 0);
+        \node[below=0.1cm] at (1.5, 0) {$\dots$};
+
+
+        % --- 4. Drawing the Middle Sequence ---
+        % Pattern from image: 
+        % Arrow 1: Up (no label)
+        % Arrow 2: Down (label i-1)
+        % Arrow 3: Up (label i)
+        % Arrow 4: Down (label i+1)
+        % Arrow 5: Up (label i+2)
+        % Arrow 6: Down (label i+3)
+        % Arrow 7: Up (no label)
+        % Arrow 8: Down (no label)
+        
+        % Define starting x position for the middle block
+        \def\startx{3}
+
+        % Loop to generate the middle section
+        % Format: offset / direction (1=up, -1=down) / label
+        \foreach \offset / \dir / \lab in {
+            0/1/,          % Up, no label
+            1/-1/i-1,      % Down, i-1
+            2/1/i,         % Up, i
+            3/-1/i+1,      % Down, i+1
+            4/1/i+2,       % Up, i+2
+            5/-1/i+3,      % Down, i+3
+            6/1/,          % Up, no label
+            7/-1/          % Down, no label
+        } {
+            \coordinate (pos) at (\startx + \offset, 0);
+            
+            % Draw the site dot
+            \node[site] at (pos) {};
+            
+            % Draw the Label (if present)
+            \ifx\lab\empty
+            \else
+                \node[label text] at (pos) {$\lab$};
+            \fi
+            
+            % Draw the Arrow
+            \ifnum\dir=1
+                % Up Arrow -> RED
+                \draw[arrow, red] (\startx + \offset, 0.4) -- ++(0, 0.7);
+            \else
+                % Down Arrow -> BLUE
+                \draw[arrow, blue] (\startx + \offset, 1.1) -- ++(0, -0.7);
+            \fi
+        }
+
+        % --- 5. Drawing the Right Side (End) ---
+        % Ellipsis (...)
+        \draw[dashed, very thick] (\startx + 7.8, 0) -- (\startx + 9.2, 0);
+        \node[below=0.1cm] at (\startx + 8.5, 0) {$\dots$};
+
+        % Site N
+        \coordinate (end) at (\startx + 10, 0);
+        \node[site] at (end) {};
+        \node[label text] at (end) {$N$};
+        % Assuming even number and alternating pattern finishing (Down) -> BLUE
+        \draw[arrow, blue] (\startx + 10, 1.1) -- ++(0, -0.7);
+
+        % Bottom reference dashes (optional, imitating the sketchy lines under labels in the image)
+        % \draw[gray, thin, dashed] (-0.5, -0.8) -- (14, -0.8);
+
+    \end{tikzpicture}
+    \caption{Illustration of a 1D spin chain with an even number of sites, showing alternating spins around site $i$.}
+    \label{fig:spin_afm_diagram}
+\end{figure}
