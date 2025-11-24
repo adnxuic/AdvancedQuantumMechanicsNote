@@ -687,6 +687,7 @@ So the diagonal can be written as a mathematical form like propagator:
 \langle \bm{n}_0 | \mathrm{e}^{-\beta \hat{H}} | \bm{n}_0 \rangle = \int D(\bm{n}) \cdot \mathrm{e}^{-S_E}
 \end{equation}
 where $D(\bm{n}) = \prod_i \prod_l \mathrm{d}^2 \bm{n}_i^l$. 
+
 Because diagonal likes the propagator with close path ($\langle \bm{n}_0 | \mathrm{e}^{-\beta \hat{H}} | \bm{n}_0 \rangle$ and not $\langle \bm{n}_i | \mathrm{e}^{-\beta \hat{H}} | \bm{n}_j \rangle$ for $i \neq j$), $S_E$ can be written as:
 \begin{equation}
 S_E = \int_0^\beta \mathrm{d}\tau \langle \bm{n} | \frac{\partial}{\partial \tau} | \bm{n} \rangle + \int_0^\beta \mathrm{d}\tau \langle \bm{n} | \hat{H} | \bm{n} \rangle
@@ -1098,11 +1099,11 @@ Now we subsitute the expression for $\bm{l}$ found above back into $\mathcal{L}_
 \end{equation}
 Final we can combine the new term with original term that do not depend on $\bm{l}$:
 \begin{equation}
-\begin{aligned}
-\mathcal{L}(\bm{m}) &= \frac{1}{8 a_0 |J|} (\partial_t \bm{m})^2 - \frac{a_0 J S^2}{2} (\partial_x \bm{m})^2 + \frac{S}{2} \bm{m} (\partial_t \bm{m} \times \partial_x \bm{m}) \\
-&= \frac{1}{2g} [ \frac{1}{v_s} (\partial_t \bm{m})^2 - v_s (\partial_x \bm{m})^2 ] + \frac{\theta}{8 \pi} \epsilon_{\mu\nu} \bm{m} (\partial_\mu \bm{m} \times \partial_\nu \bm{m})
-\end{aligned}
-\end{equation}
+    \begin{aligned}
+    \mathcal{L}(\bm{m}) &= \frac{1}{8 a_0 J} (\partial_t \bm{m})^2 - \frac{a_0 J S^2}{2} (\partial_x \bm{m})^2 + \frac{S}{2} \bm{m} (\partial_t \bm{m} \times \partial_x \bm{m}) \\
+    &= \frac{1}{2g} \left[ \frac{1}{v_s} (\partial_t \bm{m})^2 - v_s (\partial_x \bm{m})^2 \right] + \underbrace{\frac{\theta}{8\pi} \varepsilon_{\mu\nu} \bm{m} (\partial_\mu \bm{m} \times \partial_\nu \bm{m})}_{\text{Einstein summation}}
+    \end{aligned}
+    \end{equation}
 where $g$ and $v_s$ are respectively the coupling constant and spin-wave velocity:
 \begin{equation}
 \begin{cases}
@@ -1110,3 +1111,68 @@ g = \frac{2}{S} \\
 v_s = 2 a_0 |J| S
 \end{cases}
 \end{equation}
+
+The last term in \{ref\} has topological significance. We have chosen the normalization so that the coupling constant $\theta$ is given by:
+\begin{equation}
+\theta = 2 \pi S
+\end{equation}
+The tensor $\varepsilon_{\mu\nu}$ is the usual Levi-Civita antisymmetric tensor in two dimensions ($\mu,\nu=t,x$. ($t \to 0, x \to 1$))
+\begin{equation}
+\varepsilon_{\mu\nu} = \begin{cases}
+1 & (\mu,\nu) = (0,1) \\
+-1 & (\mu,\nu) = (1,0) \\
+0 & \text{otherwise}.
+\end{cases}
+\end{equation}
+The result is the Lagrangian density of non-linear sigma model.
+
+\section{The role of topological term.}
+
+Go back to Euclidean spacetime ($\mathrm{i} S_M \to -S_E$):
+\begin{equation}
+\mathrm{i} S_M = \mathrm{i} \int \mathrm{d}t \mathrm{d}x \mathcal{L}_M [\bm{m}(t,x)] 
+= - \int \mathrm{d}\tau \mathrm{d}x \mathcal{L}_E [\bm{m}(\tau,x)]
+\end{equation}
+So we can get the Lagrangian density $\mathcal{L}_E$ of Euclidean sector ($x_2 = \mathrm{i}t = \mathrm{i}x_0$)
+\begin{equation}
+\mathcal{L}_E = \frac{1}{2g} [(\partial_1 \bm{m})^2 + (\partial_2 \bm{m})^2] + \frac{\mathrm{i}\theta}{8\pi} \epsilon_{ij} \bm{m} \cdot (\partial_i \bm{m} \times \partial_j \bm{m})
+\end{equation}
+where $i,j = 1,2$.
+
+We now define the Pontryagin index or topological charge (or winding number) $Q$ of the Euclidean space spin configuration $\{\bm{m}(\bm{x})\}$ by the expression:
+\begin{equation}
+\begin{aligned}
+\mathcal{Q} &= \frac{1}{8\pi} \int \mathrm{d}^2x \, \epsilon_{ij} \bm{m} (\partial_i \bm{m} \times \partial_j \bm{m}) \\
+&= \frac{1}{4\pi} \int \mathrm{d}^2x \, \bm{m} (\partial_1 \bm{m} \times \partial_2 \bm{m})
+\end{aligned}
+\end{equation}
+We impose the boundary condition that the Euclidean action be finite. This is equivalent to the requirement that asymptotically $\bm{m}$ becomes a constant vector $\bm{m}_0$ at spatial-time infinity:
+\begin{equation}
+\lim_{|\bm{x}|\to\infty} \bm{m}(\bm{x}) = \bm{m}_0
+\end{equation}
+Thus, the 2D Euclidean space-time is isomorphic to a sphere $S_2$ since the fields are identified with $\bm{m}_0$ at the point of infinity.
+However, the order parameter manifold ("target space") is also isomorphic to a sphere $S_2$, since the constraint $\bm{m}^2=1$ has to be satisfied everywhere.
+
+\input{Tikz/Topological_Mapping.tex}
+
+The topological charge $\mathcal{Q}$ is in the sense that it counts how many times the spin configuration $\bm{m}$ has wrapped around the sphere $S_2$.
+
+So the topological term of action is:
+\begin{equation}
+S_{\text{top}} = \mathrm{e}^{\mathrm{i} \cdot 2\pi S \mathcal{Q}} = (-1)^{2S\mathcal{Q}}
+\end{equation}
+Thus:
+\begin{equation}
+\mathrm{e}^{\mathrm{i} \cdot 2\pi S \mathcal{Q}} = \begin{cases}
+1 & \text{for } S=1,2 \dots (\text{integer spin}) \\
+(-1)^{\mathcal{Q}} & \text{for } S=\frac{1}{2}, \frac{3}{2}, \dots (\text{half-odd-integer})
+\end{cases}
+\end{equation}
+
+We can see that:
+\begin{enumerate}[(1)]
+    \item $S$ is an integer: the spin chain is described at low energies by the standard non-linear sigma model, without a topological term.
+    \item $S$ is half integral $S$: each topological class contributes to the weight of the integral with a sign that is positive (negative) if the winding number $\mathcal{Q}$ is even (odd)
+\end{enumerate}
+
+The integer- and half-integer-spin chains fall in different universality classes. We will now see that this property implies a very important result, known as Haldane's conjecture, that states that the integer-spin chains are massive (have an energy gap), whereas the half-integer-spin chains are massless as in the spin one-half case.

@@ -1,0 +1,148 @@
+% 设置随机种子以保证每次编译得到的内部自旋形态一致
+\pgfmathsetseed{42}
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}[
+        >=Latex, 
+        font=\small,
+        % Define styles for consistency
+        axis_style/.style={thin, gray!50},
+        vector_style/.style={->, thick, color=black!80, line cap=round},
+        sphere_style/.style={circle, draw=black, thick, minimum size=3cm},
+        label_style/.style={align=center, font=\footnotesize\bfseries}
+    ]
+
+        % 定义布局坐标
+        % POS_TOP 的 y 坐标为 6.0
+        \coordinate (POS_TOP) at (3.5, 6.0);   % 顶部中心 (网格)
+        \coordinate (POS_LEFT) at (0, 0);      % 左下 (Base Space)
+        \coordinate (POS_RIGHT) at (8, 0);     % 右下 (Target Space)
+
+        % ==========================================
+        % STAGE 1: 2D Euclidean Space-time (TOP)
+        % ==========================================
+        \begin{scope}[shift={($(POS_TOP) + (-2.0, -1.0)$)}, scale=0.55]
+            
+            % --- 用户提供的代码逻辑 ---
+            \tikzset{
+                x={(1cm,0cm)},
+                y={(0.8cm,0.5cm)}, 
+                z={(0cm,1cm)}
+            }
+            \def\Nx{6} 
+            \def\Ny{5} 
+            \def\ArrowLen{0.8}
+
+            % 1. 绘制网格
+            \foreach \y in {0,...,\Ny} {
+                \draw[gray!80, thin] (0, \y, 0) -- (\Nx, \y, 0);
+            }
+            \foreach \x in {0,...,\Nx} {
+                \draw[gray!80, thin] (\x, 0, 0) -- (\x, \Ny, 0);
+            }
+
+            % 2. 绘制自旋
+            \foreach \y in {\Ny,...,0} {
+                \foreach \x in {0,...,\Nx} {
+                    \pgfmathparse{int(\x==0 || \x==\Nx || \y==0 || \y==\Ny)}
+                    \let\isBoundary\pgfmathresult
+                    \ifnum\isBoundary=1
+                        \draw[->, thick, color=black!80] (\x,\y,0) -- ++(0,0,\ArrowLen);
+                    \else
+                        \pgfmathsetmacro{\rx}{rand*0.35}
+                        \pgfmathsetmacro{\ry}{rand*0.35}
+                        \draw[->, thick, color=black!80] (\x,\y,0) -- ++(\rx,\ry,\ArrowLen);
+                    \fi
+                }
+            }
+            % --- 结束 ---
+            
+            % 定义一个从网格引出箭头的锚点
+            \coordinate (grid_anchor) at (1, 0, 0); 
+        \end{scope}
+        
+        % Label for Stage 1 (Top)
+        \node[label_style] at ($(POS_TOP) + (0, -2.0)$) {2D Euclidean\\Space-time};
+
+
+        % ==========================================
+        % STAGE 2: Base Space Sphere (BOTTOM LEFT)
+        % ==========================================
+        \begin{scope}[shift={(POS_LEFT)}]
+            % Sphere outline
+            \shade[ball color=white, opacity=0.2] (0,0) circle (1.5);
+            \draw[thick] (0,0) circle (1.5);
+            
+            % Grid lines
+            \draw[gray] (-1.5,0) arc (180:360:1.5 and 0.5);
+            \draw[gray, dashed] (1.5,0) arc (0:180:1.5 and 0.5);
+            \draw[gray] (0,1.5) arc (90:270:0.5 and 1.5);
+            \draw[gray, dashed] (0,-1.5) arc (-90:90:0.5 and 1.5);
+            
+            % Vectors
+            \foreach \angle in {0, 45, ..., 315} {
+                \draw[vector_style] (\angle:1.5) -- (\angle:1.9);
+            }
+            \draw[vector_style] (0.5, 0.5) -- (0.8, 0.8);
+            \draw[vector_style] (-0.3, 0.6) -- (-0.5, 1.0);
+            \draw[vector_style] (0.2, -0.8) -- (0.3, -1.2);
+            
+            % Point x
+            \coordinate (x_point) at (45:1.5); 
+            % 【修改】调整标签位置到点的右下方 (north west anchor)，避免与上方箭头重叠
+            \filldraw[black] (x_point) circle (2pt) node[anchor=north west, xshift=2pt, yshift=20pt] {$\bm{x}$};
+            
+            % Arrow Anchor (Top of sphere)
+            \coordinate (sphere1_top) at (0, 1.6);
+        \end{scope}
+
+        % Label for Stage 2
+        \node[label_style, yshift=-2.2cm] at (POS_LEFT) {Base Space ($S^2$)};
+
+
+        % ==========================================
+        % ARROW 1: Compactification (Top -> Left)
+        % ==========================================
+        \draw[->, thick, shorten >=2pt] (grid_anchor) to[out=-90, in=70] 
+            node[midway, left, align=right, font=\scriptsize, xshift=-2pt] {Isomorphic to $S^2$} 
+            (sphere1_top);
+
+
+        % ==========================================
+        % STAGE 3: Target Space Sphere (BOTTOM RIGHT)
+        % ==========================================
+        \begin{scope}[shift={(POS_RIGHT)}]
+            % Sphere outline
+            \shade[ball color=white, opacity=0.2] (0,0) circle (1.5);
+            \draw[thick] (0,0) circle (1.5);
+            
+            % Grid lines
+            \draw[gray] (-1.5,0) arc (180:360:1.5 and 0.5);
+            \draw[gray, dashed] (1.5,0) arc (0:180:1.5 and 0.5);
+            \draw[gray] (0,1.5) arc (90:270:0.5 and 1.5);
+            \draw[gray, dashed] (0,-1.5) arc (-90:90:0.5 and 1.5);
+            
+            % Target point
+            \coordinate (m_point) at (-0.5, 0.8);
+            \filldraw[black] (m_point) circle (2pt) node[anchor=west] {$\bm{m}$};
+            \draw[vector_style] (0,0) -- (m_point);
+            
+            % Arrow Anchor (Left side of sphere)
+            \coordinate (sphere2_left) at (-1.6, 0);
+        \end{scope}
+
+        % Label for Stage 3
+        \node[label_style, yshift=-2.2cm] at (POS_RIGHT) {Target Space ($S^2$)\\Order Parameter Manifold};
+
+
+        % ==========================================
+        % ARROW 2: Mapping (Left -> Right)
+        % ==========================================
+        \draw[->, thick] (x_point) to[bend left=30] 
+            node[midway, above] {$\bm{m}(\bm{x})$} 
+            (7.0, 1.0); % Direct coordinate near target sphere
+
+    \end{tikzpicture}
+    \caption{Topological mapping from 2D Euclidean space-time to the base space $S^2$ and the target space $S^2$.}
+    \label{fig:topological_mapping}
+\end{figure}
