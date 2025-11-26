@@ -536,7 +536,7 @@ where $\bm{n}$ can regrad as the monopole's field strength whose charge is 1.
 
 Because $\bm{n}$ locates on the surface of the sphere, 
 it can be the function of two parameter $t$ and $k$, 
-which form an orthonormal basis on the sphere. 
+which form an orthonormal basis on the sphere(see figure \ref{fig:sphere_differential}). 
 So $\mathrm{d}\bm{S}$ can be written as:
 
 \begin{equation}
@@ -680,7 +680,7 @@ $(\tau_i \to \tau_f \Longrightarrow 0 \to \beta)$.
 
 But in many-spin system, the identity operator for the entire system is the tensor product of the identities for each site:
 \begin{equation}
-\hat{\mathbb{I}}_{total} = \bigotimes_{i=1} \hat{\mathbb{I}}_i = \int (\prod_{i=1} \mathrm{d}^2 \bm{n}_i) | \vec{n}_1 \dots \vec{n}_N \rangle \langle \vec{n}_1 \dots \vec{n}_N |
+\hat{\mathbb{I}}_{total} = \bigotimes_{i=1} \hat{\mathbb{I}}_i = \int \left( \prod_{i=1} \mathrm{d}^2 \bm{n}_i \right) | \bm{n}_1 \cdots \bm{n}_N \rangle \langle \bm{n}_1 \cdots \bm{n}_N |
 \end{equation}
 So the diagonal can be written as a mathematical form like propagator:
 \begin{equation}
@@ -779,7 +779,7 @@ Next, we take the continuum limit where the lattice sums become integrals
 where $a_0$ is the lattice spacing and finite differences become gradients:
 \begin{equation}
 \begin{aligned}
-\sum_j (\bm{n}_i - \bm{n}_j)^2 &= \dots \\
+\sum_j (\bm{n}_i - \bm{n}_j)^2 &= a_0^2 \sum_j (\frac{\Delta \bm{n}_j}{\Delta x_j})^2 \\
 &= a_0^2 (\nabla \bm{n})^2
 \end{aligned}
 \end{equation}
@@ -793,25 +793,35 @@ S_M &= \int \frac{\mathrm{d}^d x}{a_0^d} S \cdot S_{WZ} [\bm{n}] - \frac{|J|S^2}
 \end{aligned}
 \end{equation}
 
-We want to find the classical path that minimizes the action. However, simply varying $S_m$ is incorrect because the variable $\bm{n}$ is not free; it is constrained to the surface of a sphere:
+We want to find the classical path that minimizes the action. 
+However, simply varying $S_M$ is incorrect because the variable $\bm{n}$ is not free; 
+It is constrained to the surface of a sphere:
 \begin{equation}
 \bm{n}^2 - 1 = 0
 \end{equation}
 To handle this, we introduce a Lagrange multiplier field $\lambda$. So the total action becomes:
 \begin{equation}
-S_{\mathrm{tot}} = S_m + \int \mathrm{d}^d x \mathrm{d}t \cdot \frac{\lambda}{2}(\bm{n}^2 - 1)
+S_{\mathrm{tot}} = S_M + \int \mathrm{d}^d x \mathrm{d}t \cdot \frac{\lambda}{2}(\bm{n}^2 - 1)
 \end{equation}
 Now, we can safely solve the variation equation below:
 \begin{equation}
 \delta S_{\mathrm{tot}} = 0
 \end{equation}
-We first need to variation of the Wess-Zumion term $\delta S_{\mathrm{WZ}}$. Geometrically, the $S_{\mathrm{WZ}}$ is proportional to the area swept out by the spin vector on the unit sphere.
+We first need to variation of the Wess-Zumion term $\delta S_{\mathrm{WZ}}$. 
+Geometrically, 
+the $S_{\mathrm{WZ}}$ is proportional to the area swept out by the spin vector on the unit sphere
+(see figure \ref{fig:swz_variation}).
 
-From the picture, we can see that the variation of this area element $\delta(\Delta A)$ with respect to a small change in path $\delta \bm{n}$ is given by:
+From the figure \ref{fig:swz_variation}, 
+we can see that the variation of this area element $\delta(\Delta A)$ 
+with respect to a small change in path $\delta \bm{n}$ is given by:
 \begin{equation}
 \bm{n} \cdot \delta(\Delta A) = \delta \bm{n} \times (\frac{\partial \bm{n}}{\partial t}) \mathrm{d}t
 \end{equation}
-we product $\bm{n}$ on the both sides of the equation :
+
+\input{Tikz/SwzVariationDiagram.tex}
+
+We product $\bm{n}$ on the both sides of the equation :
 \begin{equation}
 \begin{aligned}
 \delta(\Delta A) &= \bm{n} (\delta \bm{n} \times \frac{\partial \bm{n}}{\partial t}) \mathrm{d}t \\
@@ -828,6 +838,7 @@ This implies the functional derivative is:
 \begin{equation}
 \frac{\delta S_g}{\delta \bm{n}} = \frac{S}{a_0^d} \cdot (\bm{n} \times \frac{\partial \bm{n}}{\partial t})
 \end{equation}
+
 Next, we calculate the variation of energy term:
 \begin{equation}
 \begin{aligned}
@@ -835,16 +846,19 @@ Next, we calculate the variation of energy term:
 &= \int \mathrm{d}^d x \mathrm{d}t \cdot \sum_i \frac{1}{2} \cdot 2 (\frac{\partial \bm{n}}{\partial x_i}) \cdot \delta (\frac{\partial \bm{n}}{\partial x_i})
 \end{aligned}
 \end{equation}
-and we use the partial integration method:
+
+And we use the partial integration method:
 \begin{equation}
 \begin{aligned}
-    \int d^d x \sum_i^d 2 \left( \frac{\partial \vec{n}}{\partial x_i} \right) \cdot \delta \left( \frac{\partial \vec{n}}{\partial x_i} \right) 
-    &\overset{\frac{\partial \vec{n}}{\partial x_i} = \partial_i \vec{n}}{=\joinrel=\joinrel=} 
-    2 \int d^d x \sum_i^d (\partial_i \vec{n}) \cdot \partial_i (\delta \vec{n}) \\
-    &= 2 \left\{ \left[ \sum_i^d (\partial_i \vec{n}) \cdot \delta \vec{n} \right] \Bigg| - \int d^d x \sum_i^d \delta \vec{n} \cdot \partial_i^2 \vec{n} \right\} \\
-    &= -2 \int d^d x (\nabla^2 \vec{n}) \cdot \delta \vec{n}
+    \int d^d x \sum_i^d 2 \left( \frac{\partial \bm{n}}{\partial x_i} \right) \cdot \delta \left( \frac{\partial \bm{n}}{\partial x_i} \right) 
+    &\overset{\frac{\partial \bm{n}}{\partial x_i} = \partial_i \bm{n}}{=\joinrel=\joinrel=} 
+    2 \int d^d x \sum_i^d (\partial_i \bm{n}) \cdot \partial_i (\delta \bm{n}) \\
+    &= 2 \left\{ \left[ \sum_i^d (\partial_i \bm{n}) \cdot \delta \bm{n} \right] \Bigg|_{\bm{n}_0}^{\bm{n}_N = \bm{n}_0}
+    - \int d^d x \sum_i^d \delta \bm{n} \cdot \partial_i^2 \bm{n} \right\} \\
+    &= -2 \int d^d x (\nabla^2 \bm{n}) \cdot \delta \bm{n}
 \end{aligned}
 \end{equation}
+
 So the variation of energy term is
 \begin{equation}
 \frac{\delta S_e}{\delta \bm{n}} = \frac{|J|S^2}{a_0^{d-2}} (\nabla^2 \bm{n})
@@ -863,14 +877,14 @@ Now we can get the total action's variation:
 \end{equation}
 To find the value of the Lagrange multiplier, take the dot product of the above equation with $\bm{n}$:
 \begin{equation}
-    \underbrace{ \frac{S}{a_0^d} \vec{n} \cdot \left( \vec{n} \times \frac{\partial \vec{n}}{\partial t} \right) }_{
+    \underbrace{ \frac{S}{a_0^d} \bm{n} \cdot \left( \bm{n} \times \frac{\partial \bm{n}}{\partial t} \right) }_{
         \begin{subarray}{l} 
-          = \frac{S}{a_0^d} \frac{\partial \vec{n}}{\partial t} (\vec{n} \times \vec{n}) \\ 
+          = \frac{S}{a_0^d} \frac{\partial \bm{n}}{\partial t} (\bm{n} \times \bm{n}) \\ 
           = 0 
         \end{subarray}
       }
-      + \lambda \underbrace{ \vec{n} \cdot \vec{n} }_{=1}
-      = - \frac{|J| S^2}{a_0^{d-2}} (\vec{n} \cdot \nabla^2 \vec{n})
+      + \lambda \underbrace{ \bm{n} \cdot \bm{n} }_{=1}
+      = - \frac{|J| S^2}{a_0^{d-2}} (\bm{n} \cdot \nabla^2 \bm{n})
 \end{equation}
 Thus:
 \begin{equation}
@@ -990,7 +1004,8 @@ We find that the frequency of the low-energy excitations of a quantum ferromagne
 
 Consider a spin chain with an even number of sites $N$; we can write down the action of it ($J=|J|$):
 \begin{equation}
-S_m[\bm{n}] = S \sum_{i}^N S_{WZ}[\bm{n}] - \int \mathrm{d}t \sum_{i}^N J S^2 \bm{n}(i,t) \cdot \bm{n}(i+1, t)
+    \label{eq:action_afm}
+    S_M[\bm{n}] = S \sum_{i}^N S_{WZ}[\bm{n}] - \int \mathrm{d}t \sum_{i}^N J S^2 \bm{n}(i,t) \cdot \bm{n}(i+1, t)
 \end{equation}
 where we have assumed periodic boundary conditions.
 
@@ -998,21 +1013,22 @@ where we have assumed periodic boundary conditions.
 
 Since we expect to be close to a N\'{e}el state, we will stagger the configuration:
 \begin{equation}
-\bm{n}(j) \to (-1)^j \bm{n}(j)
+    \label{eq:staggered_configuration}
+    \bm{n}(j) \to (-1)^j \bm{n}(j)
 \end{equation}
 
-On a bipartite lattice, the substitution of $\{\text{ref}\}$ into $\{\text{ref}\}$ will change the sign of the exchange term of the action to a ferromagnetic:
+On a bipartite lattice, the substitution of \cref{eq:staggered_configuration} into \cref{eq:action_afm} will change the sign of the exchange term of the action to a ferromagnetic:
 \begin{equation}
-S_m[\bm{n}] = S \sum_{i}^N (-1)^i S_{WZ}[\bm{n}(i)] - \frac{|J|S^2}{2} \int \mathrm{d}t \sum_{i=1}^N (-1)^i \bm{n}(i,t) \cdot (-1)^{i+1} \bm{n}(i+1,t)
+S_M[\bm{n}] = S \sum_{i}^N (-1)^i S_{WZ}[\bm{n}(i)] - \frac{|J|S^2}{2} \int \mathrm{d}t \sum_{i=1}^N (-1)^i \bm{n}(i,t) \cdot (-1)^{i+1} \bm{n}(i+1,t)
 \end{equation}
 so the energy term become to:
 \begin{equation}
 S_e = \frac{|J|S^2}{2} \int \mathrm{d}t \sum_{i=1}^N \bm{n}(i,t) \bm{n}(i+1,t)
 \end{equation}
 which is similar to ferromagnetic.
-But the Wess-Zumino terms are odd under the replacement of $\{\text{ref}\}$ and thus become staggered. Thus, it is the Wess-Zumino term, a purely quantum-mechanical effect, which will distinguish ferromagnets from antiferromagnets.
+But the Wess-Zumino terms are odd under the replacement of \cref{eq:staggered_configuration} and thus become staggered. Thus, it is the Wess-Zumino term, a purely quantum-mechanical effect, which will distinguish ferromagnets from antiferromagnets.
 
-As ferromagnetic, we can split $\bm{n}$ into a slowly varying piece $\bm{m}$ plus a small rapidly varying part $a_0 \bm{l}$, so:
+As antiferromagnetic, we can split $\bm{n}$ into a slowly varying piece $\bm{m}$ plus a small rapidly varying part $a_0 \bm{l}$, so:
 \begin{equation}
 \bm{n}(i) = \bm{m}(i) + (-1)^i a_0 \bm{l}(i)
 \end{equation}
