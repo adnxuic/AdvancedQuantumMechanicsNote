@@ -642,9 +642,11 @@ In the previous discussion, we have obtained path integral formalism of a single
 
 \section{General theory}
 
-Consider a spin system in a $d$-dimensional lattice which is called Heisenberg Model:
+Consider a spin system in a $d$-dimensional lattice which is called Heisenberg Model(figure \ref{fig:HeisenbergModel}):
 \begin{equation}
-\hat{H} = J \cdot \sum_{\langle i,j \rangle} \hat{\bm{S}}_i \cdot \hat{\bm{S}}_j
+    \colorboxed{
+    \hat{H} = J \cdot \sum_{\langle i,j \rangle} \hat{\bm{S}}_i \cdot \hat{\bm{S}}_j
+    }
 \end{equation}
 where $J$ is the exchange coupling and $\hat{\bm{S}}$ is quantum spin operators. 
 The $\langle i,j \rangle$ denotes a summation over nearest-neighbor pairs.
@@ -816,7 +818,9 @@ From the figure \ref{fig:swz_variation},
 we can see that the variation of this area element $\delta(\Delta A)$ 
 with respect to a small change in path $\delta \bm{n}$ is given by:
 \begin{equation}
-\bm{n} \cdot \delta(\Delta A) = \delta \bm{n} \times (\frac{\partial \bm{n}}{\partial t}) \mathrm{d}t
+    \colorboxed{
+    \bm{n} \cdot \delta(\Delta A) = \delta \bm{n} \times (\frac{\partial \bm{n}}{\partial t}) \mathrm{d}t
+    }
 \end{equation}
 
 \input{Tikz/SwzVariationDiagram.tex}
@@ -828,11 +832,11 @@ We product $\bm{n}$ on the both sides of the equation :
 &= - \delta \bm{n} (\bm{n} \times \frac{\partial \bm{n}}{\partial t}) \mathrm{d}t.
 \end{aligned}
 \end{equation}
+
 Therefore, the variation of the Wess-Zumion part of the action is:
 \begin{equation}
-\begin{aligned}
-\delta (\int \mathrm{d}^d x S_{\mathrm{WZ}}(\bm{n})) &= \frac{S}{a_0^d} \int \mathrm{d}^d x [\delta \bm{n} \cdot (\bm{n} \times \frac{\partial \bm{n}}{\partial t})]
-\end{aligned}
+\delta (\int \mathrm{d}^d x S_{\mathrm{WZ}}(\bm{n})) 
+= \frac{S}{a_0^d} \int \mathrm{d}t \mathrm{d}^d x [\delta \bm{n} \cdot (\bm{n} \times \frac{\partial \bm{n}}{\partial t})]
 \end{equation}
 This implies the functional derivative is:
 \begin{equation}
@@ -915,7 +919,9 @@ Simplified to:
 \end{equation}
 We can get the Landau-Lifshitz equation:
 \begin{equation}
-\frac{\partial \bm{n}}{\partial t} = |J| S a_0^2 (\bm{n} \times \nabla^2 \bm{n}).
+    \colorboxed{
+    \frac{\partial \bm{n}}{\partial t} = |J| S a_0^2 (\bm{n} \times \nabla^2 \bm{n}).
+    }
 \end{equation}
 
 From this equation, we can know that the spins move in a precessional fashion with an angular velocity $\bm{\Omega}$ given by:
@@ -994,7 +1000,9 @@ we can get:
 \end{equation}
 So we obtain the dispersion relation for ferromagnetic spin waves:
 \begin{equation}
-|\omega| \approx |J|S a_0^2 |\bm{p}|^2
+    \colorboxed{
+    |\omega| \approx |J|S a_0^2 |\bm{p}|^2
+    }
 \end{equation}
 We find that the frequency of the low-energy excitations of a quantum ferromagnetic scales as the square of the momentum.
 
@@ -1026,7 +1034,9 @@ so the energy term become to:
 S_e = \frac{|J|S^2}{2} \int \mathrm{d}t \sum_{i=1}^N \bm{n}(i,t) \bm{n}(i+1,t)
 \end{equation}
 which is similar to ferromagnetic.
-But the Wess-Zumino terms are odd under the replacement of \cref{eq:staggered_configuration} and thus become staggered. Thus, it is the Wess-Zumino term, a purely quantum-mechanical effect, which will distinguish ferromagnets from antiferromagnets.
+But the Wess-Zumino terms become staggered under the replacement of \cref{eq:staggered_configuration}.
+Thus, it is the Wess-Zumino term, a purely quantum-mechanical effect, 
+which will distinguish ferromagnets from antiferromagnets.
 
 As antiferromagnetic, we can split $\bm{n}$ into a slowly varying piece $\bm{m}$ plus a small rapidly varying part $a_0 \bm{l}$, so:
 \begin{equation}
@@ -1054,11 +1064,12 @@ By making use of the approximation:
 &\approx a_0 \left[ \frac{\partial \bm{m}(2r)}{\partial x} + 2 \bm{l}(2r) \right] + O(a_0^2)
 \end{aligned}
 \end{equation}
-So becomes (use the similar method of area variation, see \cref{fig:antiferromagnetic_variation})
+So the geometric term becomes (use the similar method of area variation, see \cref{fig:antiferromagnetic_variation})
 \begin{equation}
 \begin{aligned}
-S \sum_i^N (-1)^i S_{WZ}[\bm{n}(i)] &\approx S \sum_{i=1}^{N/2} (\bm{n}(2r) - \bm{n}(2r-1)) [\bm{n}(2r) \times \frac{\partial \bm{n}(2r)}{\partial t}] \\
-&\approx S \sum_{i=1}^{N/2} a_0 \left[ \frac{\partial \bm{m}(2r)}{\partial x} + 2 \bm{l}(2r) \right] \left[ \bm{m}(2r) \times \frac{\partial \bm{m}(2r)}{\partial t} \right]
+S \sum_r^N (-1)^i S_{WZ}[\bm{n}(i)] 
+&\approx S \sum_{r=1}^{N/2} (\bm{n}(2r) - \bm{n}(2r-1)) [\bm{n}(2r) \times \frac{\partial \bm{n}(2r)}{\partial t}] \\
+&\approx S \sum_{r=1}^{N/2} a_0 \left[ \frac{\partial \bm{m}(2r)}{\partial x} + 2 \bm{l}(2r) \right] \left[ \bm{m}(2r) \times \frac{\partial \bm{m}(2r)}{\partial t} \right]
 \end{aligned}
 \end{equation}
 
@@ -1067,7 +1078,8 @@ S \sum_i^N (-1)^i S_{WZ}[\bm{n}(i)] &\approx S \sum_{i=1}^{N/2} (\bm{n}(2r) - \b
 Using continuum limit ($a_0 \to 0$):
 \begin{equation}
 \begin{aligned}
-\lim_{a_0 \to 0} S_g &\approx \frac{S}{2} \sum_{i=1}^N (\dots) \quad (\text{pre periodic boundary conditions}) \\
+\lim_{a_0 \to 0} S_g 
+&\approx \frac{S}{2} \sum_{r=1}^N (\dots) \quad (\text{periodic boundary conditions}) \\
 &= \frac{S}{2} \int \mathrm{d}x \mathrm{d}t (\partial_x \bm{m} + 2 \bm{l}) \cdot (\bm{m} \times \partial_t \bm{m})
 \end{aligned}
 \end{equation}
@@ -1076,7 +1088,7 @@ Thus, it can be simplified to:
 \begin{equation}
 S_g \approx \frac{S}{2} \int \mathrm{d}x \mathrm{d}t \cdot \bm{m} (\partial_t \bm{m} \times \partial_x \bm{m}) + S \int \mathrm{d}x \mathrm{d}t \bm{l} (\bm{m} \times \partial_t \bm{m})
 \end{equation}
-This term comes from alternating sum of WZ terms:
+This term comes from alternating sum of WZ terms.
 Similarly, the continuum limit of the energy terms can also be found to be given by:
 \begin{equation}
 \begin{aligned}
@@ -1090,7 +1102,7 @@ Similarly, the continuum limit of the energy terms can also be found to be given
 \end{equation}
 So the total Lagrangian density involving both the order parameter $\bm{m}$ and $\bm{l}$:
 \begin{equation}
-\mathcal{L}_m(\bm{m}, \bm{l}) = -2 a_0 |J| S^2 \bm{l}^2 + S \bm{l} (\bm{m} \times \partial_t \bm{m}) - \frac{a_0 |J| S^2}{2} (\partial_x \bm{m})^2 + \frac{S}{2} \bm{m} \cdot (\partial_t \bm{m} \times \partial_x \bm{m})
+\mathcal{L}_M(\bm{m}, \bm{l}) = -2 a_0 |J| S^2 \bm{l}^2 + S \bm{l} (\bm{m} \times \partial_t \bm{m}) - \frac{a_0 |J| S^2}{2} (\partial_x \bm{m})^2 + \frac{S}{2} \bm{m} \cdot (\partial_t \bm{m} \times \partial_x \bm{m})
 \end{equation}
 where $\bm{m}$ is the order parameter field and $\bm{l}$ roughly represents the average spin field.
 
@@ -1098,7 +1110,7 @@ The Lagrangian has a quadratic term for $\bm{l}$:
 \begin{equation}
 \mathcal{L}_{\bm{l}} = -2 a_0 |J| S^2 \bm{l}^2 + S (\bm{m} \times \partial_t \bm{m}) \bm{l}.
 \end{equation}
-To integrate out $\bm{l}$, we minimize the action with respect to $\bm{l}$
+To integrate out $\bm{l}$, we minimize the action with respect to $\bm{l}$:
 \begin{equation}
 \frac{\partial \mathcal{L}_{\bm{l}}}{\partial \bm{l}} = -4 a_0 |J| S^2 \bm{l} + S (\bm{m} \times \partial_t \bm{m}) = 0
 \end{equation}
@@ -1115,9 +1127,10 @@ Now we subsitute the expression for $\bm{l}$ found above back into $\mathcal{L}_
 \end{equation}
 Final we can combine the new term with original term that do not depend on $\bm{l}$:
 \begin{equation}
+    \label{eq:lagrangian_density}
     \begin{aligned}
     \mathcal{L}(\bm{m}) &= \frac{1}{8 a_0 J} (\partial_t \bm{m})^2 - \frac{a_0 J S^2}{2} (\partial_x \bm{m})^2 + \frac{S}{2} \bm{m} (\partial_t \bm{m} \times \partial_x \bm{m}) \\
-    &= \frac{1}{2g} \left[ \frac{1}{v_s} (\partial_t \bm{m})^2 - v_s (\partial_x \bm{m})^2 \right] + \underbrace{\frac{\theta}{8\pi} \varepsilon_{\mu\nu} \bm{m} (\partial_\mu \bm{m} \times \partial_\nu \bm{m})}_{\text{Einstein summation}}
+    &= \frac{1}{2g} \left[ \frac{1}{v_s} (\partial_t \bm{m})^2 - v_s (\partial_x \bm{m})^2 \right] + \underbrace{\frac{\theta}{8\pi} \epsilon_{\mu\nu} \bm{m} (\partial_\mu \bm{m} \times \partial_\nu \bm{m})}_{\text{Einstein summation}}
     \end{aligned}
     \end{equation}
 where $g$ and $v_s$ are respectively the coupling constant and spin-wave velocity:
@@ -1128,13 +1141,15 @@ v_s = 2 a_0 |J| S
 \end{cases}
 \end{equation}
 
-The last term in \{ref\} has topological significance. We have chosen the normalization so that the coupling constant $\theta$ is given by:
+The last term in \cref{eq:lagrangian_density} has topological significance. 
+We have chosen the normalization so that the coupling constant $\theta$ is given by:
 \begin{equation}
 \theta = 2 \pi S
 \end{equation}
-The tensor $\varepsilon_{\mu\nu}$ is the usual Levi-Civita antisymmetric tensor in two dimensions ($\mu,\nu=t,x$. ($t \to 0, x \to 1$))
+The tensor $\epsilon_{\mu\nu}$ is the usual Levi-Civita antisymmetric tensor in two dimensions 
+($\mu,\nu=t,x(t \to 0, x \to 1)$):
 \begin{equation}
-\varepsilon_{\mu\nu} = \begin{cases}
+\epsilon_{\mu\nu} = \begin{cases}
 1 & (\mu,\nu) = (0,1) \\
 -1 & (\mu,\nu) = (1,0) \\
 0 & \text{otherwise}.
@@ -1151,23 +1166,30 @@ Go back to Euclidean spacetime ($\mathrm{i} S_M \to -S_E$):
 \end{equation}
 So we can get the Lagrangian density $\mathcal{L}_E$ of Euclidean sector ($x_2 = \mathrm{i}t = \mathrm{i}x_0$)
 \begin{equation}
-\mathcal{L}_E = \frac{1}{2g} [(\partial_1 \bm{m})^2 + (\partial_2 \bm{m})^2] + \frac{\mathrm{i}\theta}{8\pi} \epsilon_{ij} \bm{m} \cdot (\partial_i \bm{m} \times \partial_j \bm{m})
+    \colorboxed{
+    \mathcal{L}_E = \frac{1}{2g} [(\partial_1 \bm{m})^2 + (\partial_2 \bm{m})^2] + 
+    \frac{\mathrm{i}\theta}{8\pi} \epsilon_{ij} \bm{m} \cdot (\partial_i \bm{m} \times \partial_j \bm{m})
+    }
 \end{equation}
 where $i,j = 1,2$.
 
-We now define the Pontryagin index or topological charge (or winding number) $Q$ of the Euclidean space spin configuration $\{\bm{m}(\bm{x})\}$ by the expression:
+We now define the Pontryagin index or topological charge (or winding number) $\mathcal{Q}$ 
+of the Euclidean space spin configuration $\{\bm{m}(\bm{x})\}$ by the following expression:
 \begin{equation}
-\begin{aligned}
-\mathcal{Q} &= \frac{1}{8\pi} \int \mathrm{d}^2x \, \epsilon_{ij} \bm{m} (\partial_i \bm{m} \times \partial_j \bm{m}) \\
-&= \frac{1}{4\pi} \int \mathrm{d}^2x \, \bm{m} (\partial_1 \bm{m} \times \partial_2 \bm{m})
-\end{aligned}
+    \colorboxed{
+    \begin{aligned}
+    \mathcal{Q} &= \frac{1}{8\pi} \int \mathrm{d}^2x \, \epsilon_{ij} \bm{m} (\partial_i \bm{m} \times \partial_j \bm{m}) \\
+    &= \frac{1}{4\pi} \int \mathrm{d}^2x \, \bm{m} (\partial_1 \bm{m} \times \partial_2 \bm{m})
+    \end{aligned}
+    }
 \end{equation}
 We impose the boundary condition that the Euclidean action be finite. This is equivalent to the requirement that asymptotically $\bm{m}$ becomes a constant vector $\bm{m}_0$ at spatial-time infinity:
 \begin{equation}
 \lim_{|\bm{x}|\to\infty} \bm{m}(\bm{x}) = \bm{m}_0
 \end{equation}
 Thus, the 2D Euclidean space-time is isomorphic to a sphere $S_2$ since the fields are identified with $\bm{m}_0$ at the point of infinity.
-However, the order parameter manifold ("target space") is also isomorphic to a sphere $S_2$, since the constraint $\bm{m}^2=1$ has to be satisfied everywhere.
+However, the order parameter manifold ("target space") is also isomorphic to a sphere $S_2$, 
+since the constraint $\bm{m}^2=1$ has to be satisfied everywhere(see figure \ref{fig:topological_mapping}).
 
 \input{Tikz/Topological_Mapping.tex}
 
@@ -1175,7 +1197,9 @@ The topological charge $\mathcal{Q}$ is in the sense that it counts how many tim
 
 So the topological term of action is:
 \begin{equation}
-S_{\text{top}} = \mathrm{e}^{\mathrm{i} \cdot 2\pi S \mathcal{Q}} = (-1)^{2S\mathcal{Q}}
+    \colorboxed{
+    S_{\text{top}} = \mathrm{e}^{\mathrm{i} \cdot 2\pi S \mathcal{Q}} = (-1)^{2S\mathcal{Q}}
+    }
 \end{equation}
 Thus:
 \begin{equation}
