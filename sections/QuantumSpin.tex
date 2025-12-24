@@ -18,9 +18,9 @@ where $\opI$ is the identity operator in $\hilbert$.
 
 But this simple, discrete basis has two drawbacks:
 \begin{itemize}
-    \item This discrete parametrized complete-set 
-    is not convenient for constructing the path integral formalism of quantum spins.
-    \item $SU(2)$ spin symmetry is broken either explicitly or not manifest.
+    \item This discretely parameterized complete set
+    is not convenient for constructing the path-integral formalism for quantum spins.
+    \item The $SU(2)$ spin symmetry is either explicitly broken or not manifest.
 \end{itemize}
 
 \section{Spin Coherent States}
@@ -301,21 +301,21 @@ Consider the quantum amplitude ($\hbar=1$):
 \langle n_f | \mathrm{e}^{-\mathrm{i}\hat{H}(t_f-t_i)} |n_i\rangle \xrightarrow{\mathrm{i}(t_f-t_i) \rightarrow T} \langle n_f | \mathrm{e}^{-\hat{H}T} |n_i\rangle
 \end{equation}
 
-First, consider $\hat{H}$ that is an isolated spin
-we divide the total time interval $T$ into $N$ small slices of
+First, consider the case where $\hat{H}$ describes an isolated spin.
+We divide the total time interval $T$ into $N$ small slices of
 duration $\Delta t = \frac{T}{N}$. In the limit $N \to \infty$ and $\Delta t \to 0$, the time evolution
 operator can be written as a product of infinitesimal operators:
 \begin{equation}
 \mathrm{e}^{-\mathrm{i}\hat{H}T} = \left( \mathrm{e}^{-\mathrm{i}\hat{H}\Delta t} \right)^N
 \end{equation}
 
-The amplitude is the:
+The amplitude is then:
 \begin{equation}
 \langle n_f | \mathrm{e}^{-\mathrm{i}\hat{H}\Delta t} \dots \mathrm{e}^{-\mathrm{i}\hat{H}\Delta t} |n_i\rangle
 \end{equation}
 
-We now insert the resolution of identity operator: let's label our
-initial state as $|n_0\rangle=|n_i\rangle$ and final state as $|n_N\rangle=|n_f\rangle$
+We now insert the resolution of the identity operator. Let us label our
+initial state as $|n_0\rangle=|n_i\rangle$ and final state as $|n_N\rangle=|n_f\rangle$.
 \begin{equation}
 \begin{aligned}
 K &= \langle n_N | \mathrm{e}^{-\mathrm{i}\hat{H}\Delta t} \cdot \left( \int \frac{\mathrm{d}\bm{n}_{N-1}}{2\pi} |n_{N-1}\rangle\langle n_{N-1}| \right) \cdot \mathrm{e}^{-\mathrm{i}\hat{H}\Delta t} \dots \mathrm{e}^{-\mathrm{i}\hat{H}\Delta t} |n_0\rangle \\
@@ -335,8 +335,8 @@ The matrix element becomes:
 \end{aligned}
 \end{equation}
 
-let's represent the state at time $t_l$ as a small deviation
-from the state at $t_{l-1}$
+Let us represent the state at time $t_l$ as a small deviation
+from the state at $t_{l-1}$.
 \begin{equation}
 |n_l\rangle \approx |n_{l-1}\rangle + \delta|n_{l-1}\rangle = |n_{l-1}\rangle + \frac{\mathrm{d}|n(t)\rangle}{\mathrm{d}t}\Big|_{t=t_{l-1}} \cdot \Delta t
 \end{equation}
@@ -353,21 +353,21 @@ This can be written in more suggestive exponential form for small $\Delta t$:
 \begin{equation}
 \langle n_l | n_{l-1}\rangle \approx \mathrm{e}^{\langle \dot{n}_{l-1} | n_{l-1}\rangle \cdot \Delta t}
 \end{equation}
-where, $\langle \dot{n}_{l-1}| = \frac{\mathrm{d}\langle n(t)|}{\mathrm{d}t}\Big|_{t=t_{l-1}}$
+where $\langle \dot{n}_{l-1}| = \frac{\mathrm{d}\langle n(t)|}{\mathrm{d}t}\Big|_{t=t_{l-1}}$.
 
-By the way, from the equation:
+From the normalization condition:
 \begin{equation}
 \frac{\mathrm{d}}{\mathrm{d}t}\langle n_l | n_l\rangle = \left( \frac{\mathrm{d}}{\mathrm{d}t}\langle n_l| \right) |n_l\rangle + \langle n_l | \left( \frac{\mathrm{d}}{\mathrm{d}t}|n_l\rangle \right) = 0
 \end{equation}
 
-we can get:
+we obtain:
 \begin{equation}
 \begin{aligned}
 \langle \dot{n}_l | n_l\rangle &= - \langle n_l | \dot{n}_l\rangle \\
 &= - \langle \dot{n}_l | n_l\rangle^*
 \end{aligned}
 \end{equation}
-So $\langle \dot{n}_l | n_l\rangle$ is purely imaginary
+So $\langle \dot{n}_l | n_l\rangle$ is purely imaginary.
 
 Because we only retain first-order small quantities, so the
 second term of matrix element becomes:
@@ -443,14 +443,14 @@ S[n(t)] &= -\frac{1}{2} \int_{t_i}^{t_f} \mathrm{d}t \cdot \dot{\varphi} (1-\cos
 \end{aligned}
 \end{equation}
 
-Because $\theta$ and $\varphi$ are the functions depending on $t$. we can express $\theta$ as a function of $\varphi$
+Because $\theta$ and $\varphi$ depend on $t$, we can express $\theta$ as a function of $\varphi$.
 
-We can rewrite the function $1-\cos\theta(\varphi)$ as a integral:
+We can rewrite the function $1-\cos\theta(\varphi)$ as an integral:
 \begin{equation}
 1-\cos\theta(\varphi) = \int_0^{\theta(\varphi)} \mathrm{d}\theta \cdot \sin\theta
 \end{equation}
 
-So the action can be written as a area integral:
+So the action can be written as an area integral:
 \begin{equation}
     \colorboxed{
     \begin{aligned}
@@ -461,13 +461,13 @@ So the action can be written as a area integral:
     }
 \end{equation}
 where $\gamma$ is the path from $|n(t_i)\rangle=|n_i\rangle$ to $|n(t_f)\rangle=|n_f\rangle$
-and $A_{\gamma}$ is area enclosed by three points on the sphere ($|\uparrow\rangle, |n_i\rangle, |n_f\rangle$). Obviously, $A_{\gamma}$ depends on where the North pole is defined, which is kind of "gauge-dependence".
-If we multiply $|n(t)\rangle$ by a overall phase:
+and $A_{\gamma}$ is the area enclosed by three points on the sphere ($|\uparrow\rangle, |n_i\rangle, |n_f\rangle$). Obviously, $A_{\gamma}$ depends on where the North pole is defined, which is a kind of "gauge dependence".
+If we multiply $|n(t)\rangle$ by an overall phase:
 \begin{equation}
 |n(t)\rangle \longrightarrow \mathrm{e}^{\mathrm{i}\delta} |n(t)\rangle
 \end{equation}
 
-$S[n(t)]$ will be added an other term:
+$S[n(t)]$ acquires an additional term:
 \begin{equation}
 \begin{aligned}
 S'[n(t)] &= \mathrm{i} \int_{t_i}^{t_f} \mathrm{d}t \langle n(t)| ( \mathrm{e}^{\mathrm{i}\delta} \frac{\mathrm{d}}{\mathrm{d}t} |n(t)\rangle + \mathrm{i}\dot{\delta} \mathrm{e}^{\mathrm{i}\delta} |n(t)\rangle ) \\
@@ -480,12 +480,12 @@ To be more precise, $\delta$ is a function of $\theta$ and $\varphi$:
 \delta(t_f) - \delta(t_i) = \delta(\theta_f, \varphi_f) - \delta(\theta_i, \varphi_i)
 \end{equation}
 
-So if we choose different gauge, $\Delta\delta$ is different
-and $S[n(t)]$ is gauge-dependence. 
+If we choose a different gauge, $\Delta\delta$ changes,
+so $S[n(t)]$ is gauge-dependent.
 
 \input{Tikz/IntegralPath.tex}
 
-But if weconsider a close path ($n_f=n_i$), the $S[n(t)]$ is
+However, for a closed path ($n_f=n_i$), $S[n(t)]$ is
 gauge-independent:
 \begin{equation}
 \begin{aligned}
@@ -493,8 +493,8 @@ gauge-independent:
 &= 2\pi \cdot N \quad (N \in \mathbb{Z})
 \end{aligned}
 \end{equation}
-The reason as follow: To ensure that the transformed
-basis is single-valued, which
+The reason is as follows: to ensure that the transformed
+basis is single-valued, we require
 \begin{equation}
 \mathrm{e}^{\mathrm{i}\delta_i} |n_i\rangle \xrightarrow{\text{close path}} \mathrm{e}^{\mathrm{i}\delta_f} |n_f\rangle = \mathrm{e}^{\mathrm{i}\delta_i} |n_i\rangle
 \end{equation}
@@ -507,13 +507,12 @@ integer multiples of $2\pi$ after completing a full cycle:
 \begin{equation}
 \delta_f - \delta_i = 2\pi \cdot N \quad (N \in \mathbb{Z}).
 \end{equation}
-So for a close path, $S[n(t)]$, to be more precise,
-the geometric phase factor:
+So for a closed path, $S[n(t)]$ (more precisely, the geometric phase factor)
 \begin{equation}
 \mathrm{e}^{\mathrm{i}S'} = \mathrm{e}^{\mathrm{i}S+\mathrm{i}\Delta\delta} = \mathrm{e}^{\mathrm{i}S+2\pi N \cdot \mathrm{i}} = \mathrm{e}^{\mathrm{i}S}
 \end{equation}
-remains unchanged, or that the geometric phase $S$ is
-invariant under the model modulo $2\pi$ operation.
+remains unchanged; equivalently, the geometric phase $S$ is
+invariant modulo $2\pi$.
 
 \input{Tikz/IntegralClosePath.tex}
 
@@ -529,13 +528,13 @@ It means that:
 S_{\mathrm{WZ}} = -\iint_{A_{\gamma}} \mathrm{d}\Omega = - \iint_{A_{\gamma}} \bm{n} \cdot \mathrm{d}\bm{S}
 \end{equation}
 
-where $\bm{n}$ can regrad as the monopole's field strength whose charge is 1. 
+where $\bm{n}$ can be regarded as the monopole field strength with unit charge.
 
 \input{Tikz/monopole.tex}
 
-Because $\bm{n}$ locates on the surface of the sphere, 
-it can be the function of two parameter $t$ and $k$, 
-which form an orthonormal basis on the sphere(see figure \ref{fig:sphere_differential}). 
+Because $\bm{n}$ lies on the surface of the sphere,
+it can be a function of two parameters $t$ and $k$,
+which form an orthonormal basis on the sphere (see figure \ref{fig:sphere_differential}).
 So $\mathrm{d}\bm{S}$ can be written as:
 
 \begin{equation}
@@ -548,7 +547,7 @@ So $\mathrm{d}\bm{S}$ can be written as:
 
 \input{Tikz/SphereDifferential.tex}
 
-So the Wess-Zumion term have another expression that is broadly used:
+The Wess-Zumino term has another commonly used expression:
 
 \begin{theorem}[Wess-Zumino term]
 
@@ -641,13 +640,13 @@ In the previous discussion, we have obtained path integral formalism of a single
 
 \section{General theory}
 
-Consider a spin system in a $d$-dimensional lattice which is called Heisenberg Model(figure \ref{fig:HeisenbergModel}):
+Consider a spin system on a $d$-dimensional lattice, called the Heisenberg model (figure \ref{fig:HeisenbergModel}):
 \begin{equation}
     \colorboxed{
     \hat{H} = J \cdot \sum_{\langle i,j \rangle} \hat{\bm{S}}_i \cdot \hat{\bm{S}}_j
     }
 \end{equation}
-where $J$ is the exchange coupling and $\hat{\bm{S}}$ is quantum spin operators. 
+where $J$ is the exchange coupling and $\hat{\bm{S}}$ are quantum-spin operators.
 The $\langle i,j \rangle$ denotes a summation over nearest-neighbor pairs.
 
 \input{Tikz/HeisenbergModel.tex}
@@ -660,36 +659,36 @@ Z &= \mathrm{Tr} \mathrm{e}^{-\beta \hat{H}} \\
 \end{aligned}
 \end{equation}
 where
-$|\bm{n}_0 \rangle = \bigotimes_{i=1} |\bm{n}_0^i \rangle$ is the tensor product of all the state on the lattice.
+$|\bm{n}_0 \rangle = \bigotimes_{i=1} |\bm{n}_0^i \rangle$ is the tensor product of all states on the lattice.
 
 In the previous chapters, we have seen that we can change real time $t$ to imaginary time $\tau$:
 \begin{equation}
 \langle n_f | \mathrm{e}^{-\mathrm{i}\hat{H}(t_f-t_i)} | n_i \rangle \xrightarrow{\mathrm{i}(t_f-t_i) \to \tau} \langle n_f | \mathrm{e}^{-\hat{H}\tau} | n_i \rangle
 \end{equation}
-In this version, propagator $K$ can be written as (for closed path):
+In this version, the propagator $K$ can be written as (for a closed path):
 \begin{equation}
 K = \int D[\bm{n}(t)] \mathrm{e}^{-S_E}
 \end{equation}
 where, $S_E = -\mathrm{i} S S_{WZ} = \mathrm{i} \cdot S \cdot A_\gamma$ for $\hat{H}=0$ and
 $S_E = -\mathrm{i} S \cdot S_{WZ} + \int_{\tau_i}^{\tau_f} \langle \bm{n}(\tau) | \hat{H} | \bm{n}(\tau) \rangle \mathrm{d}\tau$ for $\hat{H} \neq 0$.
 
-Because the diagonal element of partition function and propagator have the same mathematical form, so we can use the same method to solve the diagonal elements.
+Because the diagonal element of the partition function and the propagator have the same mathematical form, we can use the same method to evaluate the diagonal elements.
 
-let's make $\Delta \tau$ equal to $\frac{\beta}{N}$ ($N$ is the slice number) 
-whose mean is that $\beta$ play a same role in the diagonal liking $\tau$ in the propagator
+Let $\Delta \tau = \frac{\beta}{N}$ ($N$ is the number of slices),
+which means that $\beta$ plays the same role as $\tau$ in the diagonal elements, analogous to $\tau$ in the propagator
 $(\tau_i \to \tau_f \Longrightarrow 0 \to \beta)$.
 
-But in many-spin system, the identity operator for the entire system is the tensor product of the identities for each site:
+But in a many-spin system, the identity operator for the entire system is the tensor product of the identities for each site:
 \begin{equation}
 \hat{\mathbb{I}}_{total} = \bigotimes_{i=1} \hat{\mathbb{I}}_i = \int \left( \prod_{i=1} \mathrm{d}^2 \bm{n}_i \right) | \bm{n}_1 \cdots \bm{n}_N \rangle \langle \bm{n}_1 \cdots \bm{n}_N |
 \end{equation}
-So the diagonal can be written as a mathematical form like propagator:
+So the diagonal element can be written in a form analogous to the propagator:
 \begin{equation}
 \langle \bm{n}_0 | \mathrm{e}^{-\beta \hat{H}} | \bm{n}_0 \rangle = \int D(\bm{n}) \cdot \mathrm{e}^{-S_E}
 \end{equation}
 where $D(\bm{n}) = \prod_i \prod_l \mathrm{d}^2 \bm{n}_i^l$. 
 
-Because diagonal likes the propagator with close path ($\langle \bm{n}_0 | \mathrm{e}^{-\beta \hat{H}} | \bm{n}_0 \rangle$ and not $\langle \bm{n}_i | \mathrm{e}^{-\beta \hat{H}} | \bm{n}_j \rangle$ for $i \neq j$), $S_E$ can be written as:
+Because the diagonal element corresponds to a closed path (i.e., $\langle \bm{n}_0 | \mathrm{e}^{-\beta \hat{H}} | \bm{n}_0 \rangle$, not $\langle \bm{n}_i | \mathrm{e}^{-\beta \hat{H}} | \bm{n}_j \rangle$ for $i \neq j$), $S_E$ can be written as:
 \begin{equation}
 S_E = \int_0^\beta \mathrm{d}\tau \langle \bm{n} | \frac{\partial}{\partial \tau} | \bm{n} \rangle + \int_0^\beta \mathrm{d}\tau \langle \bm{n} | \hat{H} | \bm{n} \rangle
 \end{equation}
@@ -744,18 +743,18 @@ let's go back to real time ($\tau \to \mathrm{i} t$):
 \end{aligned}
 \end{equation}
 
-So $\{ \sum_i S_{WZ} [\bm{n}_i] \}$ and $\{ \int_0^\beta \mathrm{d}t \sum_{\langle i,j \rangle} J \cdot \bm{n}_i \cdot \bm{n}_j \}$ can be regard as the phase term of action ($\mathrm{e}^{\frac{\mathrm{i}}{\hbar} \theta}$). Therefore, $S$ and $\frac{S^2}{\hbar}$ play the role of $\hbar$ in simple action.
-Here, if $S$ is very large, we called it Large-$S$ limit ($\hbar \ll 1$, so $\frac{1}{\hbar} \approx S \gg 1$).
-This is a semi-classical limit.
+So $\{ \sum_i S_{WZ} [\bm{n}_i] \}$ and $\{ \int_0^\beta \mathrm{d}t \sum_{\langle i,j \rangle} J \cdot \bm{n}_i \cdot \bm{n}_j \}$ can be regarded as phase terms in the action ($\mathrm{e}^{\frac{\mathrm{i}}{\hbar} \theta}$). Therefore, $S$ and $\frac{S^2}{\hbar}$ play the role of $\hbar$ in the simple action.
+Here, if $S$ is very large, we call it the large-$S$ limit ($\hbar \ll 1$, so $\frac{1}{\hbar} \approx S \gg 1$).
+This is a semiclassical limit.
 
 \section{Quantum Ferromagnetism}
 
-let's consider a ferromagnetism system whose $J$ equal to $-|J|$. So the action is:
+Let us consider a ferromagnetic system with $J = -|J|$. The action is:
 \begin{equation}
 S_M = S \sum_i S_{WZ} [\bm{n}_i] + |J|S^2 \sum_{\langle i,j \rangle} \int_0^\beta \mathrm{d}t \bm{n}_i \cdot \bm{n}_j
 \end{equation}
 
-Because $|\bm{n}|^2 = 1$, so we can rewrite the term $\bm{n}_i \cdot \bm{n}_j$ as:
+Since $|\bm{n}|^2 = 1$, we can rewrite the term $\bm{n}_i \cdot \bm{n}_j$ as:
 \begin{equation}
 \begin{aligned}
 -\bm{n}_i \cdot \bm{n}_j &= \frac{1}{2} (|\bm{n}_i|^2 -2 \bm{n}_i \cdot \bm{n}_j + |\bm{n}_j|^2) - 1 \\
@@ -768,12 +767,12 @@ So the energy term is:
 S_e = - \frac{|J|S^2}{2} \sum_{\langle i,j \rangle} \int_0^\beta \mathrm{d}t (\bm{n}_i - \bm{n}_j)^2 + |J|S^2 \sum_{\langle i,j \rangle} \int_0^\beta \mathrm{d}t
 \end{equation}
 
-The second term of $S_e$ is the constant term (global phase), so we can drop it and $S_M$ can be written as:
+The second term of $S_e$ is a constant (a global phase), so we can drop it and $S_M$ can be written as:
 \begin{equation}
 S_M = S \sum_i S_{WZ} [\bm{n}_i] - \frac{|J|S^2}{2} \sum_{\langle i,j \rangle} \int_0^\beta \mathrm{d}t (\bm{n}_i - \bm{n}_j)^2
 \end{equation}
 
-Next, we take the continuum limit where the lattice sums become integrals
+Next, we take the continuum limit, where the lattice sums become integrals.
 \begin{equation}
 \sum_i \to \int \frac{\mathrm{d}^d x}{a_0^d}
 \end{equation}
@@ -804,11 +803,11 @@ To handle this, we introduce a Lagrange multiplier field $\lambda$. So the total
 \begin{equation}
 S_{\mathrm{tot}} = S_M + \int \mathrm{d}^d x \mathrm{d}t \cdot \frac{\lambda}{2}(\bm{n}^2 - 1)
 \end{equation}
-Now, we can safely solve the variation equation below:
+Now we can safely solve the variation equation below:
 \begin{equation}
 \delta S_{\mathrm{tot}} = 0
 \end{equation}
-We first need to variation of the Wess-Zumion term $\delta S_{\mathrm{WZ}}$. 
+We first need the variation of the Wess-Zumino term $\delta S_{\mathrm{WZ}}$. 
 Geometrically, 
 the $S_{\mathrm{WZ}}$ is proportional to the area swept out by the spin vector on the unit sphere
 (see figure \ref{fig:swz_variation}).
@@ -824,7 +823,7 @@ with respect to a small change in path $\delta \bm{n}$ is given by:
 
 \input{Tikz/SwzVariationDiagram.tex}
 
-We product $\bm{n}$ on the both sides of the equation :
+We take the cross product with $\bm{n}$ on both sides of the equation:
 \begin{equation}
 \begin{aligned}
 \delta(\Delta A) &= \bm{n} (\delta \bm{n} \times \frac{\partial \bm{n}}{\partial t}) \mathrm{d}t \\
@@ -832,7 +831,7 @@ We product $\bm{n}$ on the both sides of the equation :
 \end{aligned}
 \end{equation}
 
-Therefore, the variation of the Wess-Zumion part of the action is:
+Therefore, the variation of the Wess-Zumino part of the action is:
 \begin{equation}
 \delta (\int \mathrm{d}^d x S_{\mathrm{WZ}}(\bm{n})) 
 = \frac{S}{a_0^d} \int \mathrm{d}t \mathrm{d}^d x [\delta \bm{n} \cdot (\bm{n} \times \frac{\partial \bm{n}}{\partial t})]
@@ -893,7 +892,7 @@ Thus:
 \begin{equation}
 \lambda = - \frac{|J|S^2}{a_0^{d-2}} (\bm{n} \cdot \nabla^2 \bm{n})
 \end{equation}
-Now, substitute the $\lambda$ back into equation:
+Now, substitute $\lambda$ back into the equation:
 \begin{equation}
 \frac{S}{a_0^d} \cdot (\bm{n} \times \frac{\partial \bm{n}}{\partial t}) - [\frac{|J|S^2}{a_0^{d-2}} (\bm{n} \cdot \nabla^2 \bm{n})] \bm{n} = - \frac{|J|S^2}{a_0^{d-2}} \nabla^2 \bm{n}
 \end{equation}
@@ -923,7 +922,7 @@ We can get the Landau-Lifshitz equation:
     }
 \end{equation}
 
-From this equation, we can know that the spins move in a precessional fashion with an angular velocity $\bm{\Omega}$ given by:
+From this equation, we see that the spins undergo precessional motion with an angular velocity $\bm{\Omega}$ given by:
 \begin{equation}
 \bm{\Omega} = -|J|S a_0^2 \nabla^2 \bm{n}.
 \end{equation}
@@ -936,7 +935,7 @@ where $\sigma$ and $\pi_i (i=1,2)$ satisfy the constraint:
 \begin{equation}
 \sigma^2 + \bm{\pi}^2 = 1
 \end{equation}
-If the system is ordered, $\sigma \sim 1$, $|\bm{\pi}|$ is very small, which means that $\bm{\pi}$ is small fluctuation around the direction of $\sigma$.
+If the system is ordered, $\sigma \sim 1$ and $|\bm{\pi}|$ is very small, which means that $\bm{\pi}$ is a small fluctuation around the direction of $\sigma$.
 In this situation, we can treat $\sigma$ as a constant:
 \begin{equation}
 \begin{cases}
@@ -948,11 +947,11 @@ Therefore, we can linearize the Landau-Lifshitz equation:
 \begin{equation}
 \bm{n} \times \nabla^2 \bm{n} = \begin{pmatrix} \pi_1 \nabla^2 \pi_2 - \pi_2 \nabla^2 \pi_1 \\ -\sigma \nabla^2 \pi_2 \\ \sigma \nabla^2 \pi_1 \end{pmatrix}
 \end{equation}
-and we remain the one order term :
+Keeping only the leading-order term:
 \begin{equation}
 \bm{n} \times \nabla^2 \bm{n} = \begin{pmatrix} 0 \\ -\nabla^2 \pi_2 \\ \nabla^2 \pi_1 \end{pmatrix}
 \end{equation}
-So the linearizing Landau-Lifshitz equation:
+Thus, the linearized Landau-Lifshitz equations are:
 \begin{equation}
 \begin{cases}
 \partial_t \pi_1 = -|J|S a_0^2 \nabla^2 \pi_2 \\
@@ -960,11 +959,11 @@ So the linearizing Landau-Lifshitz equation:
 \end{cases}
 \end{equation}
 
-We look for plane wave solutions (spin wave) of the term:
+We look for plane-wave solutions (spin waves) of the form:
 \begin{equation}
 \pi_j(\bm{x}, t) = \tilde{\pi}_j e^{\mathrm{i}(\bm{p} \cdot \bm{x} - \omega t)}
 \end{equation}
-taking derivatives this ansatz converts differential operators into algebraic variables:
+Taking derivatives of this ansatz converts differential operators into algebraic variables:
 \begin{equation}
 \begin{cases}
 \partial_t \to -\mathrm{i}\omega \\
@@ -978,14 +977,14 @@ Substituting these into the linearized equations:
 -\mathrm{i}\omega \tilde{\pi}_2 = -(|J|S a_0^2 |\bm{p}|^2) \tilde{\pi}_1
 \end{cases}
 \end{equation}
-let $A = |J|S a_0^2 p^2$, the system become:
+Let $A = |J|S a_0^2 p^2$; the system becomes:
 \begin{equation}
 \begin{cases}
 -\mathrm{i}\omega \tilde{\pi}_1 - A \tilde{\pi}_2 = 0 \\
 A \tilde{\pi}_1 - \mathrm{i}\omega \tilde{\pi}_2 = 0
 \end{cases}
 \end{equation}
-for a non-trivial solution $(\tilde{\pi}_1, \tilde{\pi}_2 \neq 0)$, the determinant of the coefficient matrix must be zero:
+For a non-trivial solution $(\tilde{\pi}_1, \tilde{\pi}_2 \neq 0)$, the determinant of the coefficient matrix must be zero:
 \begin{equation}
 \begin{vmatrix}
 -\mathrm{i}\omega & -A \\
@@ -993,7 +992,7 @@ A & -\mathrm{i}\omega
 \end{vmatrix} = 0
 \end{equation}
 
-we can get:
+we obtain:
 \begin{equation}
 \omega = \pm A.
 \end{equation}
@@ -1007,9 +1006,9 @@ We find that the frequency of the low-energy excitations of a quantum ferromagne
 
 \input{Tikz/SpinWave.tex}
 
-\section{Quantum Antiferromagnetic of one-dimension}
+\section{Quantum Antiferromagnetism in One Dimension}
 
-Consider a spin chain with an even number of sites $N$; we can write down the action of it ($J=|J|$):
+Consider a spin chain with an even number of sites $N$; we can write down its action ($J=|J|$):
 \begin{equation}
     \label{eq:action_afm}
     S_M[\bm{n}] = S \sum_{i}^N S_{WZ}[\bm{n}] - \int \mathrm{d}t \sum_{i}^N J S^2 \bm{n}(i,t) \cdot \bm{n}(i+1, t)
@@ -1037,7 +1036,7 @@ But the Wess-Zumino terms become staggered under the replacement of \cref{eq:sta
 Thus, it is the Wess-Zumino term, a purely quantum-mechanical effect, 
 which will distinguish ferromagnets from antiferromagnets.
 
-As antiferromagnetic, we can split $\bm{n}$ into a slowly varying piece $\bm{m}$ plus a small rapidly varying part $a_0 \bm{l}$, so:
+For an antiferromagnet, we can split $\bm{n}$ into a slowly varying piece $\bm{m}$ plus a small, rapidly varying part $a_0 \bm{l}$, so:
 \begin{equation}
 \bm{n}(i) = \bm{m}(i) + (-1)^i a_0 \bm{l}(i)
 \end{equation}
@@ -1117,14 +1116,14 @@ so we solve for $\bm{l}$:
 \begin{equation}
 \bm{l} = \frac{1}{4 a_0 |J| S} (\bm{m} \times \partial_t \bm{m})
 \end{equation}
-Now we subsitute the expression for $\bm{l}$ found above back into $\mathcal{L}_{\bm{l}}$:
+Now we substitute the expression for $\bm{l}$ found above back into $\mathcal{L}_{\bm{l}}$:
 \begin{equation}
 \begin{aligned}
 \mathcal{L}_{\bm{l}}^{\text{eff}} &= \frac{1}{8 a_0 |J|} (\bm{m} \times \partial_t \bm{m})^2 \quad (\bm{m} \perp \partial_t \bm{m} \text{ because } \bm{m} \text{ is on the sphere}) \\
 &= \frac{1}{8 a_0 |J|} (\partial_t \bm{m})^2
 \end{aligned}
 \end{equation}
-Final we can combine the new term with original term that do not depend on $\bm{l}$:
+Finally, we can combine the new term with the original terms that do not depend on $\bm{l}$:
 \begin{equation}
     \label{eq:lagrangian_density}
     \begin{aligned}
@@ -1132,7 +1131,7 @@ Final we can combine the new term with original term that do not depend on $\bm{
     &= \frac{1}{2g} \left[ \frac{1}{v_s} (\partial_t \bm{m})^2 - v_s (\partial_x \bm{m})^2 \right] + \underbrace{\frac{\theta}{8\pi} \epsilon_{\mu\nu} \bm{m} (\partial_\mu \bm{m} \times \partial_\nu \bm{m})}_{\text{Einstein summation}}
     \end{aligned}
     \end{equation}
-where $g$ and $v_s$ are respectively the coupling constant and spin-wave velocity:
+where $g$ and $v_s$ are the coupling constant and the spin-wave velocity, respectively:
 \begin{equation}
 \begin{cases}
 g = \frac{2}{S} \\
