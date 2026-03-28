@@ -1,0 +1,510 @@
+\chapter{Relativistic Quantum Mechanics.}
+
+\section{Relativistic wave function for Spin-0 particles.}
+The klein-Gordon Equation.
+
+The description of phenomena at high energies requires the investigation of relativistic wave equation, which means equations which are invariant under Lorentz transformations.
+There are several concepts:
+\begin{enumerate}
+    \item spatial and temporal coordinates have to be treated equally within the theory.
+    \item $\Delta x \sim \frac{\hbar}{\Delta p} \sim \frac{\hbar}{m_0 c}$, so a relativistic particle cannot be localized more accurately than $\approx \frac{\hbar}{m_0 c}$. If you try to squeeze a single particle into a space smaller than a certain limit, the uncertainty principle cause its energy to fluctuate so widely that the extra energy to literally create new paticle-antiparticle pairs out of the vaccum. Therefore, you can only think of a particle as a single, isolated "free particle" if you don't try to measure its location more precisely than its compton wavelength $\lambda_c = \frac{\hbar}{m_0 c}$
+    \item The time is also uncertain $\Delta t \sim \frac{\Delta x}{c} > \frac{\hbar}{m_0 c^2}$. Because of the finite speed of light, a spatial smear guarantees a temporal smear. You cannot define a perfectly "fixed time $t$" accross the entire spread of the particle.
+    \item At relativistic energies particle conservation is no longer a valid assumption. A relativistic theory must be able to describe pair creation, vacuum polarization, particle conversion, et.
+\end{enumerate}
+
+First we shall remark on the notation used
+metric tensor:
+\begin{equation}
+g_{\mu\nu} = \begin{pmatrix} 1 & & & \\ & -1 & & \\ & & -1 & \\ & & & -1 \end{pmatrix} \quad \text{and} \quad g^{\mu\nu} = \begin{pmatrix} 1 & & & \\ & -1 & & \\ & & -1 & \\ & & & -1 \end{pmatrix}
+\end{equation}
+
+contravariant four-vector:
+\begin{equation}
+\begin{cases}
+x^\mu = \{ct, x, y, z\} \\
+x_\mu = \{ct, -x, -y, -z\}
+\end{cases}
+\end{equation}
+
+the indices can be "raised" to give:
+\begin{equation}
+x^\mu = g^{\mu\nu} x_\nu
+\end{equation}
+
+four-momentum vector:
+\begin{equation}
+p^\mu = \left\{\frac{E}{c}, p_x, p_y, p_z\right\}
+\end{equation}
+
+four-momentum operator:
+\begin{equation}
+\hat{p}^\mu = \mathrm{i}\hbar \frac{\partial}{\partial x_\mu} \equiv \mathrm{i}\hbar \nabla^\mu = \mathrm{i}\hbar \left\{\frac{\partial}{\partial(ct)}, -\frac{\partial}{\partial x}, -\frac{\partial}{\partial y}, -\frac{\partial}{\partial z}\right\}
+\end{equation}
+
+the commutation relations of momentum and position:
+\begin{equation}
+\begin{aligned}
+[\hat{p}^\mu, x^\nu] \psi &= \mathrm{i}\hbar \left[ \frac{\partial}{\partial x_\mu}, g^{\nu\sigma} x_\sigma \right] \psi \\
+&= \mathrm{i}\hbar \left[ \frac{\partial}{\partial x_\mu} g^{\nu\sigma} x_\sigma - g^{\nu\sigma} x_\sigma \frac{\partial}{\partial x_\mu} \right] \psi \\
+&= \mathrm{i}\hbar \left( g^{\nu\sigma} x_\sigma \frac{\partial\psi}{\partial x_\mu} + g^{\nu\sigma} \psi \cdot \frac{\partial x_\sigma}{\partial x_\mu} - g^{\nu\sigma} x_\sigma \frac{\partial\psi}{\partial x_\mu} \right) \\
+&= \mathrm{i}\hbar g^{\nu\sigma} \frac{\partial x_\sigma}{\partial x_\mu} \cdot \psi \\
+&= \mathrm{i}\hbar g^{\nu\sigma} \delta^\mu_\sigma \psi \\
+&= \mathrm{i}\hbar g^{\nu\mu} \psi
+\end{aligned}
+\end{equation}
+
+so we can get:
+\begin{equation}
+[\hat{p}^\mu, x^\nu] = \mathrm{i}\hbar g^{\nu\mu} = \mathrm{i}\hbar g^{\mu\nu}
+\end{equation}
+
+the four-potential of eletromagnetic field is given by
+\begin{equation}
+A^\mu = \{A_0, A_x, A_y, A_z\}
+\end{equation}
+
+the electromagnetic field tensor follows in the following way:
+\begin{equation}
+F^{\mu\nu} = \partial^\nu A^\mu - \partial^\mu A^\nu = \begin{pmatrix} 0 & E_x & E_y & E_z \\ -E_x & 0 & B_z & -B_y \\ -E_y & -B_z & 0 & B_x \\ -E_z & B_y & -B_x & 0 \end{pmatrix} \quad (c=1)
+\end{equation}
+
+The klein-Gordon Equation
+
+The Schrödinger equation:
+\begin{equation}
+\mathrm{i}\hbar \frac{\partial}{\partial t} \psi = \left[ -\frac{\hbar^2}{2m_0} \nabla^2 + V(x) \right] \psi
+\end{equation}
+
+corresponds to the nonrelativistic energy relation in operator forms:
+\begin{equation}
+\hat{E} = \frac{\hat{p}^2}{2m_0} + V(x) \quad \text{and} \quad \hat{E} = \mathrm{i}\hbar \frac{\partial}{\partial t}
+\end{equation}
+
+In order to obtain a relativistic wave function we start by considering free particles with the relativistic relation:
+\begin{equation}
+\begin{aligned}
+E^2 &= (cp)^2 + (m_0 c^2)^2 \\
+\Rightarrow p^\mu p_\mu &= (m_0 c)^2
+\end{aligned}
+\end{equation}
+
+We replace the four-momentum $p^\mu$ by the four-momentum operator and get the klein-Gordon equation for free particles:
+\begin{equation}
+\hat{p}^\mu \hat{p}_\mu \psi = m_0^2 c^2 \psi
+\end{equation}
+
+Here $m_0$ is the rest mass of the particle. We can rewrite it as:
+\begin{equation}
+\left( \frac{\partial^2}{c^2 \partial t^2} - \frac{\partial^2}{\partial x^2} - \frac{\partial^2}{\partial y^2} - \frac{\partial^2}{\partial z^2} \right) \psi = \frac{m_0^2 c^2}{\hbar^2} \psi
+\end{equation}
+
+This is similar to classical wave equation, so the free solution are of the form:
+\begin{equation}
+\begin{aligned}
+\psi &= \exp\left( \frac{-\mathrm{i}}{\hbar} p_\mu x^\mu \right) = \exp\left[ -\frac{\mathrm{i}}{\hbar} (E t - \bm{p} \cdot \bm{x}) \right]
+\end{aligned}
+\end{equation}
+
+So we have:
+\begin{equation}
+\begin{aligned}
+\hat{p}_\mu \hat{p}^\mu \exp\left( \frac{-\mathrm{i}}{\hbar} p_\mu x^\mu \right) &= m_0^2 c^2 \psi \\
+\Rightarrow p^\mu p_\mu \psi &= m_0^2 c^2 \psi \\
+\Rightarrow E^2 &= m_0^2 c^4 + c^2 \bm{p}^2
+\end{aligned}
+\end{equation}
+
+which results in:
+\begin{equation}
+E = \pm (m_0^2 c^4 + c^2 \bm{p}^2)^{\frac{1}{2}}.
+\end{equation}
+
+The negative energy are physically connected with antiparticles.
+Next we construct the four-current $j^\mu$.
+\begin{equation}
+\begin{cases}
+(\hat{p}_\mu \hat{p}^\mu - m_0^2 c^2) \psi = 0 & \text{\textcircled{1}} \\
+(\hat{p}_\mu \hat{p}^\mu - m_0^2 c^2) \psi^* = 0 & \text{\textcircled{2}}
+\end{cases}
+\end{equation}
+
+we get $(\psi^* \text{\textcircled{1}} - \psi \text{\textcircled{2}})$ :
+\begin{equation}
+\begin{aligned}
+&\psi^* (\hat{p}_\mu \hat{p}^\mu - m_0^2 c^2) \psi - \psi (\hat{p}_\mu \hat{p}^\mu - m_0^2 c^2) \psi^* \\
+&= \psi^* \hat{p}_\mu \hat{p}^\mu \psi - \psi \hat{p}_\mu \hat{p}^\mu \psi^* \\
+&= -\hbar^2 \psi^* \nabla_\mu \nabla^\mu \psi + \hbar^2 \psi \nabla_\mu \nabla^\mu \psi^* \\
+&= \hbar^2 (\psi \nabla_\mu \nabla^\mu \psi^* - \psi^* \nabla_\mu \nabla^\mu \psi) \\
+&= 0
+\end{aligned}
+\end{equation}
+
+we also have :
+\begin{equation}
+\begin{cases}
+\nabla_\mu (\psi \nabla^\mu \psi^*) = (\nabla_\mu \psi) (\nabla^\mu \psi^*) + \psi (\nabla_\mu \nabla^\mu \psi^*) \\
+\nabla_\mu (\psi^* \nabla^\mu \psi) = (\nabla_\mu \psi^*) (\nabla^\mu \psi) + \psi^* (\nabla_\mu \nabla^\mu \psi) \\
+(\nabla_\mu \psi) (\nabla^\mu \psi^*) = (\nabla_\mu \psi^*) (\nabla^\mu \psi)
+\end{cases}
+\end{equation}
+
+So we obtain :
+
+\begin{equation}
+\begin{aligned}
+&\psi \nabla_\mu \nabla^\mu \psi^* - \psi^* \nabla_\mu \nabla^\mu \psi \\
+&= \nabla_\mu (\psi \nabla^\mu \psi^* - \psi^* \nabla^\mu \psi) \\
+&= \frac{2m_0}{\mathrm{i}\hbar} \nabla_\mu j^\mu \\
+&= 0
+\end{aligned}
+\end{equation}
+
+where four-current density is
+\begin{equation}
+\begin{aligned}
+j^\mu &= \frac{\mathrm{i}\hbar}{2m_0} (\psi \nabla^\mu \psi^* - \psi^* \nabla^\mu \psi) \\
+&= \frac{\mathrm{i}\hbar}{2m_0} \left\{ \frac{1}{c} (\psi \partial_t \psi^* - \psi^* \partial_t \psi), -(\psi \nabla \psi^* - \psi^* \nabla \psi) \right\}
+\end{aligned}
+\end{equation}
+
+So we have:
+\begin{equation}
+\begin{aligned}
+\nabla_\mu j^\mu &= \frac{\partial}{\partial t} \left[ \frac{\mathrm{i}\hbar}{2m_0 c^2} (\psi \partial_t \psi^* - \psi^* \partial_t \psi) \right] + \nabla \cdot \left[ \frac{-\mathrm{i}\hbar}{2m_0} (\psi \nabla \psi^* - \psi^* \nabla \psi) \right] \\
+&= \frac{\partial}{\partial t} \rho + \nabla \cdot \bm{j} \\
+&= 0
+\end{aligned}
+\end{equation}
+
+This is the form of a continuity equation. As usual, integration over the entire configuration space yields:
+\begin{equation}
+\int_V \frac{\partial \rho}{\partial t} \mathrm{d}^3 x = \frac{\partial}{\partial t} \int_V \rho \mathrm{d}^3 x = - \int_V \nabla \cdot \bm{j} \mathrm{d}^3 x = - \int_{\partial V} \bm{j} \cdot \mathrm{d}\bm{s} = 0
+\end{equation}
+
+Hence,
+\begin{equation}
+\int_V \rho \mathrm{d}^3 x = \text{const.}
+\end{equation}
+
+So it would be a natural guess to interpret $\rho$ as a probability density.
+\begin{equation}
+\rho = \frac{\mathrm{i}\hbar}{2m_0 c^2} (\psi \partial_t \psi^* - \psi^* \partial_t \psi).
+\end{equation}
+
+\section{A Wave Equation for Spin-1/2 Particles - The Dirac Equation}
+
+The Schrödinger equation is linear in the time derivative, it is natural to try to construct a Hamiltonian that is also linear in the spatial derivatives (equality of spatial and temporal coordinates). So the desired equation has to be of the form:
+\begin{equation}
+\begin{aligned}
+\mathrm{i}\hbar \frac{\partial}{\partial t} \psi &= \underbrace{\left[ -\mathrm{i}\hbar c \cdot \left( \hat{\alpha}_1 \frac{\partial}{\partial x_1} + \hat{\alpha}_2 \frac{\partial}{\partial x_2} + \hat{\alpha}_3 \frac{\partial}{\partial x_3} \right) + \hat{\beta} m_0 c^2 \right]}_{= \hat{H}} \psi \quad \text{\textcircled{1}} \\
+&= \hat{H} \psi
+\end{aligned}
+\end{equation}
+
+We suspect that the $\hat{\alpha}_i$ are matrices and $\psi$ has to be a column vector.
+\begin{equation}
+\psi = \begin{pmatrix} \psi_1(x,t) \\ \vdots \\ \psi_N(x,t) \end{pmatrix}
+\end{equation}
+
+We shall call them spinor and assume its their dimension is $N$.
+So we have:
+\begin{equation}
+\mathrm{i}\hbar \frac{\partial}{\partial t} \psi_\sigma = \sum_{\tau=1}^N \left[ c (\hat{\alpha}_1 \hat{p}_1 + \hat{\alpha}_2 \hat{p}_2 + \hat{\alpha}_3 \hat{p}_3)_{\sigma\tau} + m_0 c^2 \hat{\beta}_{\sigma\tau} \right] \psi_\tau
+\end{equation}
+
+To fulfill the correct energy-momentum relation for relativistic free particle:
+\begin{equation}
+\hat{E}^2 = (\hat{\bm{p}}c)^2 + (m_0 c^2)^2
+\end{equation}
+
+every single component $\psi_\sigma$ of the spinor $\psi$ has to satisfy the Klein-Gorden equation:
+\begin{equation}
+-\hbar^2 \frac{\partial^2}{\partial t^2} \psi_\sigma = (-\hbar^2 c^2 \nabla^2 + m_0^2 c^4) \psi_\sigma
+\end{equation}
+
+From equation \text{\textcircled{1}}, we have :
+
+\begin{equation}
+\begin{aligned}
+-\hbar^2 \frac{\partial^2}{\partial t^2} \psi &= \left( c \sum_i \hat{\alpha}_i \hat{p}_i + m_0 c^2 \hat{\beta} \right) \cdot \left( c \sum_j \hat{\alpha}_j \hat{p}_j + m_0 c^2 \hat{\beta} \right) \psi \\
+&= \left[ c^2 \sum_i \hat{\alpha}_i^2 \hat{p}_i^2 + c^2 \sum_{i < j} \underbrace{(\hat{\alpha}_i \hat{\alpha}_j \hat{p}_i \hat{p}_j + \hat{\alpha}_j \hat{\alpha}_i \hat{p}_j \hat{p}_i)}_{\textcolor{blue}{= (\hat{\alpha}_i \hat{\alpha}_j + \hat{\alpha}_j \hat{\alpha}_i) \hat{p}_i \hat{p}_j}} \right. \\
+&\quad \left. + m_0 c^3 \sum_i (\hat{\alpha}_i \hat{\beta} + \hat{\beta} \hat{\alpha}_i) \hat{p}_i + \hat{\beta}^2 (m_0 c^2)^2 \right] \psi
+\end{aligned}
+\end{equation}
+
+Comparison with Klein-Gorden equation shows the following requirements for the matrices $\hat{\alpha}_i, \hat{\beta}$:
+\begin{equation}
+\begin{cases}
+\hat{\alpha}_i^2 = \hat{\mathbb{I}}, \quad \hat{\alpha}_i = \hat{\alpha}_i^\dagger \\
+\hat{\alpha}_i \hat{\alpha}_j + \hat{\alpha}_j \hat{\alpha}_i = 0, \quad (i \neq j) \\
+\hat{\alpha}_i \hat{\beta} + \hat{\beta} \hat{\alpha}_i = 0 \\
+\hat{\beta}^2 = \hat{\mathbb{I}}, \quad \hat{\beta} = \hat{\beta}^\dagger
+\end{cases}
+\end{equation}
+
+In order to establish hermiticity of the Hamiltonian $\hat{H}$, the matrices $\hat{\alpha}_i, \hat{\beta}$ also have to be Hermitian:
+\begin{equation}
+\hat{\alpha}_i = \hat{\alpha}_i^\dagger \quad \text{and} \quad \hat{\beta} = \hat{\beta}^\dagger
+\end{equation}
+
+Therefore, the eigenvalues of the matrices are real and can only have the values $\pm 1$. We assume $\hat{A}_i$ which is the eigenrepresentation of $\hat{\alpha}_i$ has the form:
+\begin{equation}
+\hat{U}^\dagger \hat{\alpha}_i \hat{U} = \hat{A}_i = \begin{pmatrix} A_1 & 0 & \dots & 0 \\ 0 & A_2 & \dots & 0 \\ \vdots & \vdots & \ddots & \vdots \\ 0 & 0 & \dots & A_N \end{pmatrix}
+\end{equation}
+
+with the eigenvalues $A_1 \dots A_N$ and $A_j^2 = 1, (j=1 \dots N)$. So $A_j = \pm 1$
+
+Furthermore, from the anticommutation relation ($\hat{\alpha}_i \hat{\beta} + \hat{\beta} \hat{\alpha}_i = 0$)
+it follows that the trace of each $\hat{\alpha}_i$ and $\hat{\beta}$ has to be zero:
+\begin{equation}
+\begin{aligned}
+\text{tr}(\hat{\alpha}_i) &= \text{tr}(\hat{\mathbb{I}} \hat{\alpha}_i) \\
+&= \text{tr}(\hat{\beta}^2 \hat{\alpha}_i) \quad (\hat{\beta}^2 \hat{\alpha}_i = \hat{\beta} \cdot \hat{\beta} \hat{\alpha}_i, \text{tr} AB = \text{tr} BA) \\
+&= \text{tr}(\hat{\beta} \hat{\alpha}_i \hat{\beta}) \quad (\hat{\alpha}_i \hat{\beta} + \hat{\beta} \hat{\alpha}_i = 0 \Rightarrow \hat{\alpha}_i = -\hat{\beta} \hat{\alpha}_i \hat{\beta}^\dagger = -\hat{\beta} \hat{\alpha}_i \hat{\beta}) \\
+&= -\text{tr} \hat{\alpha}_i \\
+\Rightarrow \text{tr}(\hat{\alpha}_i) &= 0.
+\end{aligned}
+\end{equation}
+
+Similarly, $\text{tr}(\hat{\beta}) = 0$. So we can get:
+\begin{equation}
+\begin{aligned}
+\text{tr}(\hat{A}_i) &= \text{tr}(\hat{U}^\dagger \hat{\alpha}_i \hat{U}) = \text{tr}(\hat{\alpha}_i) = 0 \\
+\Rightarrow \sum_k A_k &= 0.
+\end{aligned}
+\end{equation}
+
+Because the eigenvalues of $\hat{\alpha}_i$ and $\hat{\beta}$ are equal to $\pm 1$, each matrix $\hat{\alpha}_i$ and $\hat{\beta}$ has to possess as many positive as negative eigenvalues and therefore has to be of even dimension. The smallest even dimension ($N=2$) can not be right because only three anticommuting matrices exist (Pauli matrices $\bm{\sigma}_i$). Therefore, the smallest dimension is four. One possible explicit representation of the Dirac matrices are:
+
+\begin{equation}
+\hat{\alpha}_i = \begin{pmatrix} 0 & \bm{\sigma}_i \\ \bm{\sigma}_i & 0 \end{pmatrix} \quad \text{and} \quad \hat{\beta} = \begin{pmatrix} \hat{\mathbb{I}} & 0 \\ 0 & -\hat{\mathbb{I}} \end{pmatrix}
+\end{equation}
+
+where $\bm{\sigma}_i$ are Pauli's $2 \times 2$ matrices and $\hat{\mathbb{I}}$ is the unit matrix
+
+Next we construct the four-current density and the equation of continuity. From Dirac equation and $\psi^\dagger$ we obtain:
+\begin{equation}
+\mathrm{i}\hbar \psi^\dagger \frac{\partial}{\partial t} \psi = \psi^\dagger (c \bm{\alpha} \cdot \hat{\bm{p}}) \psi + m_0 c^2 \psi^\dagger \hat{\beta} \psi \quad \text{\textcircled{1}}
+\end{equation}
+
+Furthermore, we form the Hermitian conjugate of Dirac equation:
+\begin{equation}
+-\mathrm{i}\hbar \frac{\partial}{\partial t} \psi^\dagger = \psi^\dagger (c \bm{\alpha} \cdot \hat{\bm{p}}^\dagger) + m_0 c^2 \psi^\dagger \hat{\beta}^\dagger
+\end{equation}
+and multiply this equation from the right by $\psi$ to give:
+\begin{equation}
+-\mathrm{i}\hbar \left( \frac{\partial}{\partial t} \psi^\dagger \right) \psi = \psi^\dagger (c \bm{\alpha} \cdot \hat{\bm{p}}^\dagger) \psi + m_0 c^2 \psi^\dagger \hat{\beta}^\dagger \psi \quad \text{\textcircled{2}}
+\end{equation}
+
+Taking into consideration the hermiticity of the Dirac matrices ($\hat{\alpha}_i^\dagger = \hat{\alpha}_i$, $\hat{\beta}^\dagger = \hat{\beta}$), subtraction of \text{\textcircled{2}} from \text{\textcircled{1}} yields:
+
+\begin{equation}
+\begin{aligned}
+\mathrm{i}\hbar \frac{\partial}{\partial t} (\psi^\dagger \psi) &= \psi^\dagger (c \bm{\alpha} \cdot \hat{\bm{p}}) \psi - \psi^\dagger (c \bm{\alpha} \cdot \hat{\bm{p}}^\dagger) \psi \\
+&= -\mathrm{i}\hbar ( \psi^\dagger (\bm{\alpha} \cdot c \nabla) \psi ) - \mathrm{i}\hbar \psi^\dagger (\bm{\alpha}^\dagger \cdot c \overleftarrow{\nabla}) \psi \\
+&= -\mathrm{i}\hbar c [ \psi^\dagger (\bm{\alpha} \cdot \nabla) \psi + \psi^\dagger (\bm{\alpha} \cdot \overleftarrow{\nabla}) \psi ] \\
+&= -\mathrm{i}\hbar c \cdot \nabla \cdot \psi^\dagger \bm{\alpha} \psi
+\end{aligned}
+\end{equation}
+
+So we can get:
+\begin{equation}
+\frac{\partial}{\partial t} \rho + \nabla \cdot \bm{j} = 0
+\end{equation}
+where $\rho = \psi^\dagger \psi$ and $\bm{j} = c \psi^\dagger \bm{\alpha} \psi$
+
+$\rho$ is positive definite and because of the conservation law
+\begin{equation}
+\frac{\partial}{\partial t} \rho + \nabla \cdot \bm{j} = 0
+\end{equation}
+we can accept the interpretation of $\rho$ as a probability density. Accordingly, we call $\bm{j}$ the probability current density.
+So $\{c\rho, \bm{j}\}$ should form a four-vector:
+\begin{equation}
+j^\mu = \{c\rho, \bm{j}\}
+\end{equation}
+
+\subsection{Free Motion of a Dirac Particle.}
+
+The free Dirac equation:
+\begin{equation}
+\mathrm{i}\hbar \frac{\partial}{\partial t} \psi = c \bm{\alpha} \cdot \hat{\bm{p}} + m_0 c^2 \hat{\beta} ) \psi
+\end{equation}
+
+Its stationary states are found with ansatz:
+\begin{equation}
+\psi(\bm{x}, t) = \psi(\bm{x}) \exp\left[ \frac{-\mathrm{i} \varepsilon t}{\hbar} \right]
+\end{equation}
+with which transforms free Dirac equation into:
+\begin{equation}
+\varepsilon \psi(\bm{x}) = (c \bm{\alpha} \cdot \hat{\bm{p}} + m_0 c^2 \hat{\beta}) \psi(\bm{x})
+\end{equation}
+
+It is useful to split up the four-component spinor into two component spinors $\phi$ and $\chi$:
+\begin{equation}
+\psi = \begin{pmatrix} \psi_1 \\ \psi_2 \\ \psi_3 \\ \psi_4 \end{pmatrix} = \begin{pmatrix} \phi \\ \chi \end{pmatrix} \quad \text{with} \quad \begin{cases} \phi = \begin{pmatrix} \psi_1 \\ \psi_2 \end{pmatrix} \\ \chi = \begin{pmatrix} \psi_3 \\ \psi_4 \end{pmatrix} \end{cases}
+\end{equation}
+
+we can obtain:
+
+\begin{equation}
+\varepsilon \begin{pmatrix} \phi \\ \chi \end{pmatrix} = c \begin{pmatrix} 0 & \bm{\sigma} \\ \bm{\sigma} & 0 \end{pmatrix} \cdot \hat{\bm{p}} \begin{pmatrix} \phi \\ \chi \end{pmatrix} + m_0 c^2 \begin{pmatrix} \hat{\mathbb{I}} & 0 \\ 0 & -\hat{\mathbb{I}} \end{pmatrix} \begin{pmatrix} \phi \\ \chi \end{pmatrix}
+\end{equation}
+\begin{equation}
+\Rightarrow \begin{cases}
+\varepsilon \phi = c \bm{\sigma} \cdot \hat{\bm{p}} \cdot \chi + m_0 c^2 \phi \\
+\varepsilon \chi = c \bm{\sigma} \cdot \hat{\bm{p}} \phi - m_0 c^2 \chi
+\end{cases}
+\end{equation}
+
+States with definite momentum $\bm{p}$ are:
+\begin{equation}
+\begin{pmatrix} \phi \\ \chi \end{pmatrix} = \begin{pmatrix} \phi_0 \\ \chi_0 \end{pmatrix} \exp\left[ \frac{\mathrm{i} \bm{p} \cdot \bm{x}}{\hbar} \right]
+\end{equation}
+
+So we can get: ($\bm{p}$ is the eigenvalues of $\hat{\bm{p}}$)
+\begin{equation}
+\begin{cases}
+(\varepsilon - m_0 c^2) \phi_0 - c \bm{\sigma} \cdot \bm{p} \cdot \chi_0 = 0 \\
+-c \bm{\sigma} \cdot \bm{p} \cdot \phi_0 + (\varepsilon + m_0 c^2) \cdot \chi_0 = 0
+\end{cases}
+\end{equation}
+
+This equation has nontrivial solutions only in the case of a vanishing determinant of the coefficients:
+\begin{equation}
+\begin{vmatrix}
+(\varepsilon - m_0 c^2)\hat{\mathbb{I}} & -c \bm{\sigma} \cdot \bm{p} \\
+-c \bm{\sigma} \cdot \bm{p} & (\varepsilon + m_0 c^2)\hat{\mathbb{I}}
+\end{vmatrix} = 0
+\end{equation}
+
+using the relation:
+\begin{equation}
+(\bm{\sigma} \cdot \bm{A}) (\bm{\sigma} \cdot \bm{B}) = \bm{A} \cdot \bm{B} \hat{\mathbb{I}} + \mathrm{i} \bm{\sigma} \cdot (\bm{A} \times \bm{B})
+\end{equation}
+we have:
+\begin{equation}
+\begin{aligned}
+[ \varepsilon^2 - (m_0 c^2)^2 ] \hat{\mathbb{I}} &= c^2 (\bm{\sigma} \cdot \bm{p})^2 \\
+&= c^2 \bm{p}^2
+\end{aligned}
+\end{equation}
+
+Finally, we can get:
+\begin{equation}
+\varepsilon = \pm E_p \quad \text{with} \quad E_p = c\sqrt{p^2 + m_0^2 c^2}
+\end{equation}
+
+From :
+\begin{equation}
+-c\bm{\sigma}\cdot\bm{p}\phi_0 + (\varepsilon + m_0 c^2)\chi_0 = 0
+\end{equation}
+
+for fixed $\varepsilon$, we can get:
+\begin{equation}
+\chi_0 = \frac{c(\bm{\sigma}\cdot\bm{p})}{m_0 c^2 + \varepsilon} \phi_0
+\end{equation}
+
+let us denote the two spinor $\phi_0$ in the form
+\begin{equation}
+\phi_0 = U = \begin{pmatrix} u_1 \\ u_2 \end{pmatrix} \quad \text{with} \quad U^\dagger U = \hat{\mathbb{I}}.
+\end{equation}
+
+We obtain the complete set of positive and negative free solutions of the Dirac equation as:
+\begin{equation}
+\Psi_{\bm{p},\lambda}(\bm{x},t) = N \cdot \begin{pmatrix} U \\ \frac{c(\bm{\sigma}\cdot\bm{p})}{m_0 c^2 + \lambda E_p} U \end{pmatrix} \frac{\exp\left[\frac{\mathrm{i}}{\hbar}(\bm{p}\cdot\bm{x} - \lambda E_p t)\right]}{(2\pi\hbar)^{\frac{3}{2}}}.
+\end{equation}
+
+Here $\lambda = \pm 1$ characterizes the positive and negative solutions with time evolution factor $\varepsilon = \lambda E_p$ and $N$ is the normalization factor. So we have:
+\begin{equation}
+\int \Psi_{\bm{p},\lambda}^\dagger \Psi_{\bm{p}',\lambda'}^{} \mathrm{d}^3 x = \delta_{\lambda, \lambda'} \delta(\bm{p} - \bm{p}')
+\end{equation}
+
+Hence,
+
+\begin{equation}
+N^2 \left[ U^\dagger U + U^\dagger \frac{c^2 (\bm{\sigma}\cdot\bm{p})^2}{(m_0 c^2 + \lambda E_p)^2} U \right] = 1
+\end{equation}
+using the relation:
+\begin{equation}
+(\bm{\sigma}\cdot\bm{p})^2 = \bm{p}^2 \cdot \hat{\mathbb{I}},
+\end{equation}
+
+we have
+\begin{equation}
+\begin{aligned}
+& N^2 \left[ 1 + \frac{c^2 p^2}{(m_0 c^2 + \lambda E_p)^2} \right] = 1 \\
+\Rightarrow \quad & N = \sqrt{\frac{(m_0 c^2 + \lambda E_p)^2}{c^2 p^2 + (m_0 c^2 + \lambda E_p)^2}} \\
+&\quad = \sqrt{\frac{(m_0 c^2 + \lambda E_p)^2}{c^2 p^2 + (m_0 c^2)^2 + 2\lambda E_p(m_0 c^2) + (\lambda E_p)^2}} \quad [c^2 p^2 + (m_0 c^2)^2 = (\lambda E_p)^2] \\
+&\quad = \sqrt{\frac{(m_0 c^2 + \lambda E_p)^2}{2\lambda E_p (m_0 c^2 + \lambda E_p)}} \\
+&\quad = \sqrt{\frac{(m_0 c^2 + \lambda E_p)}{2\lambda E_p}}
+\end{aligned}
+\end{equation}
+
+For every momentum $\bm{p}$, there are two different kinds of solutions, We will now need another quantum number because the energy eigenvalues are two-fold degenerate. It is \fcolorbox{red}{white}{helicity}. First we note that the operator:
+\begin{equation}
+\bm{\Sigma}\cdot\bm{p} = \begin{pmatrix} \bm{\sigma} & 0 \\ 0 & \bm{\sigma} \end{pmatrix} \cdot \bm{p}
+\end{equation}
+and the four-dimensional generalization of the spin vector operator:
+\begin{equation}
+\hat{\bm{S}} = \frac{\hbar}{2} \cdot \bm{\Sigma}
+\end{equation}
+
+We calculate
+\begin{equation}
+\begin{aligned}
+[\hat{H}_f, \bm{\Sigma}\cdot\bm{p}] &= [c\bm{\alpha}\cdot\bm{p} + m_0 c^2 \cdot \hat{\beta}, \bm{\Sigma}\cdot\bm{p}] \\
+&= [c\bm{\alpha}\cdot\bm{p}, \bm{\Sigma}\cdot\bm{p}] + m_0 c^2 \underbrace{[\hat{\beta}, \bm{\Sigma}\cdot\bm{p}]}_{=0}
+\end{aligned}
+\end{equation}
+
+Furthermore, we obtain: 
+\begin{equation}
+\begin{aligned}
+[\bm{\alpha}\cdot\bm{p}, \bm{\Sigma}\cdot\bm{p}] &= \bm{\alpha}\cdot\bm{p} \cdot \bm{\Sigma}\cdot\bm{p} - \bm{\Sigma}\cdot\bm{p} \cdot \bm{\alpha}\cdot\bm{p} \quad (\text{simplified notation}) \\
+&= \begin{pmatrix} 0 & \bm{\sigma}\cdot\bm{p} \\ \bm{\sigma}\cdot\bm{p} & 0 \end{pmatrix} \begin{pmatrix} \bm{\sigma}\cdot\bm{p} & 0 \\ 0 & \bm{\sigma}\cdot\bm{p} \end{pmatrix} - \begin{pmatrix} \bm{\sigma}\cdot\bm{p} & 0 \\ 0 & \bm{\sigma}\cdot\bm{p} \end{pmatrix} \begin{pmatrix} 0 & \bm{\sigma}\cdot\bm{p} \\ \bm{\sigma}\cdot\bm{p} & 0 \end{pmatrix} \\
+&= \begin{pmatrix} 0 & (\bm{\sigma}\cdot\bm{p})^2 \\ (\bm{\sigma}\cdot\bm{p})^2 & 0 \end{pmatrix} - \begin{pmatrix} 0 & (\bm{\sigma}\cdot\bm{p})^2 \\ (\bm{\sigma}\cdot\bm{p})^2 & 0 \end{pmatrix} \\
+&= 0
+\end{aligned}
+\end{equation}
+
+Hence:
+\begin{equation}
+[\hat{H}_f, \bm{\Sigma}\cdot\bm{p}] = 0
+\end{equation}
+
+and naturally
+\begin{equation}
+\begin{aligned}
+[\hat{\bm{p}}, \bm{\Sigma}\cdot\bm{p}] &= \bm{p} \begin{pmatrix} \bm{\sigma}\cdot\bm{p} & 0 \\ 0 & \bm{\sigma}\cdot\bm{p} \end{pmatrix} - \begin{pmatrix} \bm{\sigma}\cdot\bm{p} & 0 \\ 0 & \bm{\sigma}\cdot\bm{p} \end{pmatrix} \bm{p} \\
+&= 0
+\end{aligned}
+\end{equation}
+
+This means that $\bm{\Sigma}\cdot\bm{p}$, $\hat{H}_f$ and $\hat{\bm{p}}$ can be diagonalized together
+The same holds for the helicity operator
+\begin{equation}
+\hat{\Lambda}_S = \frac{\hbar}{2} \frac{\bm{\Sigma}\cdot\bm{p}}{|\bm{p}|} = \hat{\bm{S}} \cdot \frac{\bm{p}}{|\bm{p}|}
+\end{equation}
+
+If the electron wave propagates into the direction of $z$ axis, we have:
+\begin{equation}
+\bm{p} = \{0, 0, p\}
+\end{equation}
+
+so $\hat{\Lambda}_S$ becomes:
+\begin{equation}
+\hat{\Lambda}_S = \hat{S}_z = \frac{\hbar}{2} \begin{pmatrix} \hat{\sigma}_z & 0 \\ 0 & \hat{\sigma}_z \end{pmatrix}
+\end{equation}
+
+the eigenvectors of $\hat{\Lambda}_z$ are:
+\begin{equation}
+\lambda = \frac{\hbar}{2} \begin{cases} \begin{pmatrix} 1 \\ 0 \\ 0 \\ 0 \end{pmatrix} \\ \\ \begin{pmatrix} 0 \\ 0 \\ 1 \\ 0 \end{pmatrix} \end{cases}, \quad \lambda = -\frac{\hbar}{2} \begin{cases} \begin{pmatrix} 0 \\ 1 \\ 0 \\ 0 \end{pmatrix} \\ \\ \begin{pmatrix} 0 \\ 0 \\ 0 \\ 1 \end{pmatrix} \end{cases}
+\end{equation}
+
+we denote Dirac wave by
+\begin{equation}
+\begin{cases}
+\Psi_{p,\lambda,+\frac{1}{2}} = N \begin{pmatrix} \begin{pmatrix} 1 \\ 0 \end{pmatrix} \\ \frac{c\hat{\sigma}_z p}{m_0 c^2 + \lambda E_p} \begin{pmatrix} 1 \\ 0 \end{pmatrix} \end{pmatrix} \exp\left[ \frac{\mathrm{i}}{\hbar}(pz - \lambda E_p t) \right] \\ \\
+\Psi_{p,\lambda,-\frac{1}{2}} = N \begin{pmatrix} \begin{pmatrix} 0 \\ 1 \end{pmatrix} \\ \frac{c\hat{\sigma}_z p}{m_0 c^2 + \lambda E_p} \begin{pmatrix} 0 \\ 1 \end{pmatrix} \end{pmatrix} \exp\left[ \frac{\mathrm{i}}{\hbar}(pz - \lambda E_p t) \right]
+\end{cases}
+\end{equation}
